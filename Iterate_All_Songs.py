@@ -13,6 +13,12 @@ import sqlite3
 msd_subset_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/MillionSongSubset'
 msd_subset_data_path=os.path.join(msd_subset_path,'data')
 msd_subset_addf_path=os.path.join(msd_subset_path,'AdditionalFiles')
+
+# Database files are located in the github folder
+# Change for to your folder
+#msd_subset_addf_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis'
+#msd_subset_path = msd_subset_addf_path
+
 assert os.path.isdir(msd_subset_path),'wrong path' # sanity check
 # path to the Million Song Dataset code
 # CHANGE IT TO YOUR LOCAL CONFIGURATION
@@ -36,42 +42,37 @@ conn_artist = sqlite3.connect(path_artist)
 conn_similar = sqlite3.connect(path_similar)
 conn_dummy = sqlite3.connect(path_dummy)
 
+print("songs:")
+q_all = "SELECT 'song_id', 'title' FROM 'songs' LIMIT 5;"
+results = conn_tracks.execute(q_all)
+print(results.fetchall())
 
 # create cursor for dummy database
 dummy_c = conn_dummy.cursor()
-#dummy_c.execute("ATTACH database 'subset_track_metadata.db' AS 'track_db';")
-#dummy_c.execute("ATTACH database 'subset_artist_term.db' AS 'artist_term_db';")
-
-#q = "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
-#res = conn_dummy.execute(q)
-#print("* tables contained in DB File:")
-#print(res.fetchall())
-#print(" ")
-
-#q_all = "SELECT 'song_id', 'title' FROM track_db.songs JOIN 'artist_term', 'artist_id' FROM artist_db.artist_term WHERE songs.artist_id = artist_term.artist_id;"
-q_all = dummy_c.execute("SELECT 'song_id', 'title' FROM track_db.'songs';")
-
-res_all = conn_dummy.execute(q_all)
+dummy_c.execute("ATTACH database 'subset_track_metadata.db' AS 'track_db';")
+dummy_c.execute("ATTACH database 'subset_artist_term.db' AS 'artist_term_db';")
+dummy_c.execute("ATTACH database 'subset_artist_similarity.db' AS 'artist_similarity_db';")
+conn_dummy.commit()
 
 
+#q_select =  "SELECT 'song_id', 'title', 'artist_id', 'artist_terms' "
+#q_from =    "FROM (track_db.'songs' JOIN artist_term_db.'terms') "
+#q_where =   ""
+#q_end = ";"
 
+#q_all = q_select + q_from + q_where + q_end
 
-#q_tracks = "SELECT song_id, artist_id FROM songs"
-#res_tracks = conn_tracks.execute(q_tracks)
-#
-#q_artist = "SELECT artist_id, term FROM artist_term"
-#res_artist = conn_artist.execute(q_artist)
-#
-#
-#
-#all_artist_ids = map(lambda x: x[:], res_artist.fetchall())
+q_all = "SELECT 'song_id', 'title' FROM track_db.'songs' LIMIT 5;"
+res_q = conn_dummy.execute(q_all)
+all = res_q.fetchall()
+print(all)
 
+print("songs:")
+q_all = "SELECT 'song_id', 'title' FROM 'songs' LIMIT 5;"
+results = conn_tracks.execute(q_all)
+print(results.fetchall())
 
 conn_tracks.close()
 conn_artist.close()
 conn_similar.close()
 conn_dummy.close()
-
-# The Echo Nest artist id look like:
-#for k in range(4):
-#    print(all_artist_ids[k])

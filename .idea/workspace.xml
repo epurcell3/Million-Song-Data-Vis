@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9cf782b-30be-4130-aa2c-9ceb56a52044" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Database_Schema.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/subset_dummy.db" afterPath="$PROJECT_DIR$/subset_dummy.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Iterate_All_Songs.py" afterPath="$PROJECT_DIR$/Iterate_All_Songs.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Million-Song-Data-Vis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,19 +27,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MSD_Tutorial.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="0" selection-start="4350" selection-end="4472" vertical-scroll-proportion="0.0" vertical-offset="1775" max-vertical-offset="3165">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Iterate_All_Songs.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Iterate_All_Songs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="35" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.94827586" vertical-offset="225" max-vertical-offset="1170">
+            <state line="47" column="25" selection-start="1918" selection-end="1918" vertical-scroll-proportion="0.53370786" vertical-offset="345" max-vertical-offset="1185">
               <folding />
             </state>
           </provider>
@@ -47,10 +39,8 @@
       <file leaf-file-name="Database_Schema.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database_Schema.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="0" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.0" vertical-offset="347" max-vertical-offset="1890">
-              <folding>
-                <element signature="e#26#35#0" expanded="true" />
-              </folding>
+            <state line="34" column="0" selection-start="1405" selection-end="1405" vertical-scroll-proportion="0.0" vertical-offset="677" max-vertical-offset="1860">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -58,7 +48,7 @@
       <file leaf-file-name="Database_Test.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database_Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="86" column="6" selection-start="2896" selection-end="2910" vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="2790">
+            <state line="112" column="18" selection-start="3927" selection-end="3927" vertical-scroll-proportion="0.0" vertical-offset="1290" max-vertical-offset="2790">
               <folding />
             </state>
           </provider>
@@ -67,7 +57,7 @@
       <file leaf-file-name="Artist_Database_Test.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Artist_Database_Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="0" selection-start="1149" selection-end="1337" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1290">
+            <state line="57" column="26" selection-start="1764" selection-end="1764" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1290">
               <folding />
             </state>
           </provider>
@@ -76,7 +66,7 @@
       <file leaf-file-name="Artist_Term_Database_Test.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Artist_Term_Database_Test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="138" column="26" selection-start="4803" selection-end="4803" vertical-scroll-proportion="-7.3076925" vertical-offset="1805" max-vertical-offset="3255">
+            <state line="152" column="0" selection-start="5249" selection-end="5453" vertical-scroll-proportion="0.0" vertical-offset="2010" max-vertical-offset="3255">
               <folding />
             </state>
           </provider>
@@ -139,6 +129,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -163,25 +154,24 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
-    <property name="last_opened_file_path" value="$USER_HOME$/anaconda/envs/py33/bin/python" />
+    <property name="recentsLimit" value="5" />
     <property name="restartRequiresConfirmation" value="true" />
+    <property name="last_opened_file_path" value="$USER_HOME$/anaconda/envs/py33/bin/python" />
     <property name="FullScreen" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
       <PyConsoleSettings />
     </option>
   </component>
-  <component name="RunManager" selected="Python.Iterate_All_Songs">
+  <component name="RunManager" selected="Python.Database_Schema">
     <configuration default="false" name="Iterate_All_Songs" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -427,11 +417,11 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.Iterate_All_Songs" />
-        <item index="1" class="java.lang.String" itemvalue="Python.Database_Schema" />
-        <item index="2" class="java.lang.String" itemvalue="Python.Artist_Term_Database_Test" />
-        <item index="3" class="java.lang.String" itemvalue="Python.Artist_Database_Test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.Database_Test" />
+        <item index="0" class="java.lang.String" itemvalue="Python.Database_Schema" />
+        <item index="1" class="java.lang.String" itemvalue="Python.Iterate_All_Songs" />
+        <item index="2" class="java.lang.String" itemvalue="Python.Database_Test" />
+        <item index="3" class="java.lang.String" itemvalue="Python.Artist_Term_Database_Test" />
+        <item index="4" class="java.lang.String" itemvalue="Python.Artist_Database_Test" />
       </list>
     </recent_temporary>
   </component>
@@ -469,11 +459,11 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32889965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24305555" sideWeight="0.68077385" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24305555" sideWeight="0.6795647" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39903265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32913166" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31922612" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32043532" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -519,44 +509,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="30" selection-start="2029" selection-end="2029" vertical-scroll-proportion="0.0" vertical-offset="1991" max-vertical-offset="3165">
-          <folding />
-        </state>
+        <state line="53" column="30" selection-start="2029" selection-end="2029" vertical-scroll-proportion="0.0" vertical-offset="1991" max-vertical-offset="3165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="30" selection-start="2029" selection-end="2029" vertical-scroll-proportion="0.0" vertical-offset="2601" max-vertical-offset="3165">
-          <folding />
-        </state>
+        <state line="53" column="30" selection-start="2029" selection-end="2029" vertical-scroll-proportion="0.0" vertical-offset="2601" max-vertical-offset="3165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="27" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="3165">
-          <folding />
-        </state>
+        <state line="49" column="27" selection-start="1874" selection-end="1874" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="3165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="58" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3165">
-          <folding />
-        </state>
+        <state line="55" column="58" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="58" selection-start="2089" selection-end="2089" vertical-scroll-proportion="0.0" vertical-offset="1920" max-vertical-offset="3165">
-          <folding />
-        </state>
+        <state line="55" column="58" selection-start="2089" selection-end="2089" vertical-scroll-proportion="0.0" vertical-offset="1920" max-vertical-offset="3165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="1" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="3165">
-          <folding />
-        </state>
+        <state line="36" column="1" selection-start="1063" selection-end="1063" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="3165" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../MSongsDB/PythonSrc/hdf5_getters.py">
@@ -566,44 +544,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MSD_Tutorial.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="0" selection-start="4350" selection-end="4472" vertical-scroll-proportion="0.0" vertical-offset="1775" max-vertical-offset="3165">
+        <state line="123" column="0" selection-start="4350" selection-end="4472" vertical-scroll-proportion="0.13084112" vertical-offset="1700" max-vertical-offset="3090" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Artist_Database_Test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="26" selection-start="1764" selection-end="1764" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1290">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Artist_Term_Database_Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="26" selection-start="4803" selection-end="4803" vertical-scroll-proportion="-7.3076925" vertical-offset="1805" max-vertical-offset="3255">
+        <state line="152" column="0" selection-start="5249" selection-end="5453" vertical-scroll-proportion="0.0" vertical-offset="2010" max-vertical-offset="3255">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Database_Test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="6" selection-start="2896" selection-end="2910" vertical-scroll-proportion="0.0" vertical-offset="825" max-vertical-offset="2790">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Artist_Database_Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="1149" selection-end="1337" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1290">
+        <state line="112" column="18" selection-start="3927" selection-end="3927" vertical-scroll-proportion="0.0" vertical-offset="1290" max-vertical-offset="2790">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Database_Schema.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="0" selection-start="1404" selection-end="1404" vertical-scroll-proportion="0.0" vertical-offset="347" max-vertical-offset="1890">
-          <folding>
-            <element signature="e#26#35#0" expanded="true" />
-          </folding>
+        <state line="34" column="0" selection-start="1405" selection-end="1405" vertical-scroll-proportion="0.0" vertical-offset="677" max-vertical-offset="1860">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Iterate_All_Songs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="35" selection-start="2236" selection-end="2236" vertical-scroll-proportion="0.94827586" vertical-offset="225" max-vertical-offset="1170">
+        <state line="47" column="25" selection-start="1918" selection-end="1918" vertical-scroll-proportion="0.53370786" vertical-offset="345" max-vertical-offset="1185">
           <folding />
         </state>
       </provider>
