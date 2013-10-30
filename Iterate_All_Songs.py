@@ -24,24 +24,54 @@ assert os.path.isdir(msd_code_path),'wrong path' # sanity check
 sys.path.append( os.path.join(msd_code_path,'PythonSrc') )
 
 # imports specific to the MSD
-import hdf5_getters as GETTERS
+#import hdf5_getters as GETTERS
 
-conn_tracks = sqlite3.connect(os.path.join(msd_subset_addf_path,
-                                    'subset_track_metadata.db'))
+path_tracks = os.path.join(msd_subset_addf_path, 'subset_track_metadata.db')
+path_artist = os.path.join(msd_subset_addf_path, 'subset_artist_term.db')
+path_similar = os.path.join(msd_subset_addf_path, 'subset_artist_similarity.db')
+path_dummy = os.path.join(msd_subset_addf_path, 'subset_dummy.db')
 
-conn_artist = sqlite3.connect(os.path.join(msd_subset_addf_path,
-                                    'subset_artist_term.db'))
+conn_tracks = sqlite3.connect(path_tracks)
+conn_artist = sqlite3.connect(path_artist)
+conn_similar = sqlite3.connect(path_similar)
+conn_dummy = sqlite3.connect(path_dummy)
 
-q_tracks = "SELECT song_id, artist_id FROM songs"
-res_tracks = conn_tracks.execute(q_tracks)
 
-q_artist = "SELECT artist_id, artist_mbtag, artist_mbtags_count, artist_terms, artist_terms_freq, artist_terms_weight FROM artists"
-res_artist = conn_artist.execute(q_artist)
+# create cursor for dummy database
+dummy_c = conn_dummy.cursor()
+#dummy_c.execute("ATTACH database 'subset_track_metadata.db' AS 'track_db';")
+#dummy_c.execute("ATTACH database 'subset_artist_term.db' AS 'artist_term_db';")
 
-all_artist_ids = map(lambda x: x[1], res_tracks.fetchall())
+#q = "SELECT name FROM sqlite_master WHERE type='table' ORDER BY name"
+#res = conn_dummy.execute(q)
+#print("* tables contained in DB File:")
+#print(res.fetchall())
+#print(" ")
+
+#q_all = "SELECT 'song_id', 'title' FROM track_db.songs JOIN 'artist_term', 'artist_id' FROM artist_db.artist_term WHERE songs.artist_id = artist_term.artist_id;"
+q_all = dummy_c.execute("SELECT 'song_id', 'title' FROM track_db.'songs';")
+
+res_all = conn_dummy.execute(q_all)
+
+
+
+
+#q_tracks = "SELECT song_id, artist_id FROM songs"
+#res_tracks = conn_tracks.execute(q_tracks)
+#
+#q_artist = "SELECT artist_id, term FROM artist_term"
+#res_artist = conn_artist.execute(q_artist)
+#
+#
+#
+#all_artist_ids = map(lambda x: x[:], res_artist.fetchall())
+
+
 conn_tracks.close()
 conn_artist.close()
+conn_similar.close()
+conn_dummy.close()
 
 # The Echo Nest artist id look like:
-for k in range(4):
-    print(all_artist_ids[k])
+#for k in range(4):
+#    print(all_artist_ids[k])
