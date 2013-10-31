@@ -7,72 +7,69 @@ import time
 import glob
 import datetime
 import sqlite3
-#import numpy as np # get it at: http://numpy.scipy.org/
-# path to the Million Song Dataset subset (uncompressed)
-# CHANGE IT TO YOUR LOCAL CONFIGURATION
-msd_subset_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/MillionSongSubset'
-msd_subset_data_path=os.path.join(msd_subset_path,'data')
-msd_subset_addf_path=os.path.join(msd_subset_path,'AdditionalFiles')
+import numpy as np
 
-# Database files are located in the github folder
-# Change for to your folder
-#msd_subset_addf_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis'
-#msd_subset_path = msd_subset_addf_path
+class IterateAllSongs():
+    # CHANGE IT TO YOUR LOCAL CONFIGURATION
+    msd_subset_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis' # path to MSD Database files
 
-assert os.path.isdir(msd_subset_path),'wrong path' # sanity check
-# path to the Million Song Dataset code
-# CHANGE IT TO YOUR LOCAL CONFIGURATION
-msd_code_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/MSongsDB'
-assert os.path.isdir(msd_code_path),'wrong path' # sanity check
-# we add some paths to python so we can import MSD code
-# Ubuntu: you can change the environment variable PYTHONPATH
-# in your .bashrc file so you do not have to type these lines
-sys.path.append( os.path.join(msd_code_path,'PythonSrc') )
+    def database_setup(self):
+        assert os.path.isdir(IterateAllSongs.msd_subset_path),'wrong path' # sanity check for path to the Million Song Dataset code
 
-# imports specific to the MSD
-#import hdf5_getters as GETTERS
-
-path_tracks = os.path.join(msd_subset_addf_path, 'subset_track_metadata.db')
-path_artist = os.path.join(msd_subset_addf_path, 'subset_artist_term.db')
-path_similar = os.path.join(msd_subset_addf_path, 'subset_artist_similarity.db')
-path_dummy = os.path.join(msd_subset_addf_path, 'subset_dummy.db')
-
-conn_tracks = sqlite3.connect(path_tracks)
-conn_artist = sqlite3.connect(path_artist)
-conn_similar = sqlite3.connect(path_similar)
-conn_dummy = sqlite3.connect(path_dummy)
-
-print("songs:")
-q_all = "SELECT 'song_id', 'title' FROM 'songs' LIMIT 5;"
-results = conn_tracks.execute(q_all)
-print(results.fetchall())
-
-# create cursor for dummy database
-dummy_c = conn_dummy.cursor()
-dummy_c.execute("ATTACH database 'subset_track_metadata.db' AS 'track_db';")
-dummy_c.execute("ATTACH database 'subset_artist_term.db' AS 'artist_term_db';")
-dummy_c.execute("ATTACH database 'subset_artist_similarity.db' AS 'artist_similarity_db';")
-conn_dummy.commit()
+        path_dummy = os.path.join(IterateAllSongs.msd_subset_path, 'subset_dummy.db')
+        conn_dummy = sqlite3.connect(path_dummy)
 
 
-#q_select =  "SELECT 'song_id', 'title', 'artist_id', 'artist_terms' "
-#q_from =    "FROM (track_db.'songs' JOIN artist_term_db.'terms') "
-#q_where =   ""
-#q_end = ";"
+        # create cursor for dummy database
+        dummy_c = conn_dummy.cursor()
+        dummy_c.execute("ATTACH database 'subset_track_metadata.db' AS t_db;")
+        dummy_c.execute("ATTACH database 'subset_artist_term.db' AS at_db;")
+        dummy_c.execute("ATTACH database 'subset_artist_similarity.db' AS as_db;")
+        conn_dummy.commit()
+        return conn_dummy
 
-#q_all = q_select + q_from + q_where + q_end
+    def getArtistTermsTable(self):
+        conn_dummy = self.database_setup()
 
-q_all = "SELECT 'song_id', 'title' FROM track_db.'songs' LIMIT 5;"
-res_q = conn_dummy.execute(q_all)
-all = res_q.fetchall()
-print(all)
+        # Get Artist Terms results
+        q_select    = "SELECT song_id, title, 'songs'.artist_id, artist_name, term "
+        q_from      = "FROM (t_db.'songs' JOIN at_db.'artist_term') "
+        q_where     = "WHERE 'songs'.artist_id = 'artist_term'.artist_id "
+        q_end       = ";"
 
-print("songs:")
-q_all = "SELECT 'song_id', 'title' FROM 'songs' LIMIT 5;"
-results = conn_tracks.execute(q_all)
-print(results.fetchall())
+        q_all = q_select + q_from + q_where + q_end
+        q_all_res = conn_dummy.execute(q_all)
+        results_terms = q_all_res.fetchall()
 
-conn_tracks.close()
-conn_artist.close()
-conn_similar.close()
-conn_dummy.close()
+        conn_dummy.close()
+        return results_terms
+
+    def getArtistMBtagsTable(self):
+        conn_dummy = self.database_setup()
+
+        # Get Artist mbtags results
+        q_select    = "SELECT song_id, title, 'songs'.artist_id, artist_name, mbtag "
+        q_from      = "FROM (t_db.'songs' JOIN at_db.'artist_mbtag') "
+        q_where     = "WHERE 'songs'.artist_id = 'artist_mbtag'.artist_id "
+        q_end       = ";"
+
+        q_all = q_select + q_from + q_where + q_end
+        q_all_res = conn_dummy.execute(q_all)
+        results_tags = q_all_res.fetchall()
+
+        conn_dummy.close()
+        return results_tags
+
+def main():
+    ias = IterateAllSongs()
+    results_terms = ias.getArtistTermsTable()
+    results_tags = ias.getArtistMBtagsTable()
+
+    print("One Row From Terms Table:")
+    print(results_terms[:1])
+    print("")
+    print("One Row From mbtabs Table:")
+    print(results_tags[:1])
+
+if __name__ == "__main__":
+    main()
