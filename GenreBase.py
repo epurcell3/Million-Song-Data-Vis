@@ -28,7 +28,7 @@ class GenreBase:
         maxRank = 0
         maxKey = None
         for key in current.minimalList.values():
-            if(self.fulllist[key].rank > maxRank):
+            if(self.fulllist[key].rank >= maxRank):
                 maxRank = self.fulllist[key].rank
                 maxKey = key
         return maxKey

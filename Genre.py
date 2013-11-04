@@ -3,6 +3,8 @@ class Genre:
     def __init__(self, keyword, initialSong):
         self.keyword = keyword
         self.minimalList = initialSong.terms
+        if keyword in self.minimalList:
+            self.minimalList.remove(keyword)
         self.songCount = 0
         self.children = []
         self.rank = len(initialSong.keywords)
