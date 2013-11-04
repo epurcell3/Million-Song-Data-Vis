@@ -2,21 +2,20 @@ __author__ = 'mcdc09'
 
 # usual imports
 import os
-import sys
-import time
-import glob
-import datetime
 import sqlite3
-import numpy as np
+
 
 class IterateAllSongs():
     # CHANGE IT TO YOUR LOCAL CONFIGURATION
-    msd_subset_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis' # path to MSD Database files
+
+    def __init__(self):
+        self.msd_subset_path='/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis' # path to MSD Database files
+        self.limit = " "
 
     def database_setup(self):
-        assert os.path.isdir(IterateAllSongs.msd_subset_path),'wrong path' # sanity check for path to the Million Song Dataset code
+        assert os.path.isdir(self.msd_subset_path),'wrong path' # sanity check for path to the Million Song Dataset code
 
-        path_dummy = os.path.join(IterateAllSongs.msd_subset_path, 'subset_dummy.db')
+        path_dummy = os.path.join(self.msd_subset_path, 'subset_dummy.db')
         conn_dummy = sqlite3.connect(path_dummy)
 
 
@@ -32,13 +31,15 @@ class IterateAllSongs():
         conn_dummy = self.database_setup()
 
         # Get Artist Terms results
-        q_select    = "SELECT song_id, title, 'songs'.artist_id, artist_name, term "
-        q_from      = "FROM (t_db.'songs' JOIN at_db.'artist_term') "
-        q_where     = "WHERE 'songs'.artist_id = 'artist_term'.artist_id "
-        q_end       = ";"
+        q = ""
+        q = q + "SELECT song_id, title, 'songs'.artist_id, artist_name, term "
+        q = q + "FROM (t_db.'songs' JOIN at_db.'artist_term') "
+        q = q + "WHERE 'songs'.artist_id = 'artist_term'.artist_id "
+        q = q + self.limit
+        q = q + ";"
 
-        q_all = q_select + q_from + q_where + q_end
-        q_all_res = conn_dummy.execute(q_all)
+        print("Q: ", q)
+        q_all_res = conn_dummy.execute(q)
         results_terms = q_all_res.fetchall()
 
         conn_dummy.close()
@@ -48,13 +49,15 @@ class IterateAllSongs():
         conn_dummy = self.database_setup()
 
         # Get Artist mbtags results
-        q_select    = "SELECT song_id, title, 'songs'.artist_id, artist_name, mbtag "
-        q_from      = "FROM (t_db.'songs' JOIN at_db.'artist_mbtag') "
-        q_where     = "WHERE 'songs'.artist_id = 'artist_mbtag'.artist_id "
-        q_end       = ";"
+        q = ""
+        q = q + "SELECT song_id, title, 'songs'.artist_id, artist_name, mbtag "
+        q = q + "FROM (t_db.'songs' JOIN at_db.'artist_mbtag') "
+        q = q + "WHERE 'songs'.artist_id = 'artist_mbtag'.artist_id "
+        q = q + self.limit
+        q = q + ";"
 
-        q_all = q_select + q_from + q_where + q_end
-        q_all_res = conn_dummy.execute(q_all)
+        print("Q: ", q)
+        q_all_res = conn_dummy.execute(q)
         results_tags = q_all_res.fetchall()
 
         conn_dummy.close()
@@ -70,6 +73,10 @@ def main():
     print("")
     print("One Row From mbtabs Table:")
     print(results_tags[:1])
+    print("")
+    print("")
+    print("song id: \t", results_terms[0][0])
+    print("song title: \t", results_terms[0][1])
 
 if __name__ == "__main__":
     main()
