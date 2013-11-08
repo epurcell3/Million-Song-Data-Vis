@@ -1,0 +1,89 @@
+import java.lang.Integer;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: Ryan
+ * Date: 10/29/13
+ * Time: 7:17 PM
+ * To change this template use File | Settings | File Templates.
+ */
+public class Genre {
+    String keyword;
+    List<String> minimalList; //
+    List<Genre> children;
+    int songCount;
+    double averageDuration;
+    HashMap<Integer, Integer> yearsMap = new HashMap<int,int>();
+    public Genre(String keyword, Song initial){
+        this.keyword = keyword;
+        this.minimalList = initial.getMyArtist().getArtist_terms();
+        minimalList.remove(keyword);
+        this.children = new ArrayList<Genre>();
+        yearsMap.put(Integer.valueOf(initial.getYear()), Integer.valueOf(1));
+        averageDuration= initial.getDuration();
+        this.songCount = 1;
+    }
+    public void addSong(Song song){
+        songCount++;
+        if(yearsMap.get(Integer.valueOf(song.getYear())) == null){
+            yearsMap.put(Integer.valueOf(song.getYear()), Integer.valueOf(1));
+        }
+        else {
+            Integer newVal = yearsMap.get(Integer.valueOf(song.getYear())) + 1;
+            yearsMap.put(Integer.valueOf(song.getYear()), newVal);
+        }
+
+        minListAdjust(song.getMyArtist().getArtist_terms());
+        most = (((double)(songCount-1))/((double)(songCount)))*averageDuration;
+        averageDuration = most +  ((1.0 /(double) songCount)*song.getDuration());
+    }
+    private void minListAdjust(List<String> newSongsList){
+
+        for(String gen : minimalList){
+            if(!(newSongsList.contains(gen))){
+                minimalList.remove(gen);
+            }
+        }
+    }
+    public int getRank(){
+        return minimalList.size();
+    }
+    public void addChild(Genre genre){
+        children.add(genre);
+    }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public List<String> getMinimalList() {
+        return minimalList;
+    }
+
+    public void setMinimalList(List<String> minimalList) {
+        this.minimalList = minimalList;
+    }
+
+    public List<Genre> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Genre> children) {
+        this.children = children;
+    }
+
+    public int getSongCount() {
+        return songCount;
+    }
+
+    public void setSongCount(int songCount) {
+        this.songCount = songCount;
+    }
+}

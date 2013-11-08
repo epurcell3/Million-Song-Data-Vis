@@ -106,4 +106,11 @@ public class Artist {
 		this.artist_hottness = artist_hottness;
 	}
 
+    public Collection<String> getArtist_terms() {
+        return artist_terms;
+    }
+
+    public Collection<String> getArtist_mbtags() {
+        return artist_mbtags;
+    }
 }
