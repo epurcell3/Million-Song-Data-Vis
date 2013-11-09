@@ -24,10 +24,24 @@ public class Artist {
 		artist_mbtags = new ArrayList<String>();
 	}
 	
+	public Artist(String a_id, String name) {
+		this(a_id, null, name, Double.NaN, Double.NaN);
+	}
+	
 	public void addTerm(String term) {
 		if(term != null && !term.isEmpty()) {
 			artist_terms.add(term);
 		}
+	}
+	
+	public void addTerms(Collection<String> terms) {
+		if(terms != null && !terms.isEmpty()) {
+			artist_terms.addAll(terms);
+		}
+	}
+	
+	public Collection<String> getTerms() {
+		return artist_terms;
 	}
 	
 	public void addMbtag(String tag) {

@@ -9,19 +9,41 @@ public class Song {
 	private String track_id;
 	private String track_title;
 	private String song_id;
+	private String artist_id;
 	private String release;
-	private Artist myArtist;
 	private int year;
 	private double duration;
+	public static int COUNT = 0;
+	private int songNumber;
 	
-	private Song(String t_id, String title, String s_id, String rel, Artist artist, int yr, double dur) {
+	public Song(String t_id, String title, String s_id, String rel, String a_id, int yr, double dur) {
 		this.track_id = t_id;
 		this.track_title = title;
 		this.song_id = s_id;
 		this.release = rel;
-		this.myArtist = artist;
+		this.artist_id = a_id;
 		this.year = yr;
 		this.duration = dur;
+		
+		this.songNumber = (COUNT++);
+	}
+	
+	/**
+	 * @return the songNumber
+	 */
+	public int getSongNumber() {
+		return songNumber;
+	}
+
+	/**
+	 * @param songNumber the songNumber to set
+	 */
+	public void setSongNumber(int songNumber) {
+		this.songNumber = songNumber;
+	}
+
+	public Song(String s_id, String title, String a_id) {
+		this(null, title, s_id, null, a_id, Integer.MIN_VALUE, Double.NaN);
 	}
 
 	/**
@@ -81,17 +103,17 @@ public class Song {
 	}
 
 	/**
-	 * @return the myArtist
+	 * @return the artist_id
 	 */
-	public Artist getMyArtist() {
-		return myArtist;
+	public String getArtist_id() {
+		return artist_id;
 	}
 
 	/**
-	 * @param myArtist the myArtist to set
+	 * @param artist_id the artist_id to set
 	 */
-	public void setMyArtist(Artist myArtist) {
-		this.myArtist = myArtist;
+	public void setArtist_id(String artist_id) {
+		this.artist_id = artist_id;
 	}
 
 	/**
