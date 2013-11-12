@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/jhdf5obj.jar"/>
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/jhdfobj.jar"/>
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/sqlite-jdbc-3.7.2.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/core.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
