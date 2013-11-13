@@ -1,5 +1,6 @@
 package backend;
 
+import java.lang.String;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,12 +16,12 @@ import java.util.Set;
  */
 public class GenreBase {
     HashMap<String,Genre> fullGenreList;
-    List<Genre> fullList;
+ //   List<Genre> fullList;
     List<Genre> zeroRank;
     
     public GenreBase(SongList sl){
     	
-        fullList = new ArrayList<Genre>();
+      //  fullList = new ArrayList<Genre>();
         fullGenreList = new HashMap<String,Genre>();
 
         boolean inlist = false; // will just be the dictionary check in python
@@ -82,5 +83,29 @@ public class GenreBase {
 
 
 
+    }
+
+    public HashMap<String, Genre> getFullGenreList() {
+        return fullGenreList;
+    }
+
+    public void setFullGenreList(HashMap<String, Genre> fullGenreList) {
+        this.fullGenreList = fullGenreList;
+    }
+
+//    public List<Genre> getFullList() {
+//        return fullList;
+//    }
+//
+//    public void setFullList(List<Genre> fullList) {
+//        this.fullList = fullList;
+//    }
+
+    public List<Genre> getZeroRank() {
+        return zeroRank;
+    }
+
+    public void setZeroRank(List<Genre> zeroRank) {
+        this.zeroRank = zeroRank;
     }
 }
