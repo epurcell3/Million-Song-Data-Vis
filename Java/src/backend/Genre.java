@@ -1,3 +1,5 @@
+package backend;
+
 import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,17 +18,18 @@ public class Genre {
     List<Genre> children;
     int songCount;
     double averageDuration;
-    HashMap<Integer, Integer> yearsMap = new HashMap<int,int>();
-    public Genre(String keyword, Song initial){
+    HashMap<Integer, Integer> yearsMap = new HashMap<Integer,Integer>();
+    
+    public Genre(String keyword, Song initial, List<String> terms){
         this.keyword = keyword;
-        this.minimalList = initial.getMyArtist().getArtist_terms();
+        this.minimalList = terms;
         minimalList.remove(keyword);
         this.children = new ArrayList<Genre>();
         yearsMap.put(Integer.valueOf(initial.getYear()), Integer.valueOf(1));
         averageDuration= initial.getDuration();
         this.songCount = 1;
     }
-    public void addSong(Song song){
+    public void addSong(Song song, List<String> terms){
         songCount++;
         if(yearsMap.get(Integer.valueOf(song.getYear())) == null){
             yearsMap.put(Integer.valueOf(song.getYear()), Integer.valueOf(1));
@@ -36,8 +39,8 @@ public class Genre {
             yearsMap.put(Integer.valueOf(song.getYear()), newVal);
         }
 
-        minListAdjust(song.getMyArtist().getArtist_terms());
-        most = (((double)(songCount-1))/((double)(songCount)))*averageDuration;
+        minListAdjust(terms);
+        double most = (((double)(songCount-1))/((double)(songCount)))*averageDuration;
         averageDuration = most +  ((1.0 /(double) songCount)*song.getDuration());
     }
     private void minListAdjust(List<String> newSongsList){

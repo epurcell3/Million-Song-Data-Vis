@@ -1,7 +1,9 @@
-import java.lang.String;
+package backend;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -15,21 +17,24 @@ public class GenreBase {
     HashMap<String,Genre> fullGenreList;
     List<Genre> fullList;
     List<Genre> zeroRank;
-    public GenreBase(List<Song> songs){
+    
+    public GenreBase(SongList sl){
+    	
         fullList = new ArrayList<Genre>();
         fullGenreList = new HashMap<String,Genre>();
 
         boolean inlist = false; // will just be the dictionary check in python
-        for(Song song : songs){
-            for(String keyword: song.getMyArtist().getArtist_terms()){
+        Set<String> songIds = sl.getSongIds();
+        for(String song_id : songIds){
+            for(String keyword: sl.getTermsForSongId(song_id)){
                 //will use dictionary lookup to determine if it is already in the list first
                 if(fullGenreList.get(keyword) == null){
-                    fullGenreList.put(keyword, new Genre(keyword, song);
+                    fullGenreList.put(keyword, new Genre(keyword, sl.getSong(song_id), sl.getTermsForSongId(song_id)));
                     //fullList.add(new Genre(keyword, song.getMyArtist().getArtist_terms()));
                 }
                 else{
                     //will get the genre from list by keyword
-                    fullGenreList.get(keyword).addSong(song);
+                    fullGenreList.get(keyword).addSong(sl.getSong(song_id), sl.getTermsForSongId(song_id));
                    // fullList.get(1).addSong(song);
                 }
 
@@ -42,7 +47,7 @@ public class GenreBase {
 
             generateParentsTree(key);
         }
-        for(String key : fullGenreList){
+        for(String key : fullGenreList.keySet()){
             if(fullGenreList.get(key).getRank() ==0){
                 zeroRank.add(fullGenreList.get(key));
             }
@@ -58,7 +63,7 @@ public class GenreBase {
 
                 int max = 0;
                 List<String> parents = new ArrayList<String>();
-                for (String keys : current.getMinimalList())
+                for (String keys : fullGenreList.get(current).getMinimalList())
                 {
                     if (fullGenreList.get(keys).getRank() == max){
                         parents.add(keys);
@@ -66,7 +71,7 @@ public class GenreBase {
                     else if(fullGenreList.get(keys).getRank() > max){
                         max = fullGenreList.get(keys).getRank();
                         parents = new ArrayList<String>();
-                        parents.add(keys)
+                        parents.add(keys);
                     }
                 }
             for (String key : parents){

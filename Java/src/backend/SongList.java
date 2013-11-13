@@ -1,6 +1,8 @@
 package backend;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 public class SongList {
 	/**
@@ -47,5 +49,15 @@ public class SongList {
 	
 	public int getSongsCount() {
 		return songs.size();
+	}
+	
+	public List<String>getTermsForSongId(String song_id) {
+		Song s = songs.get(song_id);
+		Artist a = artists.get(s.getArtist_id());
+		return a.getTerms();
+	}
+	
+	public Set<String> getSongIds() {
+		return songs.keySet();
 	}
 }

@@ -2,6 +2,7 @@ package backend;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Artist {
 	private String artist_id;
@@ -9,8 +10,8 @@ public class Artist {
 	private String artist_name;
 	private double artist_familiarity;
 	private double artist_hottness;
-	private Collection<String> artist_terms;
-	private Collection<String> artist_mbtags;
+	private List<String> artist_terms;
+	private List<String> artist_mbtags;
 	
 	public Artist(String a_id, String mbid, String name, double fam, double hott) {
 		this.artist_id = a_id;
@@ -40,7 +41,7 @@ public class Artist {
 		}
 	}
 	
-	public Collection<String> getTerms() {
+	public List<String> getTerms() {
 		return artist_terms;
 	}
 	
@@ -120,11 +121,11 @@ public class Artist {
 		this.artist_hottness = artist_hottness;
 	}
 
-    public Collection<String> getArtist_terms() {
+    public List<String> getArtist_terms() {
         return artist_terms;
     }
 
-    public Collection<String> getArtist_mbtags() {
+    public List<String> getArtist_mbtags() {
         return artist_mbtags;
     }
 }

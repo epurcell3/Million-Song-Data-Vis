@@ -116,12 +116,16 @@ public class DatabaseConnection {
         q = q + ";";
         return q;
 	}
+	
+	public void closeConnection() {
+		dbOp.closeConnection();
+	}
 
 	public static void main(String[] args) {
 		DatabaseConnection dc = new DatabaseConnection();
 		SongList sl = dc.getArtistTerms();
 		System.out.println("Song count: " + sl.getSongsCount());
 		System.out.println("Artist count: " + sl.getArtistCount());
-		dc.dbOp.closeConnection();
+		dc.closeConnection();
 	}
 }
