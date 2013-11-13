@@ -98,9 +98,9 @@ public class DatabaseConnection {
 
 	private String createArtistTermsSQLQuery() {
 		String q = "";
-		q = q + "SELECT song_id, title, 'songs'.artist_id, artist_name, term ";
+		q = q + "SELECT song_id, title, 'songs'.artist_id, artist_name, term, year ";
 		q = q + "FROM (t_db.'songs' JOIN at_db.'artist_term') ";
-		q = q + "WHERE 'songs'.artist_id = 'artist_term'.artist_id ";
+		q = q + "WHERE 'songs'.artist_id = 'artist_term'.artist_id AND year <> 0";
 		q = q + QUERY_LIMIT;
 		q = q + ";";
 		return q;
