@@ -1,7 +1,7 @@
 package backend;
 
-import java.lang.String;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -25,17 +25,25 @@ public class GenreBase {
         fullGenreList = new HashMap<String,Genre>();
 
         boolean inlist = false; // will just be the dictionary check in python
-        Set<String> songIds = sl.getSongIds();
-        for(String song_id : songIds){
-            for(String keyword: sl.getTermsForSongId(song_id)){
+        //Set<String> songIds = sl.getSongIds();
+        Collection<Song> songs = sl.getSongs();
+        List<Song> sa = new ArrayList<Song>(songs);
+        
+        for(int j = 0; j < sa.size(); j++){
+        	Song song = sa.get(j);
+        	Artist a = sl.getArtist(song.getArtist_id());
+        	List<String> terms = a.getTerms();
+        	
+            for(int i = 0; i < terms.size(); i++){
                 //will use dictionary lookup to determine if it is already in the list first
+            	String keyword = terms.get(i);
                 if(fullGenreList.get(keyword) == null){
-                    fullGenreList.put(keyword, new Genre(keyword, sl.getSong(song_id), sl.getTermsForSongId(song_id)));
+                    fullGenreList.put(keyword, new Genre(keyword, song, terms));
                     //fullList.add(new Genre(keyword, song.getMyArtist().getArtist_terms()));
                 }
                 else{
                     //will get the genre from list by keyword
-                    fullGenreList.get(keyword).addSong(sl.getSong(song_id), sl.getTermsForSongId(song_id));
+                    fullGenreList.get(keyword).addSong(song, terms);
                    // fullList.get(1).addSong(song);
                 }
 
@@ -66,10 +74,11 @@ public class GenreBase {
                 List<String> parents = new ArrayList<String>();
                 for (String keys : fullGenreList.get(current).getMinimalList())
                 {
-                    if (fullGenreList.get(keys).getRank() == max){
+                	
+                    if (fullGenreList.get(keys)!= null && fullGenreList.get(keys).getRank() == max){
                         parents.add(keys);
                     }
-                    else if(fullGenreList.get(keys).getRank() > max){
+                    else if(fullGenreList.get(keys)!= null && fullGenreList.get(keys).getRank() > max){
                         max = fullGenreList.get(keys).getRank();
                         parents = new ArrayList<String>();
                         parents.add(keys);

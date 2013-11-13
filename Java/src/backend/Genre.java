@@ -44,11 +44,14 @@ public class Genre {
         averageDuration = most +  ((1.0 /(double) songCount)*song.getDuration());
     }
     private void minListAdjust(List<String> newSongsList){
-
+    	List<String> toRemove = new ArrayList<String>();
         for(String gen : minimalList){
             if(!(newSongsList.contains(gen))){
-                minimalList.remove(gen);
+                toRemove.add(gen);
             }
+        }
+        for(String gen : toRemove){
+        	minimalList.remove(gen);
         }
     }
     public int getRank(){
