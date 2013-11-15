@@ -2,10 +2,20 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/jhdf5.jar"/>
-	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/jhdf5obj.jar"/>
-	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/jhdfobj.jar"/>
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/sqlite-jdbc-3.7.2.jar"/>
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/core.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/glgraphics.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/gluegen-rt.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/jogl.jar">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="MillionSongVisualization/jars/UnfoldingMaps/libNative/macosx"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/json4processing.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/libTUIO.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/log4j-1.2.15.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/opengl.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/sqlitejdbc-v056.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/unfolding.0.9.3.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
