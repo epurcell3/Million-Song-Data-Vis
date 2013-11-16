@@ -69,7 +69,8 @@ public class CircleVis extends PApplet
             CircleInCircle c = new CircleInCircle(this, x, y, r);
             for(Genre g: topGenres[i].getChildren())
             {
-                c.addCircle(g.getSongCount());
+            	if(g.getSongCount() > 50)
+            		c.addCircle(g.getSongCount());
             }
             circles[i] = c;
             angle += increment;
