@@ -3,6 +3,7 @@ package visualizations;
 import java.util.ArrayList;
 
 import processing.core.PApplet;
+import processing.core.PConstants;
 
 public class CircleInCircle implements Drawable
 {
@@ -38,7 +39,7 @@ public class CircleInCircle implements Drawable
 	
 	public void draw()
 	{
-		parent.ellipseMode(parent.RADIUS);
+		parent.ellipseMode(PConstants.RADIUS);
 		parent.fill(255,0, 0);
         parent.ellipse(this.x, this.y, (int)(this.r * scale), (int)(this.r * scale));
         for (CircleInCircle c: this.innerCircles)
@@ -52,7 +53,7 @@ public class CircleInCircle implements Drawable
 		int offset = 0;
 		for(CircleInCircle c: this.innerCircles)
 		{
-			c.x = this.x - (int)(this.r * scale) + offset + c.r;
+			c.x = (int)((this.x - this.r + offset + c.r) * scale);
 			offset += 2*c.r;
 		}
 	}
