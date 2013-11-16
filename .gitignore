@@ -4,6 +4,10 @@
 .idea/
 *.iml
 
+# Eclipse crap
+.classpath
+.project
+
 # C extensions
 *.so
 
