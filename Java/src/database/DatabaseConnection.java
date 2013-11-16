@@ -20,8 +20,8 @@ public class DatabaseConnection extends DatabaseConnectionInterface{
 	public DatabaseConnection() {
 		dbOp = new DatabaseOperator();
 		
-		dbOp.executeSQLUpdate("ATTACH database 'db/subset_track_metadata.db' AS t_db;");
-		dbOp.executeSQLUpdate("ATTACH database 'db/subset_artist_term.db' AS at_db;");
+		dbOp.executeSQLUpdate("ATTACH database 'subset_track_metadata.db' AS t_db;");
+		dbOp.executeSQLUpdate("ATTACH database 'subset_artist_term.db' AS at_db;");
 		dbOp.executeSQLUpdate("ATTACH database 'subset_artist_similarity.db' AS as_db;");
 		System.out.println("Databases attached");
 	} // close constructor
