@@ -2,16 +2,18 @@ package visualizations;
 
 import java.util.ArrayList;
 
+import processing.core.PApplet;
+
 public class CircleInCircle
 {
-	private CircleVis parent;
+	private PApplet parent;
 	
 	public int x, y, r;
 	public double scale = 0.01;
 	public ArrayList<CircleInCircle> innerCircles;
 	public int red, grn, blu;
 
-	public CircleInCircle(CircleVis parent, int x, int y, int r, int red, int grn, int blu)
+	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu)
 	{
 		this.parent = parent;
 		this.x = x;
