@@ -12,11 +12,7 @@ import java.lang.Math;
 
 public class CircleVis extends PApplet
 {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3098928797994474272L;
-	//CircleInCircle cic;
     CircleInCircle[] circles;
     double scale = 0.01;
     int points = 5;
@@ -75,12 +71,6 @@ public class CircleVis extends PApplet
             circles[i] = c;
             angle += increment;
         }
-		/*cic = new CircleInCircle(100, 100, 50);
-		cic.addCircle(10);
-		cic.addCircle(25);
-		cic.addCircle(5);
-		cic.addCircle(7);
-		cic.addCircle(3);*/
 
 	}
 
@@ -92,11 +82,5 @@ public class CircleVis extends PApplet
         {
             circles[i].draw();
         }
-		/*ellipse(cic.x, cic.y, cic.r, cic.r);
-		for(CircleInCircle c: cic.innerCircles)
-		{
-			fill(0, 255, 0);
-			ellipse(c.x, c.y, c.r, c.r);
-		}*/
 	}
 }
