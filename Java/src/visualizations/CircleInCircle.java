@@ -34,7 +34,7 @@ public class CircleInCircle implements Drawable
 
 	public void addCircle(int r)
 	{
-		this.innerCircles.add(new CircleInCircle(parent, this.x, this.y, r, 0, 255, 0, 0.01));
+		this.innerCircles.add(new CircleInCircle(parent, this.x, this.y, r, 0, 255, 0, 0.05));
 		pack();
 	}
 	
