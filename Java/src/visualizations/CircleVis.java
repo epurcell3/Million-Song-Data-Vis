@@ -12,9 +12,14 @@ import java.lang.Math;
 
 public class CircleVis extends PApplet
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3098928797994474272L;
 	//CircleInCircle cic;
     CircleInCircle[] circles;
-    double scale;
+    double scale = 0.01;
+    int points = 5;
 
 	public static void main(String args[])
 	{
@@ -24,44 +29,43 @@ public class CircleVis extends PApplet
 	public void setup()
 	{
         size(500, 500);
-        circles = new CircleInCircle[5];
-        scale = 1.0;
+        circles = new CircleInCircle[points];
         DatabaseConnection dc = new DatabaseConnection();
         SongList sl = dc.getArtistTerms();
 
         GenreBase gb = new GenreBase(sl);
         List<Genre> tree = gb.getZeroRank();
-        Genre[] top5 = new Genre[5];
-        for (int i = 0; i < 5; i++)
+        Genre[] topGenres = new Genre[points];
+        for (int i = 0; i < points; i++)
         {
-            top5[i] = tree.get(i);
+            topGenres[i] = tree.get(i);
         }
-        for (int i = 5; i < tree.size(); i++)
+        for (int i = points; i < tree.size(); i++)
         {
             int ind = -1;
             int minval = Integer.MAX_VALUE;
             Genre genre = tree.get(i);
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < points; j++)
             {
-                if (genre.getSongCount() > top5[j].getSongCount() && top5[j].getSongCount() < minval)
+                if (genre.getSongCount() > topGenres[j].getSongCount() && topGenres[j].getSongCount() < minval)
                 {
                     ind = j;
-                    minval = top5[j].getSongCount();
+                    minval = topGenres[j].getSongCount();
                 }
             }
             if (ind != -1)
-                top5[ind] = genre;
+                topGenres[ind] = genre;
         }
-        int angle = 18;
-        int increment = 72;
+        int angle = 90;
+        int increment = 360/points;
         int d = 100;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < points; i++)
         {
             int x = (int) Math.cos(angle) * d;
             int y = (int) Math.sin(angle) * d;
-            int r = top5[i].getSongCount();
+            int r = topGenres[i].getSongCount();
             CircleInCircle c = new CircleInCircle(x, y, r);
-            for(Genre g: top5[i].getChildren())
+            for(Genre g: topGenres[i].getChildren())
             {
                 c.addCircle(g.getSongCount());
             }
@@ -83,11 +87,11 @@ public class CircleVis extends PApplet
         for (int i = 0; i < 5; i++)
         {
             fill(255,0, 0);
-            ellipse(circles[i].x, circles[i].y, circles[i].r, circles[i].r);
+            ellipse(circles[i].x, circles[i].y, (int)(circles[i].r * scale), (int)(circles[i].r * scale));
             fill(0, 255, 0);
             for(CircleInCircle c: circles[i].innerCircles)
             {
-                ellipse(c.x, c.y, c.r, c.r);
+                ellipse(c.x, c.y, (int)(c.r * scale), (int)(c.r * scale));
             }
         }
 		/*ellipse(cic.x, cic.y, cic.r, cic.r);
