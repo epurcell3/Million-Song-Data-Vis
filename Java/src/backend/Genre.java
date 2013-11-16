@@ -24,6 +24,7 @@ public class Genre {
         this.keyword = keyword;
         this.minimalList = terms;
         minimalList.remove(keyword);
+        removeOriginalDuplicates();
         this.children = new ArrayList<Genre>();
         yearsMap.put(Integer.valueOf(initial.getYear()), Integer.valueOf(1));
         averageDuration= initial.getDuration();
@@ -42,6 +43,15 @@ public class Genre {
         minListAdjust(terms);
         double most = (((double)(songCount-1))/((double)(songCount)))*averageDuration;
         averageDuration = most +  ((1.0 /(double) songCount)*song.getDuration());
+    }
+    private void removeOriginalDuplicates(){
+        List<String> newMinimalList = new ArrayList<String>();
+        for (String term : minimalList){
+            if (!newMinimalList.contains(term)){
+                newMinimalList.add(term);
+            }
+        }
+        minimalList = newMinimalList;
     }
     private void minListAdjust(List<String> newSongsList){
     	List<String> toRemove = new ArrayList<String>();
