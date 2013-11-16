@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-public class CircleInCircle
+public class CircleInCircle implements Drawable
 {
 	private PApplet parent;
 	
