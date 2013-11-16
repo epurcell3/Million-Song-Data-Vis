@@ -20,6 +20,8 @@ public class CircleVis extends PApplet
     CircleInCircle[] circles;
     double scale = 0.01;
     int points = 5;
+    static int WIDTH = 500;
+    static int HEIGHT = 500;
 
 	public static void main(String args[])
 	{
@@ -28,7 +30,7 @@ public class CircleVis extends PApplet
 
 	public void setup()
 	{
-        size(500, 500);
+        size(WIDTH, HEIGHT);
         circles = new CircleInCircle[points];
         DatabaseConnection dc = new DatabaseConnection();
         SongList sl = dc.getArtistTerms();
@@ -56,13 +58,13 @@ public class CircleVis extends PApplet
             if (ind != -1)
                 topGenres[ind] = genre;
         }
-        int angle = 90;
-        int increment = 360/points;
-        int d = 100;
+        double angle = Math.PI / 2;
+        double increment = 2 * Math.PI / points;
+        int d = 150;
         for (int i = 0; i < points; i++)
         {
-            int x = (int) Math.cos(angle) * d;
-            int y = (int) Math.sin(angle) * d;
+            int x = (int)(Math.cos(angle) * d) + WIDTH/2;
+            int y = (int)(Math.sin(angle) * d) + HEIGHT/2;
             int r = topGenres[i].getSongCount();
             CircleInCircle c = new CircleInCircle(x, y, r);
             for(Genre g: topGenres[i].getChildren())
@@ -83,12 +85,15 @@ public class CircleVis extends PApplet
 
 	public void draw()
 	{
+		fill(255, 255, 255);
+		rect(0, 0, WIDTH, HEIGHT);
         ellipseMode(RADIUS);
         for (int i = 0; i < 5; i++)
         {
             fill(255,0, 0);
             ellipse(circles[i].x, circles[i].y, (int)(circles[i].r * scale), (int)(circles[i].r * scale));
             fill(0, 255, 0);
+            double scale = 0.1;
             for(CircleInCircle c: circles[i].innerCircles)
             {
                 ellipse(c.x, c.y, (int)(c.r * scale), (int)(c.r * scale));
