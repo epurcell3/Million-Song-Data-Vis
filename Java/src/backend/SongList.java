@@ -69,4 +69,8 @@ public class SongList {
 	public Collection<Song> getSongs() {
 		return songs.values();
 	}
+	
+	public Collection<Artist> getArtists() {
+		return artists.values();
+	}
 }

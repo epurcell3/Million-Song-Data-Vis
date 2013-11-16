@@ -8,11 +8,19 @@ import java.sql.Statement;
 
 public class DatabaseOperator {
 	private static Connection con;
-	public static String dbFilepath = System.getProperty("user.dir") + "/db/subset_track_metadata.db";
-
+	public static String dbFilepathTrack = System.getProperty("user.dir") + "/db/subset_track_metadata.db";
+	//public static String dbFilepathTotal = System.getProperty("user.dir") + "/db/MillionSongSubset.db";
+	public static String dbFilepathTotal = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/MillionSongSubset.db";
+	private String filename;
+	
 	public DatabaseOperator() {
-		con = getNewConnection();
+		con = getNewConnection(dbFilepathTrack);
 		
+	}
+	
+	public DatabaseOperator(String filename) {
+		con = getNewConnection(filename);
+		this.filename = filename;
 	}
 
 	protected Statement createStatement() {
@@ -20,7 +28,7 @@ public class DatabaseOperator {
 
 		try {
 			if (con.isClosed()) {
-				con = getNewConnection();
+				con = getNewConnection(filename);
 			}
 
 			out = con.createStatement();
@@ -85,7 +93,7 @@ public class DatabaseOperator {
 	 * Creates and returns a new connection to the database
 	 * @return A new connection to the database
 	 */
-	public Connection getNewConnection() {
+	public Connection getNewConnection(String dbFilepath) {
 		Connection conOut = null;
 		
 		try {

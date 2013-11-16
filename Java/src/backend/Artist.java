@@ -10,19 +10,55 @@ public class Artist {
 	private String artist_name;
 	private double artist_familiarity;
 	private double artist_hottness;
+	private double artist_latitude;
+	private double artist_longitude;
 	private List<String> artist_terms;
 	private List<String> artist_mbtags;
 	
-	public Artist(String a_id, String mbid, String name, double fam, double hott) {
+	public Artist(String a_id, String mbid, String name, double fam, double hott, double lat, double lon) {
 		this.artist_id = a_id;
 		this.artist_mbid = mbid;
 		this.artist_name = name;
 		this.artist_familiarity = fam;
 		this.artist_hottness = hott;
+		this.artist_latitude = lat;
+		this.artist_longitude = lon;
 		
 		// Actual data structure used is up for discussion
 		artist_terms = new ArrayList<String>();
 		artist_mbtags = new ArrayList<String>();
+	}
+	
+	/**
+	 * @return the artist_latitude
+	 */
+	public double getArtist_latitude() {
+		return artist_latitude;
+	}
+
+	/**
+	 * @param artist_latitude the artist_latitude to set
+	 */
+	public void setArtist_latitude(double artist_latitude) {
+		this.artist_latitude = artist_latitude;
+	}
+
+	/**
+	 * @return the artist_longitude
+	 */
+	public double getArtist_longitude() {
+		return artist_longitude;
+	}
+
+	/**
+	 * @param artist_longitude the artist_longitude to set
+	 */
+	public void setArtist_longitude(double artist_longitude) {
+		this.artist_longitude = artist_longitude;
+	}
+
+	public Artist(String a_id, String mbid, String name, double fam, double hott) {
+		this(a_id, mbid, name, fam, hott, Double.NaN, Double.NaN);
 	}
 	
 	public Artist(String a_id, String name) {

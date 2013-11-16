@@ -13,7 +13,7 @@ import backend.SongList;
  * @author tbowling3
  * 
  */
-public class DatabaseConnection {
+public class DatabaseConnection extends DatabaseConnectionInterface{
 	public static String QUERY_LIMIT = "";
 	private DatabaseOperator dbOp;
 
@@ -115,10 +115,6 @@ public class DatabaseConnection {
         q = q + QUERY_LIMIT;
         q = q + ";";
         return q;
-	}
-	
-	public void closeConnection() {
-		dbOp.closeConnection();
 	}
 
 	public static void main(String[] args) {
