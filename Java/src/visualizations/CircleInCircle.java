@@ -8,7 +8,7 @@ import processing.core.PConstants;
 public class CircleInCircle implements Drawable
 {
 	private PApplet parent;
-	
+	public boolean highlighted;
 	public int x, y, r;
 	public double scale = 0.01;
 	public ArrayList<CircleInCircle> innerCircles;
@@ -24,6 +24,7 @@ public class CircleInCircle implements Drawable
 		this.red = red;
 		this.grn = grn;
 		this.blu = blu;
+        highlighted = false;
 	}
 	
 	public CircleInCircle(CircleVis parent, int x, int y, int r)
@@ -47,7 +48,35 @@ public class CircleInCircle implements Drawable
         	c.draw();
         }
 	}
-
+    public boolean highlight(int mx, int my){
+        boolean isHighlighted = false;
+        double xs = (x-mx) * (x-mx);
+        double ys = (y - my) *(y-my);
+        double dist = Math.sqrt(xs + ys);
+        if( dist < r){
+            isHighlighted = true;
+            if (!(highlightInners(mx,my))){
+                highlighted = true;
+            }
+            else {
+                highlighted = false;
+            }
+        }
+        else {
+            highlighted = false;
+        }
+        return isHighlighted;
+    }
+    public boolean highlightInners(int mx, int my){
+        boolean current = false;
+        for(int i = 0; i < innerCircles.size(); i++){
+            current = innerCircles.get(i).highlight(mx,my);
+            if(current){
+                return true;
+            }
+        }
+        return  current;
+    }
 	private void pack()
 	{
 		int offset = 0;
