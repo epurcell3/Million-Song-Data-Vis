@@ -2,11 +2,6 @@ package visualizations;
 
 import java.util.ArrayList;
 
-public class CircleInCircle extends PApplet
-{
-
-}
-
 public class CircleInCircle
 {
 	public int x, y, r;
