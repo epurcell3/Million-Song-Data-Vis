@@ -2,7 +2,23 @@ package database;
 
 public abstract class DatabaseConnectionInterface {
 	protected String dbFilepath;
-	public static String QUERY_LIMIT = "";
+	protected String QueryLimit = "";
+	/**
+	 * @return the queryLimit
+	 */
+	public String getQueryLimit() {
+		return QueryLimit;
+	}
+
+
+	/**
+	 * @param queryLimit the queryLimit to set
+	 */
+	public void setQueryLimit(String queryLimit) {
+		QueryLimit = queryLimit;
+	}
+
+
 	protected DatabaseOperator dbOp;
 	
 	

@@ -9,7 +9,7 @@ import backend.SongList;
 public class DatabaseConnectionTotal extends DatabaseConnectionInterface {
 	
 	public DatabaseConnectionTotal() {
-		dbOp = new DatabaseOperator(DatabaseOperator.dbFilepathTotal);
+		dbOp = new DatabaseOperator();
 		
 		
 	}
