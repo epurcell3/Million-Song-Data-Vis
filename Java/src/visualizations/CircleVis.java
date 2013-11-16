@@ -14,11 +14,11 @@ public class CircleVis extends PApplet
 {
 	//CircleInCircle cic;
     CircleInCircle[] circles;
-    float scale;
+    double scale;
 
-	public static void main(Strings args[])
+	public static void main(String args[])
 	{
-		PApplet.main(new String[] {"--present", Main.class.getName()});
+		PApplet.main(new String[] {"--present", "CircleVis"});
 	}
 
 	public void setup()
@@ -43,10 +43,10 @@ public class CircleVis extends PApplet
             Genre genre = tree.get(i);
             for (int j = 0; j < 5; j++)
             {
-                if (genre.songCount > top5[j].songCount && top5[j].songCount < minval)
+                if (genre.getSongCount() > top5[j].getSongCount() && top5[j].getSongCount() < minval)
                 {
                     ind = j;
-                    minval = top5[j].songCount;
+                    minval = top5[j].getSongCount();
                 }
             }
             if (ind != -1)
@@ -54,16 +54,16 @@ public class CircleVis extends PApplet
         }
         int angle = 18;
         int increment = 72;
-        int r = 100;
+        int d = 100;
         for (int i = 0; i < 5; i++)
         {
-            int x = Math.cos(angle) * r;
-            int y = Math.sin(angle) * r;
-            int r = top5[i].songCount;
+            int x = (int) Math.cos(angle) * d;
+            int y = (int) Math.sin(angle) * d;
+            int r = top5[i].getSongCount();
             CircleInCircle c = new CircleInCircle(x, y, r);
-            for(Genre g: top5[i].children)
+            for(Genre g: top5[i].getChildren())
             {
-                c.addCircle(g.songCount);
+                c.addCircle(g.getSongCount());
             }
             circles[i] = c;
             angle += increment;
@@ -83,11 +83,11 @@ public class CircleVis extends PApplet
         for (int i = 0; i < 5; i++)
         {
             fill(255,0, 0);
-            ellipse(circles[i].x, circles[i].y, circles[i].r);
+            ellipse(circles[i].x, circles[i].y, circles[i].r, circles[i].r);
             fill(0, 255, 0);
             for(CircleInCircle c: circles[i].innerCircles)
             {
-                ellipse(c.x, c.y, c.r);
+                ellipse(c.x, c.y, c.r, c.r);
             }
         }
 		/*ellipse(cic.x, cic.y, cic.r, cic.r);
