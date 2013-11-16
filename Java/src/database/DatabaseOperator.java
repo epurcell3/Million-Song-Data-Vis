@@ -10,26 +10,17 @@ import java.sql.Statement;
 public class DatabaseOperator {
 	private static Connection con;
 	public static String dbFilepathTrack = "subset_track_metadata.db";
-	public static String thomasDB = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/";
-	public static String trackDB = thomasDB + "subset_dummy.db";
+	//public static String thomasDB = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/";
+	//public static String trackDB = thomasDB + "subset_dummy.db";
 	public static String dbFileTrack = "subset_dummy.db";
 	//public static String dbFilepathTotal = System.getProperty("user.dir") + "/db/MillionSongSubset.db";
-	public static String dbFilepathTotal = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/MillionSongSubset.db";
+	public static String dbFilepathTotal = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/";
+	public static String dbTotal = dbFilepathTotal + "MillionSongSubset.db";
 	private String filename;
 	
 	public DatabaseOperator() {
-//		String currentLocation = System.getProperty("user.dir");
-//		String dbLocation = "../db/" + dbFilepathTrack;
-//		File f = new File("../../");
-//		String fs = f.getAbsolutePath();
-//		
-//		String filepath = dbLocation;
-//		File f = new File(System.getProperty("user.dir"), "../" + dbFilepathTrack);
-//		String dbFile = f.getAbsolutePath();
-//		System.out.println("Attempting to connect to database: " + dbFile);
-//		con = getNewConnection(dbFile);
-		System.out.println(trackDB);
-		con = getNewConnection(trackDB);
+		System.out.println(dbFileTrack);
+		con = getNewConnection(dbFileTrack);
 		this.filename= dbFileTrack;
 	}
 	
