@@ -50,7 +50,7 @@ public class ArtistLocationMap {
 			} // close if
 		} // close for
 		
-		parent.mouseText(line);
+		parent.setArtistText(line);
 	} // close mouseMoved
 	
 	private boolean contains(float x1, float y1, double cx, double cy, double radius) {

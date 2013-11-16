@@ -28,15 +28,24 @@ public class ArtistLocationApplet extends PApplet {
 	}
 	
 	public void draw() {
-		fill(255);
+		fill(255,255,0);
 		alm.draw();
 		
 		fill(50);
 		text(artistText, 50, 50);
 	}
 	
-	public void mouseText(String t) {
-		artistText = t;
-		
+	/**
+	 * @return the artistText
+	 */
+	public String getArtistText() {
+		return artistText;
+	}
+
+	/**
+	 * @param artistText the artistText to set
+	 */
+	public void setArtistText(String artistText) {
+		this.artistText = artistText;
 	}
 }
