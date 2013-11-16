@@ -66,7 +66,7 @@ public class CircleVis extends PApplet
             int x = (int)(Math.cos(angle) * d) + WIDTH/2;
             int y = (int)(Math.sin(angle) * d) + HEIGHT/2;
             int r = topGenres[i].getSongCount();
-            CircleInCircle c = new CircleInCircle(x, y, r);
+            CircleInCircle c = new CircleInCircle(this, x, y, r);
             for(Genre g: topGenres[i].getChildren())
             {
                 c.addCircle(g.getSongCount());
@@ -87,17 +87,9 @@ public class CircleVis extends PApplet
 	{
 		fill(255, 255, 255);
 		rect(0, 0, WIDTH, HEIGHT);
-        ellipseMode(RADIUS);
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < points; i++)
         {
-            fill(255,0, 0);
-            ellipse(circles[i].x, circles[i].y, (int)(circles[i].r * scale), (int)(circles[i].r * scale));
-            fill(0, 255, 0);
-            double scale = 0.1;
-            for(CircleInCircle c: circles[i].innerCircles)
-            {
-                ellipse(c.x, c.y, (int)(c.r * scale), (int)(c.r * scale));
-            }
+            circles[i].draw();
         }
 		/*ellipse(cic.x, cic.y, cic.r, cic.r);
 		for(CircleInCircle c: cic.innerCircles)
