@@ -1,6 +1,5 @@
 package database;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -9,24 +8,18 @@ import java.sql.Statement;
 
 public class DatabaseOperator {
 	private static Connection con;
-	public static String dbFilepathTrack = "subset_track_metadata.db";
-	//public static String thomasDB = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/";
-	//public static String trackDB = thomasDB + "subset_dummy.db";
-	public static String dbFileTrack = "subset_dummy.db";
-	//public static String dbFilepathTotal = System.getProperty("user.dir") + "/db/MillionSongSubset.db";
-	public static String dbFilepathTotal = "/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/db/";
-	public static String dbTotal = dbFilepathTotal + "MillionSongSubset.db";
-	private String filename;
+	public static String dbTotal = "MillionSongSubset.db";
+	public static String dbFilesPath = "Java/db/";
+	private String dbPath;
 	
 	public DatabaseOperator() {
-		System.out.println(dbFileTrack);
-		con = getNewConnection(dbFileTrack);
-		this.filename= dbFileTrack;
-	}
-	
-	public DatabaseOperator(String filename) {
-		con = getNewConnection(filename);
-		this.filename = filename;
+		String workingDirectory = System.getProperty("user.dir");
+		int index = workingDirectory.indexOf("Million-Song-Data-Vis");
+		String localPath = workingDirectory.substring(0,index);
+		String filepath = localPath + "Million-Song-Data-Vis/" + dbFilesPath;
+		dbPath = filepath + dbTotal;
+		
+		con = getNewConnection(dbPath);
 	}
 
 	protected Statement createStatement() {
@@ -34,7 +27,7 @@ public class DatabaseOperator {
 
 		try {
 			if (con.isClosed()) {
-				con = getNewConnection(filename);
+				con = getNewConnection(dbPath);
 			}
 
 			out = con.createStatement();
@@ -46,7 +39,7 @@ public class DatabaseOperator {
 
 	public void closeConnection() {
 		try {
-			if (con != null)
+			if (con != null && !con.isClosed())
 				con.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,7 +102,7 @@ public class DatabaseOperator {
 					.getConnection("jdbc:sqlite:" + dbFilepath);
 			
 			if (!conOut.isClosed()) {
-				System.out.println("1: Successfully connected to database");
+				System.out.println("Successfully connected to database");
 			}
 		} catch (Exception e) {
 			System.err.println("Exception: " + e.getMessage());
@@ -155,4 +148,19 @@ public class DatabaseOperator {
 		}
 		return out;
 	}
-} // close IPresenter
+	
+	public static void main(String[] args) {
+		DatabaseOperator dbOp = new DatabaseOperator();
+		String sql = "SELECT COUNT(*) FROM songs_h5";
+		ResultSet rs = dbOp.executeSQLQuery(sql);
+		try {
+			int count = rs.getInt(1);
+			System.out.println("Song count: " + count);
+			
+		} catch (SQLException e) {
+			System.err.println("Check count failed");
+			e.printStackTrace();
+		}
+		
+	}
+} // close DatabaseOperator
