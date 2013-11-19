@@ -1,11 +1,10 @@
 package visualizations;
 
-import backend.Genre;
-import processing.core.PApplet;
-import processing.core.PConstants;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import processing.core.PApplet;
+import backend.ToolTipResult;
 
 /**
  * Created with IntelliJ IDEA.
