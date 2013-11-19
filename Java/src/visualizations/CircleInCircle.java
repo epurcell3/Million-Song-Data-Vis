@@ -1,7 +1,7 @@
 package visualizations;
 
 import java.util.ArrayList;
-import java.util.Random;
+//import java.util.Random;
 
 import java.lang.Math;
 
@@ -157,41 +157,41 @@ public class CircleInCircle implements Drawable
         return  current;
     }
     
-	private void pack()
-	{
-		Random rand = new Random();
-		double angle = Math.PI/2;
-		double increment = 2*Math.PI/this.innerCircles.size();
-		
-		for (int i = 0; i < this.innerCircles.size(); i++)
-		{
-			boolean placed = true;
-			do {
-				CircleInCircle c = this.innerCircles.get(i);
-				c.x = this.x;
-				c.y = this.y;
-				//double angle = rand.nextDouble() * 2 * Math.PI;
-				double radius = rand.nextInt((int)(this.r*this.scale - c.r*c.scale));
-				
-				int x = (int)(Math.cos(angle) * radius);
-				int y = (int)(Math.sin(angle) * radius);
-				
-				for (int j = 0; j < i; j++)
-				{
-					CircleInCircle c2 = this.innerCircles.get(j);
-					if ((Math.pow(x - c2.x, 2) + Math.pow(y - c2.y, 2)) < Math.pow(c2.r * c2.scale, 2))
-					{
-						placed = false;
-					}
-				}
-				if (placed)
-				{
-					c.x = x;
-					c.y = y;
-				}
-			} while(!placed);
-			//c.x = (int)((this.x - (this.r*scale) + offset + (c.r*c.scale)));
-			//offset += 2*c.r*c.scale;
-		}
-	}
+//private void pack()
+//	{
+//		Random rand = new Random();
+//		double angle = Math.PI/2;
+//		double increment = 2*Math.PI/this.innerCircles.size();
+//		
+//		for (int i = 0; i < this.innerCircles.size(); i++)
+//		{
+//			boolean placed = true;
+//			do {
+//				CircleInCircle c = this.innerCircles.get(i);
+//				c.x = this.x;
+//				c.y = this.y;
+//				//double angle = rand.nextDouble() * 2 * Math.PI;
+//				double radius = rand.nextInt((int)(this.r*this.scale - c.r*c.scale));
+//				
+//				int x = (int)(Math.cos(angle) * radius);
+//				int y = (int)(Math.sin(angle) * radius);
+//				
+//				for (int j = 0; j < i; j++)
+//				{
+//					CircleInCircle c2 = this.innerCircles.get(j);
+//					if ((Math.pow(x - c2.x, 2) + Math.pow(y - c2.y, 2)) < Math.pow(c2.r * c2.scale, 2))
+//					{
+//						placed = false;
+//					}
+//				}
+//				if (placed)
+//				{
+//					c.x = x;
+//					c.y = y;
+//				}
+//			} while(!placed);
+//			//c.x = (int)((this.x - (this.r*scale) + offset + (c.r*c.scale)));
+//			//offset += 2*c.r*c.scale;
+//		}
+//	}
 }
