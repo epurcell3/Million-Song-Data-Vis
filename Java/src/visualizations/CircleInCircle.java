@@ -28,6 +28,7 @@ public class CircleInCircle implements Drawable
 	public int greenHighlight = 255;
 	public int blueHighlight = 0;
 	private Genre genre;
+	public int weightHighlight = 5;
 
 	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu, double scale)
 	{
@@ -41,9 +42,9 @@ public class CircleInCircle implements Drawable
 		this.blu = blu;
 		
 		//Make the highlight a little less of an eyesore and dynamic
-		redHighlight = this.red >= 180 ? 255 : this.red + 75;
-		greenHighlight = this.grn >= 180 ? 255 : this.grn + 75;
-		blueHighlight = this.blu >= 180 ? 255 : this.blu + 75;
+		redHighlight = this.red >= 155 ? 255 : this.red + 100;
+		greenHighlight = this.grn >= 155 ? 255 : this.grn + 100;
+		blueHighlight = this.blu >= 155 ? 255 : this.blu + 100;
 		
         highlighted = false;
 		this.scale = scale;
@@ -81,6 +82,10 @@ public class CircleInCircle implements Drawable
 	{
 		parent.ellipseMode(PConstants.RADIUS);
 		parent.fill(this.red,this.grn, this.blu);
+		if (highlighted)
+			parent.strokeWeight(weightHighlight);
+		else
+			parent.strokeWeight(1);
         parent.ellipse(this.x, this.y, (int)(this.r * scale), (int)(this.r * scale));
         for (CircleInCircle c: this.innerCircles)
         {

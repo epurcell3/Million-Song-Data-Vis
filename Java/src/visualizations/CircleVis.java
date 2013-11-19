@@ -89,6 +89,7 @@ public class CircleVis extends PApplet
 	public void draw()
 	{
 		fill(255,255,255);
+		strokeWeight(1);
 		rect(0, 0, WIDTH, HEIGHT);
         for (int i = 0; i < points; i++)
         {
