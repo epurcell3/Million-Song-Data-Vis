@@ -7,6 +7,7 @@ import java.lang.Math;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
+import backend.Genre;
 
 public class CircleInCircle implements Drawable
 {
@@ -15,6 +16,7 @@ public class CircleInCircle implements Drawable
 	public int x, y, r;
 	public double scale;
 	public ArrayList<CircleInCircle> innerCircles;
+
 	public int red, grn, blu;
 	
 	private double angle = Math.PI/2;
@@ -25,6 +27,7 @@ public class CircleInCircle implements Drawable
 	public int redHighlight = 255;
 	public int greenHighlight = 255;
 	public int blueHighlight = 0;
+	private Genre genre;
 	public int weightHighlight = 5;
 
 	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu, double scale)
@@ -51,6 +54,11 @@ public class CircleInCircle implements Drawable
 	public CircleInCircle(CircleVis parent, int x, int y, int r)
 	{
 		this(parent, x, y, r, 255, 0, 0, 0.01);
+	}
+	
+	public void addCircle(Genre g) {
+		this.setGenre(g);
+		this.addCircle(g.getSongCount());
 	}
 
 	public void addCircle(int r)
@@ -194,4 +202,33 @@ public class CircleInCircle implements Drawable
 //			//offset += 2*c.r*c.scale;
 //		}
 //	}
+	
+	/**
+	 * @return The keyword for the genre object
+	 */
+	public String getGenreKeyword() {
+		return genre.getKeyword();
+	}
+	
+	/**
+	 * @param keyword The keyword to set for the genre object
+	 */
+	public void setGenreKeyword(String keyword) {
+		genre.setKeyword(keyword);
+	}
+	
+	
+	/**
+	 * @return the genre
+	 */
+	public Genre getGenre() {
+		return genre;
+	}
+
+	/**
+	 * @param genre the genre to set
+	 */
+	public void setGenre(Genre genre) {
+		this.genre = genre;
+	}
 }

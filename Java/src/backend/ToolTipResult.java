@@ -1,4 +1,4 @@
-package visualizations;
+package backend;
 
 public class ToolTipResult {
 	private String genreName;
