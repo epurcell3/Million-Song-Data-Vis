@@ -12,7 +12,11 @@ public class CircleInCircle implements Drawable
 	public int x, y, r;
 	public double scale;
 	public ArrayList<CircleInCircle> innerCircles;
-	public int red, grn, blu;
+	private int red, grn, blu;
+	public static int redNormal = 255, greenNormal = 0, blueNormal = 0;
+	public static int redHighlight = 255;
+	public static int greenHighlight = 255;
+	public static int blueHighlight = 0;
 
 	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu, double scale)
 	{
@@ -50,13 +54,53 @@ public class CircleInCircle implements Drawable
         	c.draw();
         }
 	}
-    public boolean highlight(int mx, int my){
-        boolean isHighlighted = false;
-        double xs = (x-mx) * (x-mx);
+	
+	private void setHighlighted() {
+		if(highlighted) {
+			this.red = redHighlight;
+			this.grn = greenHighlight;
+			this.blu = blueHighlight;
+		} else {
+			this.red = redNormal;
+			this.grn = greenNormal;
+			this.blu = blueNormal;
+		}
+	}
+	
+	/**
+     * Tests if a given point is contained in the circle
+     * @param mx
+     * @param my
+     * @return
+     */
+    public boolean contains(int mx, int my) {
+    	boolean out = false;
+    	double xs = (x-mx) * (x-mx);
         double ys = (y - my) *(y-my);
         double dist = Math.sqrt(xs + ys);
-        if( dist < r){
+        
+        if( dist < r * scale){
+            out = true;
+        }
+    	return out;
+    }
+    
+    public int getChildrenCount() {
+    	int count = 0;
+    	for(CircleInCircle c: innerCircles) {
+    		count += c.getChildrenCount();
+    	}
+    	
+    	return count + 1;
+    }
+    
+    
+    public boolean highlight(int mx, int my){
+        boolean isHighlighted = false;
+        if(contains(mx, my)){
             isHighlighted = true;
+            
+            // Check if inner circles should be highlighted instead
             if (!(highlightInners(mx,my))){
                 highlighted = true;
             }
@@ -67,9 +111,13 @@ public class CircleInCircle implements Drawable
         else {
             highlighted = false;
         }
+        
+        setHighlighted();
         return isHighlighted;
     }
-    public boolean highlightInners(int mx, int my){
+    
+    
+    private boolean highlightInners(int mx, int my){
         boolean current = false;
         for(int i = 0; i < innerCircles.size(); i++){
             current = innerCircles.get(i).highlight(mx,my);
