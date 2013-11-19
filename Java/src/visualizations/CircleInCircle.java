@@ -21,10 +21,10 @@ public class CircleInCircle implements Drawable
 	private double d;
 	private double BUFFER = 5 * 2*Math.PI/180;
 	
-	public static int redNormal = 255, greenNormal = 0, blueNormal = 0;
-	public static int redHighlight = 255;
-	public static int greenHighlight = 255;
-	public static int blueHighlight = 0;
+	public int redNormal = 255, greenNormal = 0, blueNormal = 0;
+	public int redHighlight = 255;
+	public int greenHighlight = 255;
+	public int blueHighlight = 0;
 
 	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu, double scale)
 	{
@@ -36,6 +36,12 @@ public class CircleInCircle implements Drawable
 		this.red = red;
 		this.grn = grn;
 		this.blu = blu;
+		
+		//Make the highlight a little less of an eyesore and dynamic
+		redHighlight = this.red >= 180 ? 255 : this.red + 75;
+		greenHighlight = this.grn >= 180 ? 255 : this.grn + 75;
+		blueHighlight = this.blu >= 180 ? 255 : this.blu + 75;
+		
         highlighted = false;
 		this.scale = scale;
 		this.d = 2 / 3 * this.r;
