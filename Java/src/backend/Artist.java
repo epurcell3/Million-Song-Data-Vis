@@ -12,10 +12,15 @@ public class Artist {
 	private double artist_hottness;
 	private double artist_latitude;
 	private double artist_longitude;
+	private String artist_location;
+	private String artist_continent;
+	private String artist_country;
+	
+
 	private List<String> artist_terms;
 	private List<String> artist_mbtags;
 	
-	public Artist(String a_id, String mbid, String name, double fam, double hott, double lat, double lon) {
+	public Artist(String a_id, String mbid, String name, double fam, double hott, double lat, double lon, String country, String continent) {
 		this.artist_id = a_id;
 		this.artist_mbid = mbid;
 		this.artist_name = name;
@@ -23,40 +28,18 @@ public class Artist {
 		this.artist_hottness = hott;
 		this.artist_latitude = lat;
 		this.artist_longitude = lon;
+		this.artist_continent = continent;
+		this.artist_country = country;
 		
 		// Actual data structure used is up for discussion
 		artist_terms = new ArrayList<String>();
 		artist_mbtags = new ArrayList<String>();
 	}
 	
-	/**
-	 * @return the artist_latitude
-	 */
-	public double getArtist_latitude() {
-		return artist_latitude;
+	public Artist(String a_id, String mbid, String name, double fam, double hott, double lat, double lon) {
+		this(a_id, mbid, name, fam, hott, lat, lon, null, null);
 	}
-
-	/**
-	 * @param artist_latitude the artist_latitude to set
-	 */
-	public void setArtist_latitude(double artist_latitude) {
-		this.artist_latitude = artist_latitude;
-	}
-
-	/**
-	 * @return the artist_longitude
-	 */
-	public double getArtist_longitude() {
-		return artist_longitude;
-	}
-
-	/**
-	 * @param artist_longitude the artist_longitude to set
-	 */
-	public void setArtist_longitude(double artist_longitude) {
-		this.artist_longitude = artist_longitude;
-	}
-
+	
 	public Artist(String a_id, String mbid, String name, double fam, double hott) {
 		this(a_id, mbid, name, fam, hott, Double.NaN, Double.NaN);
 	}
@@ -164,4 +147,78 @@ public class Artist {
     public List<String> getArtist_mbtags() {
         return artist_mbtags;
     }
+    
+    /**
+	 * @return the artist_location
+	 */
+	public String getArtist_location() {
+		return artist_location;
+	}
+
+	/**
+	 * @param artist_location the artist_location to set
+	 */
+	public void setArtist_location(String artist_location) {
+		this.artist_location = artist_location;
+	}
+
+	/**
+	 * @return the artist_continent
+	 */
+	public String getArtist_continent() {
+		return artist_continent;
+	}
+
+	/**
+	 * @param artist_continent the artist_continent to set
+	 */
+	public void setArtist_continent(String artist_continent) {
+		this.artist_continent = artist_continent;
+	}
+	
+	public String toString() {
+		return artist_name + "\t" + artist_id + "\t" + artist_continent;
+	}
+	
+	/**
+	 * @return the artist_country
+	 */
+	public String getArtist_country() {
+		return artist_country;
+	}
+
+	/**
+	 * @param artist_country the artist_country to set
+	 */
+	public void setArtist_country(String artist_country) {
+		this.artist_country = artist_country;
+	}
+	
+	/**
+	 * @return the artist_latitude
+	 */
+	public double getArtist_latitude() {
+		return artist_latitude;
+	}
+
+	/**
+	 * @param artist_latitude the artist_latitude to set
+	 */
+	public void setArtist_latitude(double artist_latitude) {
+		this.artist_latitude = artist_latitude;
+	}
+
+	/**
+	 * @return the artist_longitude
+	 */
+	public double getArtist_longitude() {
+		return artist_longitude;
+	}
+
+	/**
+	 * @param artist_longitude the artist_longitude to set
+	 */
+	public void setArtist_longitude(double artist_longitude) {
+		this.artist_longitude = artist_longitude;
+	}
 }

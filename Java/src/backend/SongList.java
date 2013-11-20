@@ -73,4 +73,16 @@ public class SongList {
 	public Collection<Artist> getArtists() {
 		return artists.values();
 	}
+	
+	public void printArtistInformation() {
+		Set<String> artistIDs = artists.keySet();
+		for(String a_id: artistIDs) {
+			Artist a = artists.get(a_id);
+			System.out.println(a.toString());
+		}
+	}
+	
+	public Set<String> getArtistIds() {
+		return artists.keySet();
+	}
 }

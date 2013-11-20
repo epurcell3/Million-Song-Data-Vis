@@ -143,5 +143,9 @@ public class Song {
 	public void setDuration(double duration) {
 		this.duration = duration;
 	}
+	
+	public String toString() {
+		return track_title + "\t" + song_id;
+	}
 
 }
