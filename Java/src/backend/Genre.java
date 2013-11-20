@@ -64,6 +64,14 @@ public class Genre {
         	minimalList.remove(gen);
         }
     }
+    public void purgeSelfFromminList(){
+        for(int i = 0; i < minimalList.size(); i++){
+            if(keyword.equals(minimalList.get(i))){
+                minimalList.remove(i);
+                i--;
+            }
+        }
+    }
     public int getRank(){
         return minimalList.size();
     }
