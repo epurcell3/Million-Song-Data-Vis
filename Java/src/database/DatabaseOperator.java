@@ -6,18 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import backend.PathHandler;
+
 public class DatabaseOperator {
 	private static Connection con;
 	public static String dbTotal = "MillionSongSubset.db";
-	public static String dbFilesPath = "Java/res/";
 	private String dbPath;
 	
 	public DatabaseOperator() {
-		String workingDirectory = System.getProperty("user.dir");
-		int index = workingDirectory.indexOf("Million-Song-Data-Vis");
-		String localPath = workingDirectory.substring(0,index);
-		String filepath = localPath + "Million-Song-Data-Vis/" + dbFilesPath;
-		dbPath = filepath + dbTotal;
+		PathHandler ph = new PathHandler();
+		dbPath = ph.getPathToResource(dbTotal);
 		
 		con = getNewConnection(dbPath);
 	}
