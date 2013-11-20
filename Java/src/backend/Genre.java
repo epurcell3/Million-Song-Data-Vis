@@ -70,6 +70,10 @@ public class Genre {
     public void addChild(Genre genre){
         children.add(genre);
     }
+    
+    public String toString() {
+    	return "Keyword: " + keyword + "\tChildre: " + children.size();
+    }
 
     public String getKeyword() {
         return keyword;

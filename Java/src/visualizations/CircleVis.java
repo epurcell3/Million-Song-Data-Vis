@@ -15,6 +15,7 @@ public class CircleVis extends PApplet
     CircleInCircle[] circles;
     double scale = 0.01;
     int points = 5;
+    static int SONG_REQ = 25;
     static int WIDTH = 500;
     static int HEIGHT = 500;
     private ToolTip toolTip;
@@ -66,13 +67,13 @@ public class CircleVis extends PApplet
             CircleInCircle c = new CircleInCircle(this, x, y, r);
             for(Genre g: topGenres[i].getChildren())
             {
-            	if(g.getSongCount() > 50)
+            	if(g.getSongCount() > SONG_REQ)
             		c.addCircle(g);
             }
             circles[i] = c;
             angle += increment;
         }
-
+        System.out.println("");
 	}
 	
 	
