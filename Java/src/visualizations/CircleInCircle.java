@@ -91,6 +91,7 @@ public class CircleInCircle implements Drawable
         {
         	c.draw();
         }
+        parent.strokeWeight(1);
 	}
     
 	private void setHighlighted() {
