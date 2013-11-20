@@ -16,6 +16,12 @@ public class Test {
 		for(Genre g : tree){
 			System.out.println(g.keyword + ": " + g.getChildren().size());
 		}
+        Genre jazz = gb.fullGenreList.get("jazz");
+        System.out.println("\n JAZZ TEST ");
+        System.out.println("Jazz has " + jazz.getChildren().size() + " Children\n");
+        for(Genre g : jazz.getChildren()){
+            System.out.println(g.keyword + ": " + g.getChildren().size());
+        }
 	}
 
 }

@@ -53,7 +53,7 @@ public class GenreBase {
         zeroRank = new ArrayList<Genre>();
         Genre current = null;
         for(String key : fullGenreList.keySet()){
-
+            fullGenreList.get(key).purgeSelfFromminList();
             generateParentsTree(key);
         }
         for(String key : fullGenreList.keySet()){
@@ -64,6 +64,7 @@ public class GenreBase {
     }
     public void generateParentsTree(String current){
         int rank = fullGenreList.get(current).getRank();
+
         if(rank ==0)
         {
             return;
@@ -79,9 +80,11 @@ public class GenreBase {
                         parents.add(keys);
                     }
                     else if(fullGenreList.get(keys)!= null && fullGenreList.get(keys).getRank() > max){
-                        max = fullGenreList.get(keys).getRank();
-                        parents = new ArrayList<String>();
-                        parents.add(keys);
+                        if(fullGenreList.get(keys).getRank() < fullGenreList.get(current).getRank()){
+                            max = fullGenreList.get(keys).getRank();
+                            parents = new ArrayList<String>();
+                            parents.add(keys);
+                        }
                     }
                 }
             for (String key : parents){
