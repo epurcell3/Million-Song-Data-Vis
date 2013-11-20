@@ -17,5 +17,7 @@
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/opengl.jar"/>
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/sqlitejdbc-v056.jar"/>
 	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/UnfoldingMaps/unfolding.0.9.3.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/Geonames/jdom-1.0.jar"/>
+	<classpathentry kind="lib" path="/Users/ducttapeboro/Documents/College/CS_4460/MillionSong/Million-Song-Data-Vis/Java/jars/Geonames/geonames-1.1.10.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
