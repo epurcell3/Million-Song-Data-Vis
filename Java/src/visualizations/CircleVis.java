@@ -1,7 +1,6 @@
 package visualizations;
 
 import processing.core.*;
-
 import backend.GenreBase;
 import backend.Genre;
 import backend.SongList;
@@ -16,8 +15,10 @@ public class CircleVis extends PApplet
     CircleInCircle[] circles;
     double scale = 0.01;
     int points = 5;
+    static int SONG_REQ = 25;
     static int WIDTH = 500;
     static int HEIGHT = 500;
+    private ToolTip toolTip;
 
 	public static void main(String args[])
 	{
@@ -28,9 +29,10 @@ public class CircleVis extends PApplet
 	{
         size(WIDTH, HEIGHT);
         circles = new CircleInCircle[points];
+        toolTip = new ToolTip(CircleVis.this, 0, 0);
+        
         DatabaseConnection dc = new DatabaseConnection();
         SongList sl = dc.getArtistTerms();
-
         GenreBase gb = new GenreBase(sl);
         List<Genre> tree = gb.getZeroRank();
         Genre[] topGenres = new Genre[points];
@@ -65,22 +67,36 @@ public class CircleVis extends PApplet
             CircleInCircle c = new CircleInCircle(this, x, y, r);
             for(Genre g: topGenres[i].getChildren())
             {
-            	if(g.getSongCount() > 50)
-            		c.addCircle(g.getSongCount());
+            	if(g.getSongCount() > SONG_REQ)
+            		c.addCircle(g);
             }
             circles[i] = c;
             angle += increment;
         }
-
+        System.out.println("");
+	}
+	
+	
+	@Override
+	public void mouseMoved() {
+		super.mouseMoved();
+		
+		for(CircleInCircle cic: circles) {
+			cic.highlight(mouseX, mouseY);
+		}
+		toolTip.setPosition(mouseX, mouseY);
 	}
 
 	public void draw()
 	{
-		fill(255, 255, 255);
+		fill(255,255,255);
+		strokeWeight(1);
 		rect(0, 0, WIDTH, HEIGHT);
         for (int i = 0; i < points; i++)
         {
             circles[i].draw();
         }
+        // TODO If mouse is over a circle
+        toolTip.draw();
 	}
 }

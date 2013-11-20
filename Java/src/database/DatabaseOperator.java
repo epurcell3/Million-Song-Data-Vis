@@ -9,7 +9,7 @@ import java.sql.Statement;
 public class DatabaseOperator {
 	private static Connection con;
 	public static String dbTotal = "MillionSongSubset.db";
-	public static String dbFilesPath = "Java/db/";
+	public static String dbFilesPath = "Java/res/";
 	private String dbPath;
 	
 	public DatabaseOperator() {

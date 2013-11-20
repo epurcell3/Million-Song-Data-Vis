@@ -43,3 +43,5 @@ nosetests.xml
 .pydevproject
 
 MSD_Tutorial.py
+.classpath
+Java/.classpath

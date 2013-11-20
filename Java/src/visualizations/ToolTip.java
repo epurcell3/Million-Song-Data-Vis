@@ -1,11 +1,10 @@
 package visualizations;
 
-import backend.Genre;
-import processing.core.PApplet;
-import processing.core.PConstants;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import processing.core.PApplet;
+import backend.ToolTipResult;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,6 +21,13 @@ public class ToolTip implements Drawable {
     PApplet parent;
     private List<String> text;
     private int textSize;
+    private static int TOOL_TIP_WIDTH = 100;
+    private static int TOOL_TIP_HEIGHT = 24;
+    
+    public ToolTip(PApplet parent, int xpos, int ypos) {
+    	this(parent, xpos, ypos, TOOL_TIP_WIDTH, TOOL_TIP_HEIGHT);
+    }
+    
     public ToolTip(PApplet parent, int xpos, int ypos, int width, int height){
         this.xpos = xpos;
         this.ypos = ypos;
@@ -29,11 +35,49 @@ public class ToolTip implements Drawable {
         this.height = height;
         this.parent = parent;
         textSize = 12;
-        text = new ArrayList<String>();
+        resetText();
     }
-    public void addString(String words){
+    public void addStringLine(String words){
         text.add(words);
     }
+    
+    /**
+     * Moves the ToolTip to the given location
+     * @param x
+     * @param y
+     */
+    public void setPosition(int x, int y) {
+    	this.xpos = x;
+    	this.ypos = y;
+    }
+    
+    /**
+     * Clears the text of the ToolTip to show no information
+     */
+    public void resetText() {
+    	text = new ArrayList<String>();
+    	addStringLine("Genre: ");
+    	addStringLine("Child Genres: ");
+    }
+    
+    /**
+     * Sets the text for the ToolTip with the following format
+     * Genre: 'Some genre'
+     * Child Genres: 'Some number'
+     * 
+     * @param genreName
+     * @param childGenres
+     */
+    public void setGenreText(String genreName, int childGenres) {
+    	resetText();
+    	addStringLine("Genre: " + genreName);
+    	addStringLine("Child Genres: " + childGenres);
+    }
+    
+    public void setGenreText(ToolTipResult ttr) {
+    	this.setGenreText(ttr.getGenreName(), ttr.getChildrenCount());
+    }
+    
     public void draw(){
         if(text.size() == 0)
             return;
@@ -41,10 +85,11 @@ public class ToolTip implements Drawable {
         parent.fill(255,255,255);
         parent.stroke(0,0,0);
         parent.rect(xpos,ypos,width,height);
-        parent.textAlign(PConstants.RIGHT);
+        //parent.textAlign(PConstants.RIGHT);
         parent.textSize(textSize);
+        parent.fill(0, 0, 0);
         for(int i = 0; i < text.size(); i++){
-            parent.text(text.get(i), xpos, ypos + (i * increment));
+            parent.text(text.get(i), xpos, ypos + ((i+1) * increment));
         }
     }
 
