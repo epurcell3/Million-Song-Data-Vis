@@ -44,9 +44,13 @@ public class DatabaseConnectionTotal extends DatabaseConnectionInterface {
 	
 
 	public static void main(String[] args) {
+		long startT = System.currentTimeMillis();
 		DatabaseConnectionTotal dct = new DatabaseConnectionTotal();
 		SongList sl = dct.getArtistLocation();
+		long stopT = System.currentTimeMillis();
+		dct.closeConnection();
 		System.out.println("Artists: " + sl.getArtistCount());
+		System.out.println("Milliseconds: " + (stopT - startT));
 
 	}
 
