@@ -12,6 +12,7 @@ import backend.PathHandler;
 
 public class ContinentData {
 	private HashMap<String, CountryDataEntry> continentData;
+	private static final String[] CONTINENTS = {"North America", "South America", "Europe", "Asia", "Oceania", "Antarctica"};
 
 	public ContinentData() {
 
@@ -30,6 +31,18 @@ public class ContinentData {
 		out = getContinentForCountry(countryIso);
 
 		return out;
+	}
+	
+	public static boolean checkIfContinent(String cMaybe) {
+		boolean match = false;
+		
+		for(int i = 0; i < CONTINENTS.length; i++) {
+			if(CONTINENTS[i].equals(cMaybe)) {
+				match = true;
+				break;
+			}
+		}
+		return match;
 	}
 
 	/**
@@ -106,6 +119,10 @@ public class ContinentData {
 	public static void main(String[] args) {
 		ContinentData cd = new ContinentData();
 		System.out.println(cd.getContinentForCountry("AE"));
+	}
+	
+	public static String[] getContinents() {
+		return CONTINENTS;
 	}
 
 }

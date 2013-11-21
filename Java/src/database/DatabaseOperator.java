@@ -58,7 +58,7 @@ public class DatabaseOperator {
 		return out;
 	}
 
-	protected ResultSet executeSQLQuery(String command) {
+	public ResultSet executeSQLQuery(String command) {
 		ResultSet out = null;
 
 		if (command != null && !command.isEmpty()) {
@@ -72,7 +72,7 @@ public class DatabaseOperator {
 		return out;
 	} // close executeSQLQuery method
 
-	protected boolean executeSQLCreate(String command) {
+	public boolean executeSQLCreate(String command) {
 		boolean out = false;
 		if (command != null && !command.isEmpty()) {
 			try {

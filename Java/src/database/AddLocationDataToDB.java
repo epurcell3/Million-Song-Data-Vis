@@ -45,6 +45,8 @@ public class AddLocationDataToDB {
 			System.out.println("Update Queries:");
 			
 			ContinentData cd = new ContinentData();
+			int counter = 0;
+			
 			for(Artist a: artists) {
 				String a_id = a.getArtist_id();
 				double a_lat = a.getArtist_latitude();
@@ -53,8 +55,9 @@ public class AddLocationDataToDB {
 				String continent = cd.getContinentForCountry(country);
 				
 				String updateSQL = createUpdateSQL(a_id, continent, country);
-				System.out.println(updateSQL);
+				System.out.println(counter + "\t" + updateSQL);
 				state.execute(updateSQL);
+				counter++;
 			}
 			
 			

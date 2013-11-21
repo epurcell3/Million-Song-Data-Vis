@@ -19,7 +19,6 @@ public class ArtistLocationMap {
 	public ArtistLocationMap(ArtistLocationApplet p, SongList sl) {
 		this.parent = p;
 		artists = sl.getArtists();
-		sl.printArtistInformation();
 		
 		map = new UnfoldingMap(parent);
 		//MapUtils.createDefaultEventDispatcher(parent, map);
@@ -46,7 +45,7 @@ public class ArtistLocationMap {
 			ScreenPosition pos = map.getScreenPosition(new Location(a.getArtist_latitude(), a.getArtist_longitude()));
 			
 			if(contains(x,y, pos.x, pos.y, EDGE)) {
-				line += a.getArtist_continent() + "\t" + a.getArtist_name() + "\n";
+				line += a.getArtist_continent() + "  " + a.getArtist_name() + "\n";
 			} // close if
 		} // close for
 		

@@ -15,7 +15,7 @@ public class DatabaseConnectionTotal extends DatabaseConnectionInterface {
 	}
 	
 	public SongList getArtistLocation() {
-		ResultSet rs = dbOp.executeSQLQuery("SELECT artist_id, artist_name, artist_latitude, artist_longitude FROM artists_h5 WHERE artist_latitude NOT NULL;");
+		ResultSet rs = dbOp.executeSQLQuery("SELECT artist_id, artist_name, artist_latitude, artist_longitude, artist_country, artist_continent FROM artists_h5 WHERE artist_latitude NOT NULL;");
 		SongList sl = new SongList();
 		
 		try {
@@ -26,8 +26,10 @@ public class DatabaseConnectionTotal extends DatabaseConnectionInterface {
 				String artist_name = rs.getString("artist_name");
 				double artist_lat = rs.getDouble("artist_latitude");
 				double artist_lon = rs.getDouble("artist_longitude");
+				String a_country = rs.getString("artist_country");
+				String a_continent = rs.getString("artist_continent");
 				
-				Artist a = new Artist(artist_id, null, artist_name, Double.NaN, Double.NaN, artist_lat, artist_lon);
+				Artist a = new Artist(artist_id, null, artist_name, Double.NaN, Double.NaN, artist_lat, artist_lon, a_country, a_continent);
 				
 				// Add data to SongList
 				sl.addArtist(a);
