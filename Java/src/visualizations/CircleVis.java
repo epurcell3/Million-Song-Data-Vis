@@ -16,8 +16,8 @@ public class CircleVis extends PApplet
     double scale = 0.01;
     int points = 5;
     static int SONG_REQ = 50;
-    static int WIDTH = 500;
-    static int HEIGHT = 500;
+    static int WIDTH = 750;
+    static int HEIGHT = 750;
 
 	public static void main(String args[])
 	{
@@ -56,7 +56,7 @@ public class CircleVis extends PApplet
         }
         double angle = Math.PI / 2;
         double increment = 2 * Math.PI / points;
-        int d = 150;
+        int d = 200;
         for (int i = 0; i < points; i++)
         {
             int x = (int)(Math.cos(angle) * d) + WIDTH/2;
