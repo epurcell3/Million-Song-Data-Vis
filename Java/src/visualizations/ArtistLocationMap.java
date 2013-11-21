@@ -20,6 +20,8 @@ public class ArtistLocationMap {
 		this.parent = p;
 		artists = sl.getArtists();
 		
+		int parentWidth = parent.width;
+		int parentHeight = parent.height;
 		map = new UnfoldingMap(parent);
 		//MapUtils.createDefaultEventDispatcher(parent, map);
 		

@@ -17,12 +17,12 @@ public class ContinentCheckboxes {
 
 		cp5 = new ControlP5(parent);
 		checkbox = cp5.addCheckBox("checkBox")
-				.setPosition(100, 200)
+				.setPosition(100, 50)
 				.setColorForeground(parent.color(120))
-				.setColorActive(parent.color(255))
-				.setColorLabel(parent.color(255))
+				.setColorActive(parent.color(0))
+				.setColorLabel(parent.color(0))
 				.setSize(40, 40)
-				.setItemsPerRow(3)
+				.setItemsPerRow(1)
 				.setSpacingColumn(30)
 				.setSpacingRow(20)
 				.addItem(continents[0], 0)
