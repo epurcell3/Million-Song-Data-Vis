@@ -46,9 +46,13 @@ public class CircleInCircle implements Drawable
 		greenHighlight = this.grn >= 155 ? 255 : this.grn + 100;
 		blueHighlight = this.blu >= 155 ? 255 : this.blu + 100;
 		
+		redNormal = this.red;
+		greenNormal = this.grn;
+		blueNormal = this.blu;
+		
         highlighted = false;
 		this.scale = scale;
-		this.d = 2 / 3 * this.r;
+		this.d = this.r * 2 / 3 * this.scale;
 	}
 	
 	public CircleInCircle(CircleVis parent, int x, int y, int r)
@@ -63,8 +67,12 @@ public class CircleInCircle implements Drawable
 
 	public void addCircle(int r)
 	{
-		this.angle += Math.acos((2*Math.pow(this.d, 2)-Math.pow(r*0.05, 2))/2*Math.pow(this.d, 2));
-		if (this.angle > 2 * Math.PI)
+		double bc = 2*Math.pow(this.d, 2);
+		double a = 2*Math.pow(r*0.05, 2);
+		double bca = (bc-a);
+		double bcabc = bca/bc;
+		this.angle += Math.acos(bcabc);
+		if (this.angle > 5 * Math.PI / 2)
 		{
 			this.angle = Math.PI/2;
 			this.d = this.r / 2;
@@ -74,7 +82,7 @@ public class CircleInCircle implements Drawable
 		int y = (int)(Math.sin(this.angle) * this.d * this.scale + this.y);
 		this.innerCircles.add(new CircleInCircle(parent, x, y, r, 0, 255, 0, 0.05));
 		
-		this.angle += Math.acos((2*Math.pow(this.d, 2)-Math.pow(r*0.05, 2))/2*Math.pow(this.d, 2)) + BUFFER;
+		this.angle += Math.acos(bcabc) + BUFFER;
 		//pack();
 	}
 	
