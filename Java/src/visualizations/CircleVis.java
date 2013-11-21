@@ -15,10 +15,9 @@ public class CircleVis extends PApplet
     CircleInCircle[] circles;
     double scale = 0.01;
     int points = 5;
-    static int SONG_REQ = 25;
+    static int SONG_REQ = 50;
     static int WIDTH = 500;
     static int HEIGHT = 500;
-    private ToolTip toolTip;
 
 	public static void main(String args[])
 	{
@@ -29,7 +28,6 @@ public class CircleVis extends PApplet
 	{
         size(WIDTH, HEIGHT);
         circles = new CircleInCircle[points];
-        toolTip = new ToolTip(CircleVis.this, 0, 0);
         
         DatabaseConnection dc = new DatabaseConnection();
         SongList sl = dc.getArtistTerms();
@@ -84,7 +82,6 @@ public class CircleVis extends PApplet
 		for(CircleInCircle cic: circles) {
 			cic.highlight(mouseX, mouseY);
 		}
-		toolTip.setPosition(mouseX, mouseY);
 	}
 
 	public void draw()
@@ -96,7 +93,5 @@ public class CircleVis extends PApplet
         {
             circles[i].draw();
         }
-        // TODO If mouse is over a circle
-        toolTip.draw();
 	}
 }
