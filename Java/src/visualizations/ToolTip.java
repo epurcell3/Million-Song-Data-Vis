@@ -21,8 +21,8 @@ public class ToolTip implements Drawable {
     PApplet parent;
     private List<String> text;
     private int textSize;
-    private static int TOOL_TIP_WIDTH = 100;
-    private static int TOOL_TIP_HEIGHT = 24;
+    private static int TOOL_TIP_WIDTH = 125;
+    private static int TOOL_TIP_HEIGHT = 25;
     
     public ToolTip(PApplet parent, int xpos, int ypos) {
     	this(parent, xpos, ypos, TOOL_TIP_WIDTH, TOOL_TIP_HEIGHT);
@@ -56,8 +56,6 @@ public class ToolTip implements Drawable {
      */
     public void resetText() {
     	text = new ArrayList<String>();
-    	addStringLine("Genre: ");
-    	addStringLine("Child Genres: ");
     }
     
     /**
@@ -68,10 +66,10 @@ public class ToolTip implements Drawable {
      * @param genreName
      * @param childGenres
      */
-    public void setGenreText(String genreName, int childGenres) {
+    public void setGenreText(String genreName, int songCount) {
     	resetText();
     	addStringLine("Genre: " + genreName);
-    	addStringLine("Child Genres: " + childGenres);
+    	addStringLine("Song Count: " + songCount);
     }
     
     public void setGenreText(ToolTipResult ttr) {
