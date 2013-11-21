@@ -27,10 +27,12 @@ public class CircleInCircle implements Drawable
 	public int redHighlight = 255;
 	public int greenHighlight = 255;
 	public int blueHighlight = 0;
-	private Genre genre;
 	public int weightHighlight = 5;
+	
+	private Genre genre;
+	private ToolTip tooltip;
 
-	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu, double scale)
+	public CircleInCircle(PApplet parent, int x, int y, int r, int red, int grn, int blu, double scale, Genre genre)
 	{
 		this.parent = parent;
 		this.x = x;
@@ -53,19 +55,21 @@ public class CircleInCircle implements Drawable
         highlighted = false;
 		this.scale = scale;
 		this.d = this.r * 2 / 3 * this.scale;
+		
+		this.genre = genre;
 	}
 	
-	public CircleInCircle(CircleVis parent, int x, int y, int r)
+	public CircleInCircle(CircleVis parent, int x, int y, int r, Genre genre)
 	{
-		this(parent, x, y, r, 255, 0, 0, 0.01);
+		this(parent, x, y, r, 255, 0, 0, 0.01, genre);
 	}
 	
 	public void addCircle(Genre g) {
-		this.setGenre(g);
-		this.addCircle(g.getSongCount());
+		//this.setGenre(g);
+		this.addCircle(g.getSongCount(), g);
 	}
 
-	public void addCircle(int r)
+	public void addCircle(int r, Genre genre)
 	{
 		double bc = 2*Math.pow(this.d, 2);
 		double a = 2*Math.pow(r*0.05, 2);
@@ -80,7 +84,7 @@ public class CircleInCircle implements Drawable
 		
 		int x = (int)(Math.cos(this.angle) * this.d * this.scale + this.x);
 		int y = (int)(Math.sin(this.angle) * this.d * this.scale + this.y);
-		this.innerCircles.add(new CircleInCircle(parent, x, y, r, 0, 255, 0, 0.05));
+		this.innerCircles.add(new CircleInCircle(parent, x, y, r, 0, 255, 0, 0.05, genre));
 		
 		this.angle += Math.acos(bcabc) + BUFFER;
 		//pack();
@@ -100,6 +104,8 @@ public class CircleInCircle implements Drawable
         	c.draw();
         }
         parent.strokeWeight(1);
+        if (tooltip != null)
+        	tooltip.draw();
 	}
     
 	private void setHighlighted() {
@@ -107,10 +113,13 @@ public class CircleInCircle implements Drawable
 			this.red = redHighlight;
 			this.grn = greenHighlight;
 			this.blu = blueHighlight;
+			tooltip = new ToolTip(this.parent, this.x, this.y + 10);
+			tooltip.setGenreText(genre.getKeyword(), genre.getSongCount());
 		} else {
 			this.red = redNormal;
 			this.grn = greenNormal;
 			this.blu = blueNormal;
+			tooltip = null;
 		}
 	}
 	

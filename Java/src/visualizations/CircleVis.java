@@ -62,7 +62,7 @@ public class CircleVis extends PApplet
             int x = (int)(Math.cos(angle) * d) + WIDTH/2;
             int y = (int)(Math.sin(angle) * d) + HEIGHT/2;
             int r = topGenres[i].getSongCount();
-            CircleInCircle c = new CircleInCircle(this, x, y, r);
+            CircleInCircle c = new CircleInCircle(this, x, y, r, topGenres[i]);
             for(Genre g: topGenres[i].getChildren())
             {
             	if(g.getSongCount() > SONG_REQ)
