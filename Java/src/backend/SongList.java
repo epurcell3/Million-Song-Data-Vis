@@ -111,4 +111,28 @@ public class SongList {
 		}
 		return out;
 	}
+	
+	/**
+	 * Returns a list of songs whose artist is associated with the given continent
+	 * @param continent
+	 * @return
+	 */
+	public List<Song> getSongsForContinent(String continent) {
+		ArrayList<Song> out = new ArrayList<Song>();
+		if(ContinentData.checkIfContinent(continent)) {
+			DatabaseOperator dbOp = new DatabaseOperator();
+			String sqlQuery = "SELECT song_id, artist_id FROM songs_h5, artists_h5 WHERE artist_continent = '" + continent + "' AND songs_h5.artist_id = artists_h5.artist_id;";
+			ResultSet rs = dbOp.executeSQLQuery(sqlQuery);
+
+			try {
+				while(rs.next()) {
+					String s_id = rs.getString("song_id");
+					out.add(songs.get(s_id));
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return out;
+	}
 }

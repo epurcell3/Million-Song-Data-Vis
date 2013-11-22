@@ -22,7 +22,7 @@ public class ArtistLocationMap {
 		
 		int parentWidth = parent.width;
 		int parentHeight = parent.height;
-		map = new UnfoldingMap(parent);
+		map = new UnfoldingMap(parent, "detail", 10, 10, parentWidth - 200, parentHeight - 20);
 		//MapUtils.createDefaultEventDispatcher(parent, map);
 		
 		MapUtils.createDefaultEventDispatcher(parent, map);

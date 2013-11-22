@@ -18,7 +18,7 @@ public class ArtistLocationApplet extends PApplet {
 	private String artistText = "";
 
 	public void setup() {
-		size(768, 768, GLConstants.GLGRAPHICS);
+		size(868, 768, GLConstants.GLGRAPHICS);
 		
 		DatabaseConnectionTotal dct = new DatabaseConnectionTotal();
 		SongList sl = dct.getArtistLocation();

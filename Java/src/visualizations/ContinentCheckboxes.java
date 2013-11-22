@@ -17,7 +17,7 @@ public class ContinentCheckboxes {
 
 		cp5 = new ControlP5(parent);
 		checkbox = cp5.addCheckBox("checkBox")
-				.setPosition(100, 50)
+				.setPosition(700, 50)
 				.setColorForeground(parent.color(120))
 				.setColorActive(parent.color(0))
 				.setColorLabel(parent.color(0))
