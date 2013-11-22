@@ -38,12 +38,12 @@ public class GenreBase {
                 //will use dictionary lookup to determine if it is already in the list first
             	String keyword = terms.get(i);
                 if(fullGenreList.get(keyword) == null){
-                    fullGenreList.put(keyword, new Genre(keyword, song, terms));
+                    fullGenreList.put(keyword, new Genre(keyword, song, a));
                     //fullList.add(new Genre(keyword, song.getMyArtist().getArtist_terms()));
                 }
                 else{
                     //will get the genre from list by keyword
-                    fullGenreList.get(keyword).addSong(song, terms);
+                    fullGenreList.get(keyword).addSong(song, a);
                    // fullList.get(1).addSong(song);
                 }
 
