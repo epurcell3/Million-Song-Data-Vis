@@ -12,7 +12,7 @@ import backend.PathHandler;
 
 public class ContinentData {
 	private HashMap<String, CountryDataEntry> continentData;
-	private static final String[] CONTINENTS = {"North America", "South America", "Europe", "Asia", "Oceania", "Antarctica"};
+	private static final String[] CONTINENTS = {"North America", "South America", "Europe", "Asia", "Oceania", "Antarctica", "Africa"};
 
 	public ContinentData() {
 
