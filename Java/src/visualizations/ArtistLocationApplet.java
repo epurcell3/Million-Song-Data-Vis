@@ -24,7 +24,7 @@ public class ArtistLocationApplet extends PApplet {
 		SongList sl = dct.getArtistLocation();
 		alm = new ArtistLocationMap(this, sl);
 		
-		if (USE_CHECKBOX) ccbx = new ContinentCheckboxes(this);
+		if (USE_CHECKBOX) ccbx = new ContinentCheckboxes(this, 700, 59);
 		
 	}
 	

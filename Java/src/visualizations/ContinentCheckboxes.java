@@ -1,5 +1,7 @@
 package visualizations;
 
+import java.util.Arrays;
+
 import map_works.ContinentData;
 import processing.core.PApplet;
 import controlP5.CheckBox;
@@ -10,14 +12,22 @@ public class ContinentCheckboxes {
 	private PApplet parent;
 	private ControlP5 cp5;
 	private CheckBox checkbox;
+	public static int DEFAULT_WIDTH = 100, DEFAULT_HEIGHT = 300;
 
-	public ContinentCheckboxes(PApplet p) {
+	public ContinentCheckboxes(PApplet p, int x, int y) {
+		this(p, x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	} // close constructor
+	
+	public ContinentCheckboxes(PApplet p, int x, int y, int width, int height) {
 		this.parent = p;
 		String[] continents = ContinentData.getContinents();
 
 		cp5 = new ControlP5(parent);
+		//PFont pFont = parent.createFont("Arial", 10);
+//		cp5.setFont(pFont);
+		
 		checkbox = cp5.addCheckBox("checkBox")
-				.setPosition(700, 50)
+				.setPosition(x, y)
 				.setColorForeground(parent.color(120))
 				.setColorActive(parent.color(0))
 				.setColorLabel(parent.color(0))
@@ -32,7 +42,7 @@ public class ContinentCheckboxes {
 				.addItem(continents[4], 200)
 				.addItem(continents[5], 255)
 				;
-	} // close constructor
+	}
 
 	public void keyPressed() {
 		if (parent.key==' ') {
@@ -62,24 +72,14 @@ public class ContinentCheckboxes {
 		parent.popMatrix();
 	}
 
-	void controlEvent(ControlEvent theEvent) {
+	public void controlEvent(ControlEvent theEvent) {
 		if (theEvent.isFrom(checkbox)) {
-			System.out.print("got an event from "+checkbox.getName()+"\t\n");
-			// checkbox uses arrayValue to store the state of 
-			// individual checkbox-items. usage:
-			System.out.println(checkbox.getArrayValue());
+			boolean[] checked = new boolean[ContinentData.getContinents().length];
 			for (int i=0;i<checkbox.getArrayValue().length;i++) {
 				int n = (int)checkbox.getArrayValue()[i];
-				System.out.print(n);
-				if(n==1) {
-//					myColorBackground += checkbox.getItem(i).internalValue();
-				}
+				checked[i] = (n==1);
 			}
-			System.out.println();    
+			System.out.println(Arrays.toString(checked));    
 		}
-	}
-
-	void checkBox(float[] a) {
-		System.out.println(a);
 	}
 }
