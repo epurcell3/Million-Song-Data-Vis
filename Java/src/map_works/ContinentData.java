@@ -4,11 +4,16 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.geonames.WebService;
 
 import backend.PathHandler;
+import database.DatabaseOperator;
 
 public class ContinentData {
 	private HashMap<String, CountryDataEntry> continentData;
@@ -112,8 +117,59 @@ public class ContinentData {
 		return out;
 	}
 
-	public HashMap<String, CountryDataEntry> loadContinentDataFromCSV() {
+	private HashMap<String, CountryDataEntry> loadContinentDataFromCSV() {
 		return this.loadContinentDataFromCSV("Country_Continent.csv");
+	}
+	
+	public String[] getFullCountriesArray() {
+		String[] out = new String[continentData.size()];
+		ArrayList<String> keys = new ArrayList<String>(continentData.keySet());
+		
+		for(int i = 0; i < out.length; i++) {
+			out[i] = continentData.get(keys.get(i)).getCountryName();
+		}
+		
+		return out;
+	}
+	
+	/**
+	 * Creates an array of the ISO-codes for all the countries that appear in the MSD database
+	 * @return
+	 */
+	public String[] findCountriesISOInDatabase() {
+		DatabaseOperator dbOp = new DatabaseOperator();
+		ResultSet rs = dbOp.executeSQLQuery("SELECT DISTINCT artist_country FROM artists_h5;");
+		
+		ArrayList<String> countries = new ArrayList<String>();
+		try {
+			while(rs.next()) {
+				String country = rs.getString("artist_country");
+				if(country != null && !"null".equals(country)) {
+					countries.add(country);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		String[] out = new String[countries.size()];
+		
+		for(int i = 0; i < out.length; i++) {
+			out[i] = countries.get(i);
+		}
+		
+		return out;
+	}
+	
+	public String[] findCountriesNameInDatabase() {
+		String[] countryIso = findCountriesISOInDatabase();
+		String[] out = new String[countryIso.length];
+		
+		for(int i = 0; i < out.length; i++) {
+			String iso = countryIso[i];
+			out[i] = continentData.get(iso).getCountryName();
+		}
+		System.out.println(Arrays.toString(out));
+		return out;
 	}
 	
 	public static void main(String[] args) {

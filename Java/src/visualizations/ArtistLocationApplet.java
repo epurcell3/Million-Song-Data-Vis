@@ -32,10 +32,6 @@ public class ArtistLocationApplet extends PApplet {
 		alm.mouseMoved(mouseX, mouseY);
 	}
 	
-	public void keyPressed() {
-		if (USE_CHECKBOX) ccbx.keyPressed();
-	}
-	
 	public void controlEvent(ControlEvent theEvent) {
 		if (USE_CHECKBOX) ccbx.controlEvent(theEvent);
 	}

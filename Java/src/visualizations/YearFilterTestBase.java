@@ -3,7 +3,7 @@ package visualizations;
 import controlP5.ControlEvent;
 import processing.core.PApplet;
 
-public class YearFilterBase extends PApplet {
+public class YearFilterTestBase extends PApplet {
 	/**
 	 * 
 	 */

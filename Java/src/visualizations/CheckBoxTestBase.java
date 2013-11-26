@@ -20,10 +20,6 @@ public class CheckBoxTestBase extends PApplet {
 		ccb.draw();
 	}
 	
-	public void keyPressed() {
-		ccb.keyPressed();
-	}
-	
 	public void controlEvent(ControlEvent theEvent) {
 		ccb.controlEvent(theEvent);
 	}

@@ -44,26 +44,6 @@ public class ContinentCheckboxes {
 				;
 	}
 
-	public void keyPressed() {
-		if (parent.key==' ') {
-			checkbox.deactivateAll();
-		} 
-		else {
-			for (int i=0;i<6;i++) {
-				// check if key 0-5 have been pressed and toggle
-				// the checkbox item accordingly.
-				if (parent.keyCode==(48 + i)) { 
-					// the index of checkbox items start at 0
-					checkbox.toggle(i);
-					System.out.println("toggle "+checkbox.getItem(i).getLabel());
-					// also see 
-					// checkbox.activate(index);
-					// checkbox.deactivate(index);
-				}
-			}
-		}
-	}
-
 	public void draw() {
 		parent.pushMatrix();
 		parent.translate(parent.width/2 + 200, parent.height/2);
@@ -79,7 +59,7 @@ public class ContinentCheckboxes {
 				int n = (int)checkbox.getArrayValue()[i];
 				checked[i] = (n==1);
 			}
-			System.out.println(Arrays.toString(checked));    
+			//System.out.println(Arrays.toString(checked));    
 		}
 	}
 }
