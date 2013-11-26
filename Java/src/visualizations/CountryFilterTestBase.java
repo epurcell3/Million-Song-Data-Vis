@@ -1,5 +1,6 @@
 package visualizations;
 
+import controlP5.ControlEvent;
 import processing.core.PApplet;
 
 public class CountryFilterTestBase extends PApplet {
@@ -17,6 +18,10 @@ public class CountryFilterTestBase extends PApplet {
 	
 	public void draw() {
 		cf.draw();
+	}
+	
+	public void controlEvent(ControlEvent theEvent) {
+		cf.controlEvent(theEvent);
 	}
 
 }

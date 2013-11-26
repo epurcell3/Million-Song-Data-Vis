@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import org.geonames.WebService;
@@ -168,7 +167,7 @@ public class ContinentData {
 			String iso = countryIso[i];
 			out[i] = continentData.get(iso).getCountryName();
 		}
-		System.out.println(Arrays.toString(out));
+		//System.out.println(Arrays.toString(out));
 		return out;
 	}
 	

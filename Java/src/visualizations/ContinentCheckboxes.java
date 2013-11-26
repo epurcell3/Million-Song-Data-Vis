@@ -1,7 +1,5 @@
 package visualizations;
 
-import java.util.Arrays;
-
 import map_works.ContinentData;
 import processing.core.PApplet;
 import controlP5.CheckBox;
