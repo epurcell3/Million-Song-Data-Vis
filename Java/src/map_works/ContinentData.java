@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 import org.geonames.WebService;
@@ -165,15 +166,37 @@ public class ContinentData {
 		
 		for(int i = 0; i < out.length; i++) {
 			String iso = countryIso[i];
-			out[i] = continentData.get(iso).getCountryName();
+			String upperCase = continentData.get(iso).getCountryName();
+			out[i] = convertCountryToLowerCase(upperCase);
 		}
-		//System.out.println(Arrays.toString(out));
+		System.out.println(Arrays.toString(out));
 		return out;
+	}
+	
+	private String convertCountryToLowerCase(String text) {
+		text = text.toLowerCase();
+		int pos = 0;
+		boolean capitalize = true;
+		StringBuilder sb = new StringBuilder(text);
+		while (pos < sb.length()) {
+		    if (sb.charAt(pos) == '.' || sb.charAt(pos) == ' ') {
+		        capitalize = true;
+		    } else if (capitalize && !Character.isWhitespace(sb.charAt(pos))) {
+		        sb.setCharAt(pos, Character.toUpperCase(sb.charAt(pos)));
+		        capitalize = false;
+		    }
+		    pos++;
+		}
+		System.out.println(sb.toString());
+		return sb.toString();
+		
 	}
 	
 	public static void main(String[] args) {
 		ContinentData cd = new ContinentData();
 		System.out.println(cd.getContinentForCountry("AE"));
+		String e = cd.convertCountryToLowerCase("good morning, dave");
+		System.out.println(e);
 	}
 	
 	public static String[] getContinents() {

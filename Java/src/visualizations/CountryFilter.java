@@ -50,6 +50,7 @@ public class CountryFilter {
 				.setItemsPerRow(3)
 				.setSpacingColumn(85)
 				.setSpacingRow(7)
+				.toUpperCase(false)
 				;
 		
 	}
@@ -62,6 +63,7 @@ public class CountryFilter {
 			checkbox.addItem(cs[i], i);
 		}
 		System.out.println(cs.length + " countries added to checkbox");
+		System.out.println(Arrays.toString(cs));
 	}
 	
 	public void draw() {
@@ -78,10 +80,6 @@ public class CountryFilter {
 			for(int i = 0; i < checks.length; i++) {
 				if(checks[i]) {
 					print += countriesInCheckboxList[i] + "\t";
-					
-//					if(countriesInCheckboxList[i].equals("GERMANY")) {
-//						setCheckboxList(countriesFull);
-//					}
 				}
 			}
 			System.out.println(print);
