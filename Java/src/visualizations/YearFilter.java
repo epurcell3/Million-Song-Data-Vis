@@ -58,31 +58,23 @@ public class YearFilter {
 //		parent.fill(50);
 //		parent.rect(0,0,parent.width,parent.height/2);
 	}
+	
+	/**
+	 * Method called when ever the Range slider has been changed.  Updates UI, etc...
+	 * @param min
+	 * @param max
+	 */
+	private void updateMethod(int min, int max) {
+		// TODO Result of change to range min and max
+	}
 
 	public void controlEvent(ControlEvent theControlEvent) {
 		if(theControlEvent.isFrom("Year")) {
-			// min and max values are stored in an array.
-			// access this array with controller().arrayValue().
-			// min is at index 0, max is at index 1.
 			rangeMin = (int) (theControlEvent.getController().getArrayValue(0));
 			rangeMax = (int) (theControlEvent.getController().getArrayValue(1));
-			
-			// TODO Result of change to range min and max
+			updateMethod(rangeMin, rangeMax);
 		}
 
-	}
-
-
-	public void keyPressed() {
-		switch(parent.key) {
-			/*
-			case('1'):range.setLowValue(0);break;
-			case('2'):range.setLowValue(100);break;
-			case('3'):range.setHighValue(120);break;
-			case('4'):range.setHighValue(200);break;
-			case('5'):range.setRangeValues(40,60);break;
-			*/
-		}
 	}
 
 }

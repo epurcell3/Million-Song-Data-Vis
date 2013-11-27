@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 
 import org.geonames.WebService;
@@ -169,7 +168,6 @@ public class ContinentData {
 			String upperCase = continentData.get(iso).getCountryName();
 			out[i] = convertCountryToLowerCase(upperCase);
 		}
-		System.out.println(Arrays.toString(out));
 		return out;
 	}
 	
@@ -187,7 +185,6 @@ public class ContinentData {
 		    }
 		    pos++;
 		}
-		System.out.println(sb.toString());
 		return sb.toString();
 		
 	}

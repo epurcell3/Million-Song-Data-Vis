@@ -19,7 +19,7 @@ public class GeonamesTest {
 			String country = WebService.countryCode(35.00, 80.00);
 			System.out.println("Country: " + country);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Error getting Country name");
 			e.printStackTrace();
 		}
 	}

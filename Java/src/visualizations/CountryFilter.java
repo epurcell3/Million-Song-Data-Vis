@@ -59,11 +59,12 @@ public class CountryFilter {
 		this.countriesInCheckboxList = cs;
 		createCheckbox();
 		Arrays.sort(cs);
+		System.out.println(Arrays.toString(cs));
 		for(int i = 0; i < cs.length; i++) {
 			checkbox.addItem(cs[i], i);
+			checkbox.toUpperCase(false);
 		}
 		System.out.println(cs.length + " countries added to checkbox");
-		System.out.println(Arrays.toString(cs));
 	}
 	
 	public void draw() {
@@ -89,6 +90,14 @@ public class CountryFilter {
 		
 	}
 	
+	/**
+	 * Method to be called whenever a Country has been selected.  Updates vis, etc...
+	 * @param countriesChecked
+	 */
+	private void updateMethod(boolean[] countriesChecked) {
+		// TODO
+	}
+	
 	public void controlEvent(ControlEvent theEvent) {
 		if (theEvent.isFrom(checkbox)) {
 			boolean[] checked = new boolean[countriesInCheckboxList.length];
@@ -97,7 +106,7 @@ public class CountryFilter {
 				checked[i] = (n==1);
 			}
 			printCountriesChecked(checked);
-			//System.out.println(Arrays.toString(checked));    
+			updateMethod(checked);    
 		}
 	}
 

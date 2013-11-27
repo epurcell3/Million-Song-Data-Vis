@@ -23,9 +23,4 @@ public class YearFilterTestBase extends PApplet {
 	public void controlEvent(ControlEvent theControlEvent) {
 		yr.controlEvent(theControlEvent);
 	}
-
-
-	public void keyPressed() {
-		yr.keyPressed();
-	}
 }

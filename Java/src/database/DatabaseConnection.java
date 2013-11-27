@@ -56,7 +56,7 @@ public class DatabaseConnection extends DatabaseConnectionInterface{
 			} // close while
 			System.out.println("Counter: " + counter);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error with SQL Query");
 			e.printStackTrace();
 		} // close catch
 		
