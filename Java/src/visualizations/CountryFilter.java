@@ -4,11 +4,12 @@ import java.util.Arrays;
 
 import map_works.ContinentData;
 import processing.core.PApplet;
+import backend.AbstractFilter;
 import controlP5.CheckBox;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 
-public class CountryFilter {
+public class CountryFilter extends AbstractFilter {
 	private PApplet parent;
 	private String[] countriesInDB;
 	private String[] countriesInCheckboxList;

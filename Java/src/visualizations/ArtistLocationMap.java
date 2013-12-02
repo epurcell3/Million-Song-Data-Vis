@@ -2,6 +2,7 @@ package visualizations;
 
 import java.util.Collection;
 
+import backend.AbstractMap;
 import backend.Artist;
 import backend.SongList;
 import de.fhpotsdam.unfolding.UnfoldingMap;

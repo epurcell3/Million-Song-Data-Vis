@@ -1,5 +1,6 @@
 package visualizations;
 
+import backend.AbstractMap;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import processing.core.PApplet;

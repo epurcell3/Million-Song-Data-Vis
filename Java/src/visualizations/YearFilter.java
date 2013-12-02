@@ -1,13 +1,12 @@
 package visualizations;
 
 import processing.core.PApplet;
+import backend.AbstractFilter;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Range;
 
-public class YearFilter {
-	private PApplet parent;
-	public ControlP5 cp5;
+public class YearFilter extends AbstractFilter {
 
 	public int myColorBackground;
 	private int colorRangeForeground;

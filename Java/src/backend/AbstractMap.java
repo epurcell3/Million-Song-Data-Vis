@@ -1,4 +1,4 @@
-package visualizations;
+package backend;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 
