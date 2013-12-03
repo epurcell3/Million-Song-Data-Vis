@@ -25,6 +25,10 @@ public class Genre {
     public Genre(String keyword, Song initial, Artist a){
         if(keyword.equals("RootNode")){
             this.children = new ArrayList<Genre>();
+            yearsMap = new HashMap<Integer,Integer>();
+            continentMap  = new HashMap<String, Integer>();
+            countryMap = new HashMap<String, Integer>();
+            minimalList = new ArrayList<String>();
             return;
         }
         List<String> terms = a.getTerms();

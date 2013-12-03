@@ -32,6 +32,7 @@ public class GenreBase {
         List<Song> sa = new ArrayList<Song>(songs);
         
         for(int j = 0; j < sa.size(); j++){
+            rootGenre.songCount++;
         	Song song = sa.get(j);
         	Artist a = sl.getArtist(song.getArtist_id());
         	List<String> terms = a.getTerms();
