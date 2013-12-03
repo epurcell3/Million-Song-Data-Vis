@@ -133,4 +133,12 @@ public class GenreBase {
     public void setRootGenre(Genre rootGenre) {
         this.rootGenre = rootGenre;
     }
+    
+    public GenreNode getNodeTree() {
+    	return nodeTree;
+    }
+    
+    public void setNodeTree(GenreNode nodeTree) {
+    	this.nodeTree = nodeTree;
+    }
 }
