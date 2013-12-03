@@ -169,4 +169,28 @@ public class Genre {
     public void setCountryMap(HashMap<String, Integer> countryMap) {
         this.countryMap = countryMap;
     }
+    public String getMaxCountry(){
+        String maxCountry= "";
+        int max = 0;
+        for(String key : countryMap.keySet()){
+            if(countryMap.get(key).intValue() > max){
+                max = countryMap.get(key).intValue();
+                maxCountry = key;
+            }
+        }
+        return maxCountry;
+
+    }
+    public String getMaxContinent(){
+        String maxContinent= "";
+        int max = 0;
+        for(String key : continentMap.keySet()){
+            if(continentMap.get(key).intValue() > max){
+                max = continentMap.get(key).intValue();
+                maxContinent = key;
+            }
+        }
+        return maxContinent;
+
+    }
 }
