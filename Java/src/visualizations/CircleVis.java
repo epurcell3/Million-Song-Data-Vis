@@ -61,39 +61,6 @@ public class CircleVis implements TreeView
     {
     	this.p = p;
     }
-    
-    
-    //Totally unrelated now...
-	public void setup()
-	{
-        DatabaseConnection dc = new DatabaseConnection();
-        SongList sl = dc.getArtistTerms();
-        GenreBase gb = new GenreBase(sl);
-        List<Genre> tree = gb.getZeroRank();
-//        Genre[] topGenres = new Genre[points];
-//        for (int i = 0; i < points; i++)
-//        {
-//            topGenres[i] = tree.get(i);
-//        }
-//        for (int i = points; i < tree.size(); i++)
-//        {
-//            int ind = -1;
-//            int minval = Integer.MAX_VALUE;
-//            Genre genre = tree.get(i);
-//            for (int j = 0; j < points; j++)
-//            {
-//                if (genre.getSongCount() > topGenres[j].getSongCount() && topGenres[j].getSongCount() < minval)
-//                {
-//                    ind = j;
-//                    minval = topGenres[j].getSongCount();
-//                }
-//            }
-//            if (ind != -1)
-//                topGenres[ind] = genre;
-//        }
-        
-        
-	}
 
 	public void draw()
 	{
