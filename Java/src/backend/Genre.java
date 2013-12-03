@@ -21,6 +21,7 @@ public class Genre {
     HashMap<Integer, Integer> yearsMap;
     HashMap<String, Integer> continentMap;
     HashMap<String, Integer> countryMap;
+    HashMap<String, Integer> masterMap;
     
     public Genre(String keyword, Song initial, Artist a){
         if(keyword.equals("RootNode")){
@@ -28,6 +29,7 @@ public class Genre {
             yearsMap = new HashMap<Integer,Integer>();
             continentMap  = new HashMap<String, Integer>();
             countryMap = new HashMap<String, Integer>();
+            masterMap = new HashMap<String, Integer>();
             minimalList = new ArrayList<String>();
             return;
         }
@@ -35,40 +37,103 @@ public class Genre {
         yearsMap = new HashMap<Integer,Integer>();
         continentMap  = new HashMap<String, Integer>();
         countryMap = new HashMap<String, Integer>();
+        masterMap = new HashMap<String, Integer>();
         this.keyword = keyword;
         this.minimalList = terms;
         minimalList.remove(keyword);
         removeOriginalDuplicates();
         this.children = new ArrayList<Genre>();
+        int tempYear = initial.getYear();
+        String yearStr = "";
+        if(tempYear > 1000 && tempYear < 2050){
+            yearStr = String.valueOf(tempYear);
+        }
+        else{
+            yearStr = "None";
+        }
+        masterMap.put("AllAllAll", Integer.valueOf(1));
+        masterMap.put(yearStr + "AllAll", Integer.valueOf(1));
         yearsMap.put(Integer.valueOf(initial.getYear()), Integer.valueOf(1));
+        masterMap.put("All" + a.getArtist_continent() + "All", Integer.valueOf(1));
         continentMap.put(a.getArtist_continent(), Integer.valueOf(1));
+        masterMap.put("AllAll" + a.getArtist_country(), Integer.valueOf(1));
         countryMap.put(a.getArtist_country(), Integer.valueOf(1));
+        masterMap.put(yearStr + "All" + a.getArtist_country(), Integer.valueOf(1));
+        masterMap.put(yearStr + a.getArtist_continent() + "All", Integer.valueOf(1));
+        masterMap.put("All" + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(1));
+        masterMap.put(yearStr + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(1));
         averageDuration= initial.getDuration();
         this.songCount = 1;
     }
     public void addSong(Song song, Artist a){
         List<String> terms = a.getTerms();
         songCount++;
+        int tempYear = song.getYear();
+        String yearStr = "";
+        if(tempYear > 1000 && tempYear < 2050){
+            yearStr = String.valueOf(tempYear);
+        }
+        else{
+            yearStr = "None";
+        }
+        if(masterMap.get(yearStr + a.getArtist_continent() + a.getArtist_country()) != null){
+            masterMap.put(yearStr + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(masterMap.get(yearStr + a.getArtist_continent() + a.getArtist_country()) + 1));
+            masterMap.put("AllAllAll", Integer.valueOf(masterMap.get("AllAllAll") + 1));
+//            masterMap.put(yearStr + "AllAll", Integer.valueOf(masterMap.get(yearStr + "AllAll") + 1));
+//            masterMap.put("All" + a.getArtist_continent() + "All",  Integer.valueOf(masterMap.get("All" + a.getArtist_continent() + "All") + 1));
+//            masterMap.put("AllAll" + a.getArtist_country(), Integer.valueOf(masterMap.get("AllAll" + a.getArtist_country()) + 1));
+            masterMap.put(yearStr + "All" + a.getArtist_country(),  Integer.valueOf(masterMap.get(yearStr + "All" + a.getArtist_country()) + 1));
+            masterMap.put(yearStr + a.getArtist_continent() + "All",Integer.valueOf(masterMap.get(yearStr + a.getArtist_continent() + "All") + 1));
+            masterMap.put("All" + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(masterMap.get("All" + a.getArtist_continent() + a.getArtist_country()) + 1));
+        }
+        else{
+            masterMap.put(yearStr + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(1));
+            if(masterMap.get(yearStr + "All" + a.getArtist_country()) != null){
+                masterMap.put(yearStr + "All" + a.getArtist_country(),  Integer.valueOf(masterMap.get(yearStr + "All" + a.getArtist_country()) + 1));
+            }
+            else{
+                masterMap.put(yearStr + "All" + a.getArtist_country(),  Integer.valueOf(1));
+            }
+            if(masterMap.get(yearStr + a.getArtist_continent() + "All") != null){
+                masterMap.put(yearStr + a.getArtist_continent() + "All",Integer.valueOf(masterMap.get(yearStr + a.getArtist_continent() + "All") + 1));
+            }
+            else{
+                masterMap.put(yearStr + a.getArtist_continent() + "All",Integer.valueOf(1));
+            }
+            if(masterMap.get("All" + a.getArtist_continent() + a.getArtist_country()) != null){
+                masterMap.put("All" + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(masterMap.get("All" + a.getArtist_continent() + a.getArtist_country()) + 1));
+            }
+            else{
+                masterMap.put("All" + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(1));
+            }
+
+        }
         if(yearsMap.get(Integer.valueOf(song.getYear())) == null){
             yearsMap.put(Integer.valueOf(song.getYear()), Integer.valueOf(1));
+            masterMap.put(yearStr + "AllAll", Integer.valueOf(1));
         }
         else {
             Integer newVal = yearsMap.get(Integer.valueOf(song.getYear())) + 1;
+            masterMap.put(yearStr + "AllAll", Integer.valueOf(masterMap.get(yearStr + "AllAll") + 1));
             yearsMap.put(Integer.valueOf(song.getYear()), newVal);
         }
 
         if(continentMap.get(a.getArtist_continent()) == null){
             continentMap.put(a.getArtist_continent(), Integer.valueOf(1));
+            masterMap.put("All" + a.getArtist_continent() + "All",  Integer.valueOf(1));
         }
         else {
             Integer newVal = continentMap.get(a.getArtist_continent()) + 1;
+            masterMap.put("All" + a.getArtist_continent() + "All",  Integer.valueOf(masterMap.get("All" + a.getArtist_continent() + "All") + 1));
             continentMap.put(a.getArtist_continent(), newVal);
         }
         if(countryMap.get(a.getArtist_country()) == null){
             countryMap.put(a.getArtist_country(), Integer.valueOf(1));
+            masterMap.put("AllAll" + a.getArtist_country(), Integer.valueOf(1));
         }
         else {
             Integer newVal = countryMap.get(a.getArtist_country()) + 1;
+            masterMap.put("AllAll" + a.getArtist_country(), Integer.valueOf(masterMap.get("AllAll" + a.getArtist_country()) + 1));
             countryMap.put(a.getArtist_country(), newVal);
         }
         minListAdjust(terms);
@@ -200,5 +265,9 @@ public class Genre {
         }
         return maxContinent;
 
+    }
+
+    public HashMap<String, Integer> getMasterMap() {
+        return masterMap;
     }
 }
