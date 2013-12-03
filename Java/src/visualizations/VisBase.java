@@ -3,9 +3,11 @@ package visualizations;
 import java.util.Arrays;
 import java.util.List;
 
+import ch.randelshofer.tree.circlemap.CirclemapModel;
 import backend.AbstractVizBase;
 import backend.Genre;
 import backend.GenreBase;
+import backend.GenreNode;
 import backend.SongList;
 import controlP5.ControlEvent;
 import database.DatabaseConnection;
@@ -20,7 +22,7 @@ public class VisBase extends AbstractVizBase {
 	private int backgroundColor;
 	private GenreLocationMap glm;
 	private FilterVisBase cvb;
-	
+	private CircleVis cv;
 	
 	/**
 	 * 
@@ -38,6 +40,12 @@ public class VisBase extends AbstractVizBase {
 			// TODO Use sl
 			GenreBase gb = new GenreBase(sl);
 	        List<Genre> tree = gb.getZeroRank();
+	        GenreNode root = gb.getNodeTree();
+	        CirclemapModel model = new CirclemapModel(root, null, null);
+	        cv = model.getView();
+	        cv.setX(100);
+	        cv.setY(100);
+	        cv.setP(this);
 		}
         
 		int mapX = 10, mapY = 10, mapWidth = 500, mapHeight = 400;
@@ -52,6 +60,7 @@ public class VisBase extends AbstractVizBase {
 		background(backgroundColor);
 		cvb.draw();
 		glm.draw();
+		cv.draw();
 	}
 	
 	public void mouseMoved() {

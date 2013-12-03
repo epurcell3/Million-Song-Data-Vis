@@ -10,11 +10,16 @@
  */
 package ch.randelshofer.tree.circlemap;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Rectangle;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
+
+import processing.core.PApplet;
 import ch.randelshofer.gui.ProgressObserver;
 import ch.randelshofer.tree.NodeInfo;
-import java.awt.*;
-import java.awt.geom.*;
-import java.util.ArrayList;
 
 /**
  * CirclemapDraw draws a {@link CirclemapTree}.
@@ -81,7 +86,7 @@ public class CirclemapDraw {
      * Draws the tree onto
      * the supplied graphics object.
      */
-    public void drawTree(Graphics2D g, ProgressObserver p) {
+    public void drawTree(PApplet par, ProgressObserver p) {
         scaleFactor = radius / drawRoot.getRadius();
         double sx = 0;
         double sy = 0;
@@ -94,17 +99,15 @@ public class CirclemapDraw {
             depth--;
         }
 
-        Rectangle clipBounds = g.getClipBounds();
-        if (clipBounds == null) {
-            clipBounds = new Rectangle(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
-        }
-        drawTree0(g, root, depth, sx, sy, scaleFactor, clipBounds, p);
+        
+        Rectangle clipBounds = new Rectangle(0, 0, par.width, par.height);
+        drawTree0(par, root, depth, sx, sy, scaleFactor, clipBounds, p);
     }
 
-    public void drawTree0(Graphics2D g, CirclemapNode node, int depth, double px, double py, double sf, Rectangle clipBounds, ProgressObserver p) {
+    public void drawTree0(PApplet par, CirclemapNode node, int depth, double px, double py, double sf, Rectangle clipBounds, ProgressObserver p) {
         if (!p.isCanceled()) {
-            drawNode(g, node, depth, px, py, sf);
-            drawLabel(g, node, depth, px, py, sf);
+            drawNode(par, node, depth, px, py, sf);
+            drawLabel(par, node, depth, px, py, sf);
 
             if (node.radius * sf > 1 && node.children().size() > 0) {
                 double r = node.getRadius() * sf;
@@ -113,7 +116,7 @@ public class CirclemapDraw {
                         cy + sf * py - r, r * 2, r * 2);
                 if (depth < maxDepth && clipBounds.intersects(bounds)) {
                     for (CirclemapNode child : node.children()) {
-                        drawTree0(g, child, depth + 1,
+                        drawTree0(par, child, depth + 1,
                                 px + child.getCX(),
                                 py + child.getCY(),
                                 sf, clipBounds, p);
@@ -122,35 +125,36 @@ public class CirclemapDraw {
             }
         }
     }
-    public void drawNode(Graphics2D g, CirclemapNode node, int depth, double px, double py, double sf) {
+    public void drawNode(PApplet par, CirclemapNode node, int depth, double px, double py, double sf) {
         double r = node.getRadius() * sf;
-        Ellipse2D.Double ellipse = new Ellipse2D.Double(
-                cx + sf * px - r,
-                cy + sf * py - r,
-                r * 2, r * 2);
+        float ex = (float)(cx + sf * px - r);
+        float ey = (float)(cy + sf * py - r);
+        float ew = (float)(r * 2);
+        float eh = (float)(r * 2);
 
+        Color c = info.getColor(node.getDataNodePath());
+    	Color cDark = c.darker();
+    	
         if (node.isLeaf()) {
-            g.setColor(info.getColor(node.getDataNodePath()));
-            g.fill(ellipse);
-            g.setColor(info.getColor(node.getDataNodePath()).darker());
-            g.draw(ellipse);
+        	par.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+            par.color(cDark.getRed(), cDark.getGreen(), cDark.getBlue(), cDark.getAlpha());
+            par.ellipse(ex, ey, ew, eh);
         } else if (depth == maxDepth) {
             double r2 = node.getWeightRadius(info) * sf;
-            ellipse.x = cx + sf * px - r2;
-            ellipse.y = cy + sf * py - r2;
-            ellipse.width = ellipse.height = r2 * 2;
-            g.setColor(info.getColor(node.getDataNodePath()));
-            g.fill(ellipse);
-            g.setColor(info.getColor(node.getDataNodePath()).darker());
-            g.draw(ellipse);
+            ex = (float)(cx + sf * px - r2);
+            ey = (float)(cy + sf * py - r2);
+            ew = eh = (float)(r2 * 2);
+            par.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+            par.color(cDark.getRed(), cDark.getGreen(), cDark.getBlue(), cDark.getAlpha());
+            par.ellipse(ex, ey, ew, eh);
         } else {
-            g.setColor(info.getColor(node.getDataNodePath()).darker());
-            g.draw(ellipse);
+        	par.color(cDark.getRed(), cDark.getGreen(), cDark.getBlue(), cDark.getAlpha());
+        	par.ellipse(ex, ey, ew, eh);
         }
     }
 
 
-    public void drawLabel(Graphics2D g, CirclemapNode node, int depth, double px, double py, double sf) {
+    public void drawLabel(PApplet par, CirclemapNode node, int depth, double px, double py, double sf) {
         if (node.children().size() == 0 || depth == maxDepth) {
             double r;
             if (depth == maxDepth) {
@@ -162,10 +166,11 @@ public class CirclemapDraw {
                     cx + sf * px - r,
                     cy + sf * py - r,
                     r * 2, r * 2);
-            FontMetrics fm = g.getFontMetrics();
+            Font f = par.getFont();
+            FontMetrics fm = par.getFontMetrics(f);
             int fh = fm.getHeight();
             if (fh < ellipse.height) {
-                g.setColor(Color.BLACK);
+                par.color(0);
 
                 double space = ellipse.width - 6;
 
@@ -176,7 +181,7 @@ public class CirclemapDraw {
                     String weightStr = info.getWeightFormatted(node.getDataNodePath());
                     int weightWidth = fm.stringWidth(weightStr);
                     if (weightWidth < space) {
-                        g.drawString(weightStr,
+                        par.text(weightStr,
                                 (int) (ellipse.x + (ellipse.width - weightWidth) / 2),
                                 y + fh / 2);
                         y -= fh / 2;
@@ -220,7 +225,7 @@ public class CirclemapDraw {
                 }
 
                 if (nameLength > 1 || nameLength == nameC.length) {
-                    g.drawString(new String(nameC, 0, nameLength),
+                    par.text(new String(nameC, 0, nameLength),
                             (int) (ellipse.x + (ellipse.width - nameWidth) / 2),
                             y);
                 }
@@ -228,7 +233,7 @@ public class CirclemapDraw {
         }
     }
 
-    public void drawContours(Graphics2D g, CirclemapNode node, Color color) {
+    public void drawContours(PApplet par, CirclemapNode node, Color color) {
     }
 
     public NodeInfo getInfo() {
@@ -247,8 +252,8 @@ public class CirclemapDraw {
         this.drawRoot = newValue;
     }
 
-    public void drawNodeBounds(Graphics2D g, CirclemapNode selectedNode, Color color) {
-        g.setColor(color);
+    public void drawNodeBounds(PApplet par, CirclemapNode selectedNode, Color color) {
+        par.color(color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha());
         double r = selectedNode.getRadius() * scaleFactor;
         double scx = 0;
         double scy = 0;
@@ -269,14 +274,13 @@ public class CirclemapDraw {
         double px = scx * scaleFactor + cx;
         double py = scy * scaleFactor + cy;
 
-        Ellipse2D.Double ellipse = new Ellipse2D.Double(px - r, py - r, r * 2, r * 2);
-        g.draw(ellipse);
+        par.ellipse((float)(px -r), (float)(py-r), (float) r*2, (float) r*2);
     }
 
-    public void drawSubtreeBounds(Graphics2D g, CirclemapNode selectedNode, Color color) {
+    public void drawSubtreeBounds(PApplet par, CirclemapNode selectedNode, Color color) {
     }
 
-    public void drawDescendantSubtreeBounds(Graphics2D g, CirclemapNode parent, Color color) {
+    public void drawDescendantSubtreeBounds(PApplet par, CirclemapNode parent, Color color) {
     }
 
     /**
