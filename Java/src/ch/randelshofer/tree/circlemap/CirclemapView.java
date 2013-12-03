@@ -186,13 +186,13 @@ public class CirclemapView extends javax.swing.JPanel implements TreeView {
                         if (isAdjusting && needsSimplify) {
                             //  draw.drawContours(g, draw.getRoot(), Color.gray);
                             long start = System.currentTimeMillis();
-                            draw.drawTree(g, workerProgress);
+                            //draw.drawTree(g, workerProgress);
                             long end = System.currentTimeMillis();
                             needsSimplify |= (end - start) > 99;
                             needsProgressive |= (end - start) > 33;
                         } else {
                             long start = System.currentTimeMillis();
-                            draw.drawTree(g, workerProgress);
+                            //draw.drawTree(g, workerProgress);
                             long end = System.currentTimeMillis();
                             needsSimplify = (end - start) > 99;
                             needsProgressive = (end - start) > 33;
@@ -226,16 +226,16 @@ public class CirclemapView extends javax.swing.JPanel implements TreeView {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
             if (selectedNode.children().isEmpty()) {
-                draw.drawSubtreeBounds(g, selectedNode, Color.blue);
+                //draw.drawSubtreeBounds(g, selectedNode, Color.blue);
             } else {
-                draw.drawDescendantSubtreeBounds(g, selectedNode, Color.blue);
+                //draw.drawDescendantSubtreeBounds(g, selectedNode, Color.blue);
             }
         }
         if (hoverNode != null) {
             Graphics2D g = (Graphics2D) gr;
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
-            draw.drawNodeBounds(g, hoverNode, Color.red);
+            //draw.drawNodeBounds(g, hoverNode, Color.red);
         }
 
         if (drawHandles) {
@@ -269,16 +269,16 @@ public class CirclemapView extends javax.swing.JPanel implements TreeView {
         g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g.setFont(getFont());
         try {
-        draw.drawTree(g, new ProgressTracker("Circular Treemap", "Printing..."));
+        //draw.drawTree(g, new ProgressTracker("Circular Treemap", "Printing..."));
         } catch (Throwable t) {t.printStackTrace();}
         CirclemapNode selectedNode = draw.getDrawRoot();
         if (selectedNode != null) {
             g.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
             if (selectedNode.children().isEmpty()) {
-                draw.drawSubtreeBounds(g, selectedNode, Color.blue);
+               // draw.drawSubtreeBounds(g, selectedNode, Color.blue);
             } else {
-                draw.drawDescendantSubtreeBounds(g, selectedNode, Color.blue);
+                //draw.drawDescendantSubtreeBounds(g, selectedNode, Color.blue);
             }
         }
         
