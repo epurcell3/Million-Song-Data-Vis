@@ -37,14 +37,29 @@ public class CircleVis implements TreeView
     
     GenreNode rootNode;
 
-    public CircleVis(int x, int y, PApplet p, CirclemapTree model)
+    public CircleVis(CirclemapTree model)
     {
-    	this.x = x;
-    	this.y = y;
-    	this.p = p;
+    	//this.x = x;
+    	//this.y = y;
+    	//this.p = p;
     	
     	this.model = model;
     	this.draw = new CirclemapDraw(model.getRoot(), model.getInfo());
+    }
+    
+    public void setX(int x)
+    {
+    	this.x = x;
+    }
+    
+    public void setY(int y)
+    {
+    	this.y = y;
+    }
+    
+    public void setP(PApplet p)
+    {
+    	this.p = p;
     }
     
     
