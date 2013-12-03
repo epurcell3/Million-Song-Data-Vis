@@ -1,13 +1,12 @@
 package visualizations;
 
-import processing.core.PApplet;
+import backend.AbstractFilter;
+import backend.AbstractVizBase;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Range;
 
-public class YearFilter {
-	private PApplet parent;
-	public ControlP5 cp5;
+public class YearFilter extends AbstractFilter {
 
 	public int myColorBackground;
 	private int colorRangeForeground;
@@ -17,17 +16,17 @@ public class YearFilter {
 	public static final int DEFAULT_WIDTH = 300, DEFAULT_HEIGHT = 40;
 	public Range range;
 	
-	public YearFilter(PApplet p, int lowLimit, int highLimit, int rangeWidth, int rangeHeight) {
+	public YearFilter(AbstractVizBase p, int lowLimit, int highLimit, int x, int y, int rangeWidth, int rangeHeight) {
 		this.parent = p;
+		this.name = "Year";
 		setColors();
 		int quarter = Math.round((highLimit - lowLimit) / 4);
-		System.out.println("Quarter: " + quarter);
 
 		cp5 = new ControlP5(parent);
-		range = cp5.addRange("Year")
+		range = cp5.addRange(name)
 				// disable broadcasting since setRange and setRangeValues will trigger an event
 				.setBroadcast(false) 
-				.setPosition(10,10)
+				.setPosition(x,y)
 				.setSize(rangeWidth, rangeHeight)
 				.setHandleSize(10)
 				.setRange(lowLimit,highLimit)
@@ -49,8 +48,8 @@ public class YearFilter {
 		colorRangeBackground = parent.color(255,40);
 	}
 
-	public YearFilter(PApplet p, int lowLimit, int highLimit) {
-		this(p, lowLimit, highLimit, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	public YearFilter(AbstractVizBase p, int lowLimit, int highLimit) {
+		this(p, lowLimit, highLimit, 0, 0, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	}
 
 	public void draw() {
@@ -65,11 +64,11 @@ public class YearFilter {
 	 * @param max
 	 */
 	private void updateMethod(int min, int max) {
-		// TODO Result of change to range min and max
+		parent.filterYears(min, max);
 	}
 
 	public void controlEvent(ControlEvent theControlEvent) {
-		if(theControlEvent.isFrom("Year")) {
+		if(theControlEvent.isFrom(name)) {
 			rangeMin = (int) (theControlEvent.getController().getArrayValue(0));
 			rangeMax = (int) (theControlEvent.getController().getArrayValue(1));
 			updateMethod(rangeMin, rangeMax);

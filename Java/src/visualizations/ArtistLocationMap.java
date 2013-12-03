@@ -2,6 +2,7 @@ package visualizations;
 
 import java.util.Collection;
 
+import backend.AbstractMap;
 import backend.Artist;
 import backend.SongList;
 import de.fhpotsdam.unfolding.UnfoldingMap;
@@ -9,10 +10,9 @@ import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import de.fhpotsdam.unfolding.utils.ScreenPosition;
 
-public class ArtistLocationMap {
+public class ArtistLocationMap extends AbstractMap {
 	
 	private ArtistLocationApplet parent;
-	private UnfoldingMap map;
 	private Collection<Artist> artists;
 	private static final int EDGE = 10;
 	
@@ -54,15 +54,5 @@ public class ArtistLocationMap {
 		parent.setArtistText(line);
 	} // close mouseMoved
 	
-	private boolean contains(float x1, float y1, double cx, double cy, double radius) {
-		boolean out = false;
-		if(distance(x1, y1, cx, cy) <= radius) {
-			out = true;
-		}
-		return out;
-	}
 	
-	private double distance(double x1, double y1, double x2, double y2) {
-		return Math.sqrt(Math.pow((x2 - x1), 2) + Math.pow((y2 - y1), 2));
-	}
 }
