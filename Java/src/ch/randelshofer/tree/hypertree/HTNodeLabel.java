@@ -68,7 +68,7 @@ public class HTNodeLabel {
             while((nameWidth >= space) && (nameLength > 0)) {
                 nameLength--;
                 // BEGIN PATCH Shortened names end with ellipsis
-                nameC[nameLength - 1] = 'Â·';
+                nameC[nameLength - 1] = '·';
                 // END PATCH Shortened names end with ellipsis
                 nameWidth = fm.charsWidth(nameC, 0, nameLength);
             }

@@ -208,14 +208,14 @@ public class RectmapDraw {
 
                     while ((nameWidth >= space) && (nameLength > 1)) {
                         nameLength--;
-                        nameC[nameLength - 1] = 'Â·';
+                        nameC[nameLength - 1] = '·';
                         nameWidth = fm.charsWidth(nameC, 0, nameLength);
                     }
                 } else {
                 // Label for node with children allways ands with >,
                     // regardless. So that it is clear, that we pruned
                     // the tree here.
-                    name = info.getName(node.getDataNodePath())+"â€º";
+                    name = info.getName(node.getDataNodePath())+"›";
                     nameC = name.toCharArray();
                     nameLength = nameC.length;
                     nameWidth = fm.charsWidth(nameC, 0, nameLength);
@@ -223,7 +223,7 @@ public class RectmapDraw {
 
                     while ((nameWidth >= space) && (nameLength > 1)) {
                         nameLength--;
-                        nameC[nameLength - 1] = 'â€º';
+                        nameC[nameLength - 1] = '›';
                         nameWidth = fm.charsWidth(nameC, 0, nameLength);
                     }
                 }

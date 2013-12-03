@@ -402,7 +402,7 @@ public class IcicleDraw {
             
             while((nameWidth >= space) && (nameLength > 1)) {
                 nameLength--;
-                nameC[nameLength - 1] = 'Â·';
+                nameC[nameLength - 1] = '·';
                 nameWidth = fm.charsWidth(nameC, 0, nameLength);
             }
             
