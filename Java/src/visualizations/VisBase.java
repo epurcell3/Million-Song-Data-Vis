@@ -1,14 +1,12 @@
 package visualizations;
 
-import java.util.Arrays;
-import java.util.List;
-
-import ch.randelshofer.tree.circlemap.CirclemapModel;
 import backend.AbstractVizBase;
-import backend.Genre;
 import backend.GenreBase;
 import backend.GenreNode;
+import backend.GenreNodeInfo;
 import backend.SongList;
+import ch.randelshofer.gui.ProgressTracker;
+import ch.randelshofer.tree.circlemap.CirclemapModel;
 import controlP5.ControlEvent;
 import database.DatabaseConnection;
 
@@ -32,16 +30,15 @@ public class VisBase extends AbstractVizBase {
 	public void setup() {
 		size(WIDTH, HEIGHT);
 		
-		boolean connectToDB = false;
+		boolean connectToDB = true;
 		if(connectToDB) {
 			DatabaseConnection dc = new DatabaseConnection();
 			SongList sl = dc.getArtistTerms();
-			
-			// TODO Use sl
+
 			GenreBase gb = new GenreBase(sl);
-	        List<Genre> tree = gb.getZeroRank();
 	        GenreNode root = gb.getNodeTree();
-	        CirclemapModel model = new CirclemapModel(root, null, null);
+	        ProgressTracker p = new ProgressTracker("","");
+	        CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);
 	        cv = model.getView();
 	        cv.setX(100);
 	        cv.setY(100);
