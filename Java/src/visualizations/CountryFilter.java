@@ -24,14 +24,16 @@ public class CountryFilter extends AbstractFilter {
 		this.y = y;
 		this.name = "checkBox";
 		
-		cd = new ContinentData();
+		
 		
 		cp5 = new ControlP5(parent);
 		//PFont pFont = parent.createFont("Arial", 10);
 //		cp5.setFont(pFont);		
-		
+		cd = new ContinentData();
 		countriesInDB = cd.findCountriesNameInDatabase();
 		setCheckboxList(countriesInDB);
+		
+		
 	}
 	
 	private void createCheckbox() {
