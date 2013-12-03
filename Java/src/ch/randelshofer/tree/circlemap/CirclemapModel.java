@@ -14,6 +14,8 @@ import ch.randelshofer.gui.ProgressObserver;
 import ch.randelshofer.tree.TreeNode;
 import ch.randelshofer.tree.NodeInfo;
 
+import visualizations.CircleVis;
+
 /**
  * CirclemapModel manages a CirclemapTree and its CirclemapView.
  * 
@@ -30,8 +32,8 @@ public class CirclemapModel {
         this.info = info;
     }
     
-    public CirclemapView getView() {
-        return new CirclemapView(tree);
+    public CircleVis getView() {
+        return new CircleVis(tree);
     }
     
     public NodeInfo getInfo() {
