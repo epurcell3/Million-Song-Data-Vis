@@ -18,9 +18,11 @@ public class GenreBase {
     HashMap<String,Genre> fullGenreList;
  //   List<Genre> fullList;
     List<Genre> zeroRank;
+    Genre rootGenre;
+
     
     public GenreBase(SongList sl){
-    	
+        rootGenre = new Genre("RootNode",null,null);
       //  fullList = new ArrayList<Genre>();
         fullGenreList = new HashMap<String,Genre>();
 
@@ -61,6 +63,7 @@ public class GenreBase {
                 zeroRank.add(fullGenreList.get(key));
             }
         }
+        rootGenre.setChildren(zeroRank);
     }
     public void generateParentsTree(String current){
         int rank = fullGenreList.get(current).getRank();
@@ -119,5 +122,13 @@ public class GenreBase {
 
     public void setZeroRank(List<Genre> zeroRank) {
         this.zeroRank = zeroRank;
+    }
+
+    public Genre getRootGenre() {
+        return rootGenre;
+    }
+
+    public void setRootGenre(Genre rootGenre) {
+        this.rootGenre = rootGenre;
     }
 }
