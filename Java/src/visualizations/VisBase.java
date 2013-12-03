@@ -60,6 +60,7 @@ public class VisBase extends AbstractVizBase {
 		background(backgroundColor);
 		cvb.draw();
 		glm.draw();
+		cv.draw();
 	}
 	
 	public void mouseMoved() {
