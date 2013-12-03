@@ -1,6 +1,10 @@
 package visualizations;
 
+import java.util.List;
+
 import backend.AbstractVizBase;
+import backend.Genre;
+import backend.GenreBase;
 import backend.SongList;
 import controlP5.ControlEvent;
 import database.DatabaseConnection;
@@ -25,10 +29,13 @@ public class VisBase extends AbstractVizBase {
 	public void setup() {
 		size(WIDTH, HEIGHT);
 		
-		DatabaseConnection dc = new DatabaseConnection();
-		SongList sl = dc.getArtistTerms();
+		//DatabaseConnection dc = new DatabaseConnection();
+		//SongList sl = dc.getArtistTerms();
 		
 		// TODO Use sl
+		//GenreBase gb = new GenreBase(sl);
+        //List<Genre> tree = gb.getZeroRank();
+        
 		
 		int mapX = 10, mapY = 10, mapWidth = 500, mapHeight = 400;
 		int yearX = 550, yearY = 10, yearWidth = 300, yearHeight = 25;

@@ -1,9 +1,12 @@
 package visualizations;
 
+import processing.core.PApplet;
 import backend.AbstractMap;
+import backend.PathHandler;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
-import processing.core.PApplet;
+import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
+import de.fhpotsdam.unfolding.utils.MapUtils;
 
 public class GenreLocationMap extends AbstractMap {
 	private PApplet parent;
@@ -16,7 +19,11 @@ public class GenreLocationMap extends AbstractMap {
 		this.width = width;
 		this.height = height;
 		
-		map = new UnfoldingMap(parent, "detail", x, y, width, height);
+
+		PathHandler ph = new PathHandler();
+		String mbTilesConnectionString = "jdbc:sqlite:" + ph.getPathToResource("blankLight-1-3.mbtiles");
+		map = new UnfoldingMap(parent, "detail", x, y, width, height, true, false, new MBTilesMapProvider(mbTilesConnectionString));
+		MapUtils.createDefaultEventDispatcher(parent, map);
 	}
 	
 	public void draw() {
