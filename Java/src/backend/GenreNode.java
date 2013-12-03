@@ -26,7 +26,8 @@ public class GenreNode implements TreeNode {
         this.countryMap = genre.getCountryMap();
         children = new ArrayList<TreeNode>();
         for(Genre cGenre: genre.getChildren()){
-            children.add(new GenreNode(cGenre));
+            if(cGenre.getSongCount() >= 20)
+                children.add(new GenreNode(cGenre));
         }
     }
 
