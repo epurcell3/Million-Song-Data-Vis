@@ -19,7 +19,7 @@ public class GenreBase {
  //   List<Genre> fullList;
     List<Genre> zeroRank;
     Genre rootGenre;
-
+    GenreNode nodeTree;
     
     public GenreBase(SongList sl){
         rootGenre = new Genre("RootNode",null,null);
@@ -65,6 +65,7 @@ public class GenreBase {
             }
         }
         rootGenre.setChildren(zeroRank);
+        nodeTree = new GenreNode(rootGenre);
     }
     public void generateParentsTree(String current){
         int rank = fullGenreList.get(current).getRank();
