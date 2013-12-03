@@ -61,7 +61,7 @@ public class CircleInCircle implements Drawable
 	
 	public CircleInCircle(CircleVis parent, int x, int y, int r, Genre genre)
 	{
-		this(parent, x, y, r, 255, 0, 0, 0.01, genre);
+		//this(parent, x, y, r, 255, 0, 0, 0.01, genre);
 	}
 	
 	public void addCircle(Genre g) {
