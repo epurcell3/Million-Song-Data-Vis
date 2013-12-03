@@ -109,11 +109,11 @@ public class CircleVis implements TreeView
 		{
 			if (selectedNode.children().isEmpty())
 			{
-				draw.drawSubtreeBounds(null, selectedNode, Color.blue);
+				draw.drawSubtreeBounds(p, selectedNode, Color.blue);
 			}
 			else
 			{
-				draw.drawDescendantSubtreeBounds(null, selectedNode, Color.blue);
+				draw.drawDescendantSubtreeBounds(p, selectedNode, Color.blue);
 			}
 		}
 		if (hoverNode != null)
