@@ -1,9 +1,9 @@
 package visualizations;
 
+import backend.AbstractVizBase;
 import controlP5.ControlEvent;
-import processing.core.PApplet;
 
-public class YearFilterTestBase extends PApplet {
+public class YearFilterTestBase extends AbstractVizBase {
 	/**
 	 * 
 	 */
@@ -23,4 +23,10 @@ public class YearFilterTestBase extends PApplet {
 	public void controlEvent(ControlEvent theControlEvent) {
 		yr.controlEvent(theControlEvent);
 	}
+
+	@Override
+	public void filterYears(int lower, int upper) {}
+
+	@Override
+	public void filterCountries(boolean[] checked) {}
 }

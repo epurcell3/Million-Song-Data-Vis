@@ -1,6 +1,5 @@
 package backend;
 
-import processing.core.PApplet;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 
@@ -10,13 +9,28 @@ import controlP5.ControlP5;
  *
  */
 public abstract class AbstractFilter {
-	protected PApplet parent;
+	protected AbstractVizBase parent;
 	protected ControlP5 cp5;
+	protected String name;
 	
 	
 	public abstract void draw();
 	
 	public abstract void controlEvent(ControlEvent theControlEvent);
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 
 }

@@ -1,6 +1,6 @@
 package visualizations;
 
-import processing.core.PApplet;
+import backend.AbstractVizBase;
 import backend.SongList;
 import controlP5.ControlEvent;
 import database.DatabaseConnection;
@@ -10,9 +10,11 @@ import database.DatabaseConnection;
  * @author tbowling3
  *
  */
-public class VisBase extends PApplet {
-	public static final int WIDTH = 800, HEIGHT = 700;
+public class VisBase extends AbstractVizBase {
+	public static final int WIDTH = 1000, HEIGHT = 700;
 	private GenreLocationMap glm;
+	private YearFilter yf;
+	private CountryFilter cf;
 	
 	
 	/**
@@ -28,11 +30,20 @@ public class VisBase extends PApplet {
 		
 		// TODO Use sl
 		
-		int mapX = 10, mapY = 10, mapWidth = 400, mapHeight = 400;
+		int mapX = 10, mapY = 10, mapWidth = 500, mapHeight = 400;
+		int yearX = 550, yearY = 10, yearWidth = 300, yearHeight = 25;
+		int lowerYear = 1900, upperYear = 2011;
+		int countryX = 550, countryY = 75;
+		
 		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
+		yf = new YearFilter(this, lowerYear, upperYear, yearX, yearY, yearWidth, yearHeight);
+		cf = new CountryFilter(this, countryX, countryY);
 	}
 	
 	public void draw() {
+		
+		yf.draw();
+		cf.draw();
 		glm.draw();
 	}
 	
@@ -40,8 +51,20 @@ public class VisBase extends PApplet {
 		
 	}
 	
+	public void filterYears(int lower, int upper) {
+		// TODO
+	}
+	
+	public void filterCountries(boolean[] checked) {
+		// TODO
+	}
+	
 	public void controlEvent(ControlEvent theEvent) {
-		
+		if(theEvent.isFrom(cf.getName())) {
+			cf.controlEvent(theEvent);
+		} else if(theEvent.isFrom(yf.getName())) {
+			yf.controlEvent(theEvent);
+		}
 	}
 
 }
