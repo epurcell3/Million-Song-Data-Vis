@@ -3,6 +3,7 @@ package visualizations;
 import java.util.Arrays;
 
 import map_works.ContinentData;
+import backend.FontHelper;
 import controlP5.Accordion;
 import controlP5.CheckBox;
 import controlP5.ControlEvent;
@@ -14,6 +15,7 @@ public class FilterVisBase {
 	// ControlP5 elements
 	private VisBase vb;
 	private ControlP5 cp5;
+	private FontHelper fh;
 	private Accordion acc;
 	private Group gYear, gContinent, gCountry;
 	private Range yearRange;
@@ -40,6 +42,8 @@ public class FilterVisBase {
 	public FilterVisBase(VisBase vb, int x, int y, int width, int height) {
 		this.vb = vb;
 		cp5 = new ControlP5(vb);
+		fh = new FontHelper(vb);
+		cp5.setFont(fh.accordionHeadFont());
 		continents = new String[] {"North America", "South America", "Europe", "Africa", "Asia", "Oceania"};
 		
 		// Color Setups
@@ -52,17 +56,23 @@ public class FilterVisBase {
 		gYear = cp5.addGroup("Year", defaultX, defaultY, defaultWidth)
 				.setBackgroundColor(accordionBackgroundColor)
 				.setBackgroundHeight(yearBackgroundHeight)
+				.setBarHeight(20)
 				;
 		createYearFilter();	
 		
 		gContinent = cp5.addGroup("Continent")
 				.setBackgroundColor(accordionBackgroundColor)
-				.setBackgroundHeight(continentBackgroundHeight);
+				.setBackgroundHeight(continentBackgroundHeight)
+				.setBarHeight(20)
+				;
+				
 		createContinentFilter();
 				
 		gCountry = cp5.addGroup("Country")
 				.setBackgroundColor(accordionBackgroundColor)
-				.setBackgroundHeight(countryBackgroundHeight);
+				.setBackgroundHeight(countryBackgroundHeight)
+				.setBarHeight(20)
+				;
 		createCountryFilter();
 		
 		
@@ -125,6 +135,7 @@ public class FilterVisBase {
 				.setColorBackground(yearBackgroundColor)
 				.moveTo(gYear)
 				;
+		yearRange.getCaptionLabel().setFont(fh.accordionSubFont());
 	}
 	
 	private void createContinentFilter() {
@@ -139,6 +150,7 @@ public class FilterVisBase {
 				.toUpperCase(false)
 				.moveTo(gContinent)
 				;
+		continentCheckBox.getCaptionLabel().setFont(fh.accordionSubFont());
 		
 		Arrays.sort(continents);
 		for(int i = 0; i<continents.length; i++) {
@@ -156,11 +168,12 @@ public class FilterVisBase {
 				.setColorLabel(colorCheckBoxLabel)
 				.setSize(20, 20)
 				.setItemsPerRow(3)
-				.setSpacingColumn(85)
+				.setSpacingColumn(95)
 				.setSpacingRow(7)
 				.toUpperCase(false)
 				.moveTo(gCountry)
 				;
+		countryCheckBox.getCaptionLabel().setFont(fh.accordionSubFont());
 			
 		ContinentData cd = new ContinentData();
 		countriesInDB = cd.findCountriesNameInDatabase();
