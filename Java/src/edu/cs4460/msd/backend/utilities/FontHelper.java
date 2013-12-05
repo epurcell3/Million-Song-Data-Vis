@@ -1,4 +1,4 @@
-package backend;
+package edu.cs4460.msd.backend.utilities;
 
 import processing.core.PApplet;
 import processing.core.PFont;

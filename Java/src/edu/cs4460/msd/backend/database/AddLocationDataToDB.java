@@ -6,9 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Collection;
 
+import edu.cs4460.msd.backend.utilities.PathHandler;
 import map_works.ContinentData;
 import backend.Artist;
-import backend.PathHandler;
 import backend.SongList;
 
 public class AddLocationDataToDB {

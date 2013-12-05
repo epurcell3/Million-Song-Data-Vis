@@ -1,6 +1,5 @@
 package visualizations;
 
-import backend.FontHelper;
 import backend.GenreBase;
 import backend.GenreNode;
 import backend.GenreNodeInfo;
@@ -10,6 +9,7 @@ import ch.randelshofer.tree.circlemap.CirclemapModel;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
+import edu.cs4460.msd.backend.utilities.FontHelper;
 import edu.cs4460.msd.backend.visual_abstract.AbstractVizBase;
 
 /**

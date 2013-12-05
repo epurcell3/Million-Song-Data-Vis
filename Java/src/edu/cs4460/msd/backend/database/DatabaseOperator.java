@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import backend.PathHandler;
+import edu.cs4460.msd.backend.utilities.PathHandler;
 
 public class DatabaseOperator {
 	private static Connection con;
