@@ -1,10 +1,10 @@
 package visualizations;
 
-import map_works.ContinentData;
 import processing.core.PApplet;
 import controlP5.CheckBox;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
+import edu.cs4460.msd.backend.maps_works.ContinentData;
 
 public class ContinentCheckboxes {
 	private PApplet parent;

@@ -2,13 +2,13 @@ package visualizations;
 
 import java.util.Arrays;
 
-import map_works.ContinentData;
 import controlP5.Accordion;
 import controlP5.CheckBox;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Group;
 import controlP5.Range;
+import edu.cs4460.msd.backend.maps_works.ContinentData;
 import edu.cs4460.msd.backend.utilities.FontHelper;
 
 public class FilterVisBase {

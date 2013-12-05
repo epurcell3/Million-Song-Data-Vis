@@ -1,4 +1,4 @@
-package map_works;
+package edu.cs4460.msd.backend.maps_works;
 
 import java.io.IOException;
 
