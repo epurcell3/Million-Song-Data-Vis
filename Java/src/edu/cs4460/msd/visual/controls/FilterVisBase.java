@@ -4,11 +4,14 @@ import java.util.Arrays;
 
 import visualizations.VisBase;
 import controlP5.Accordion;
+import controlP5.Bang;
 import controlP5.CheckBox;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import controlP5.Group;
 import controlP5.Range;
+import controlP5.Slider;
+import edu.cs4460.msd.backend.database.DatabaseConnectionInterface;
 import edu.cs4460.msd.backend.maps_works.ContinentData;
 import edu.cs4460.msd.backend.utilities.FontHelper;
 
@@ -18,12 +21,16 @@ public class FilterVisBase {
 	private ControlP5 cp5;
 	private FontHelper fh;
 	private Accordion acc;
-	private Group gYear, gContinent, gCountry;
+	private Group gYear, gContinent, gCountry, gSongs;
 	private Range yearRange;
+	private Slider songsSlider;
+	private Bang songBang;
 	private CheckBox continentCheckBox, countryCheckBox;
 	private static final String YEAR_NAME = "Year Range";
 	private static final String CONTINENT_NAME = "Continent Checkbox";
 	private static final String COUNTRY_NAME = "Country Checkbox";
+	private static final String SONG_NAME = "Song Range";
+	private static final String SONG_BANG = "Song Bang";
 	
 	// Graphics Properties - Colors
 	private int colorCheckBoxActive;
@@ -35,10 +42,12 @@ public class FilterVisBase {
 	private int yearBackgroundHeight = 50;
 	private int continentBackgroundHeight = 225;
 	private int countryBackgroundHeight = 575;
+	private int songBackgroundHeight = 50;
 	private int defaultX = 10, defaultY = 10, defaultWidth = 250;
 	
 	// Other
 	private String[] countriesInCheckboxList, countriesInDB, continents;
+	private int songsDefault = DatabaseConnectionInterface.START_QUERY_LIMIT;
 	
 	public FilterVisBase(VisBase vb, int x, int y, int width, int height) {
 		this.vb = vb;
@@ -76,6 +85,20 @@ public class FilterVisBase {
 				;
 		createCountryFilter();
 		
+		gSongs = cp5.addGroup("Songs")
+				.setBackgroundColor(accordionBackgroundColor)
+				.setBackgroundHeight(songBackgroundHeight)
+				.setBarHeight(20)
+				;
+		createSongsFilter();
+		
+		songBang = cp5.addBang(SONG_BANG, defaultX + 300, defaultY)
+				.setSize(40,40)
+				.moveTo(gSongs)
+				;
+		songBang.setBroadcast(true)
+				.getCaptionLabel().set("Update")
+				;
 		
 		
 		acc = cp5.addAccordion("acc")
@@ -84,6 +107,7 @@ public class FilterVisBase {
                 .addItem(gYear)
                 .addItem(gContinent)
                 .addItem(gCountry)
+                .addItem(gSongs)
                 ;
 		acc.setCollapseMode(Accordion.MULTI);
 	}
@@ -111,24 +135,22 @@ public class FilterVisBase {
 				checked[i] = (n==1);
 			}
 			vb.filterCountries(checked);
+		} else if(theEvent.isFrom(songBang)) {
+			int count = (int) songsSlider.getValue();
+			vb.filterSongs(count);
 		}
 	}
 	
 	private void createYearFilter() {
-		int yearX = 10, yearY = 10, yearWidth = 300, yearHeight = 25;
+		int yearX = defaultX, yearY = defaultX, yearWidth = 300, yearHeight = 25;
 		int lowerYear = 1926, upperYear = 2010;
 		int quarterYear = Math.round((upperYear - lowerYear) / 4);
 		
 		int yearRangeForeground = vb.color(0, 0, 255);
 		int yearBackgroundColor = accordionBackgroundColor;
 		
-		yearRange = cp5.addRange(YEAR_NAME)
-				.setBroadcast(false) 
-				.setPosition(yearX,yearY)
-				.setSize(yearWidth, yearHeight)
+		yearRange = cp5.addRange(YEAR_NAME, lowerYear, upperYear, lowerYear + quarterYear,upperYear - quarterYear, yearX, yearY, yearWidth, yearHeight)
 				.setHandleSize(10)
-				.setRange(lowerYear,upperYear)
-				.setRangeValues(lowerYear + quarterYear,upperYear - quarterYear)
 				// after the initialization we turn broadcast back on again
 				.setBroadcast(true)
 				.setDecimalPrecision(0)
@@ -179,6 +201,17 @@ public class FilterVisBase {
 		ContinentData cd = new ContinentData();
 		countriesInDB = cd.findCountriesNameInDatabase();
 		setCheckboxList(countriesInDB);
+	}
+	
+	private void createSongsFilter() {
+		int songsX = defaultX, songsY = defaultY, songsHeight = 25;
+		int upperBound = 137705;
+		
+		songsSlider = cp5.addSlider(SONG_NAME, 0, upperBound, songsDefault, songsX, songsY, defaultWidth - 75, songsHeight)
+				.setDecimalPrecision(0)
+				.moveTo(gSongs)
+				;
+		songsSlider.getCaptionLabel().setFont(fh.accordionSubFont());
 	}
 	
 	private void setCheckboxList(String[] cs) {
