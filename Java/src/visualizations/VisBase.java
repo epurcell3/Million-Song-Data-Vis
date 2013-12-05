@@ -1,6 +1,5 @@
 package visualizations;
 
-import backend.AbstractVizBase;
 import backend.FontHelper;
 import backend.GenreBase;
 import backend.GenreNode;
@@ -11,6 +10,7 @@ import ch.randelshofer.tree.circlemap.CirclemapModel;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
+import edu.cs4460.msd.backend.visual_abstract.AbstractVizBase;
 
 /**
  * Base PApplet and controller for the visualization

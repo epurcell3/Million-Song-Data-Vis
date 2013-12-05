@@ -1,4 +1,4 @@
-package backend;
+package edu.cs4460.msd.backend.visual_abstract;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 

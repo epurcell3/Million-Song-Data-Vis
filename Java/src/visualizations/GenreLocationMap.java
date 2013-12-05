@@ -1,12 +1,12 @@
 package visualizations;
 
 import processing.core.PApplet;
-import backend.AbstractMap;
 import backend.PathHandler;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.MapUtils;
+import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
 
 public class GenreLocationMap extends AbstractMap {
 	private PApplet parent;

@@ -2,13 +2,13 @@ package visualizations;
 
 import java.util.Collection;
 
-import backend.AbstractMap;
 import backend.Artist;
 import backend.SongList;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import de.fhpotsdam.unfolding.utils.ScreenPosition;
+import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
 
 public class ArtistLocationMap extends AbstractMap {
 	
