@@ -47,16 +47,8 @@ public class VisBase extends AbstractVizBase {
 
 		boolean connectToDB = true;
 		if(connectToDB) {
-			DatabaseConnection dc = new DatabaseConnection();
-			SongList sl = dc.getArtistTerms();
-
-			GenreBase gb = new GenreBase(sl);
-			GenreNode root = gb.getNodeTree();
-			ProgressTracker p = new ProgressTracker("","");
-			CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);
-			cv = model.getView();
-			cv.setDimensions(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
-			cv.setP(this);
+			updateCircleVis();
+			
 		}
 
 		int filterX = DEFAULT_X + DEFAULT_WIDTH + SPACING, filterY = 10, filterWidth = 400, filterHeight = 500;
@@ -121,7 +113,7 @@ public class VisBase extends AbstractVizBase {
 	}
 	
 	public void filterSongs(int count) {
-		
+		updateCircleVis(count);
 	}
 
 	public void controlEvent(ControlEvent theEvent) {
@@ -131,6 +123,29 @@ public class VisBase extends AbstractVizBase {
 			fvb.controlEvent(theEvent);
 			cvb.controlEvent(theEvent);
 		}
+	}
+	
+	private void updateCircleVis() {
+		updateCircleVis(-1);
+	}
+	
+	private void updateCircleVis(int limit) {
+		DatabaseConnection dc = new DatabaseConnection();
+		
+		if(limit < 1) {
+			dc.setQueryLimit("");
+		} else {
+			dc.setQueryLimit(limit);
+		}
+		SongList sl = dc.getArtistTerms();
+
+		GenreBase gb = new GenreBase(sl);
+		GenreNode root = gb.getNodeTree();
+		ProgressTracker p = new ProgressTracker("","");
+		CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);
+		cv = model.getView();
+		cv.setDimensions(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		cv.setP(this);
 	}
 
 }

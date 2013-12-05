@@ -2,7 +2,10 @@ package edu.cs4460.msd.backend.database;
 
 public abstract class DatabaseConnectionInterface {
 	protected String dbFilepath;
-	protected String QueryLimit = "";
+	public static final int START_QUERY_LIMIT = 20000;
+	protected String QueryLimit = " LIMIT " + START_QUERY_LIMIT;
+	protected DatabaseOperator dbOp;
+	
 	/**
 	 * @return the queryLimit
 	 */
@@ -17,9 +20,10 @@ public abstract class DatabaseConnectionInterface {
 	public void setQueryLimit(String queryLimit) {
 		QueryLimit = queryLimit;
 	}
-
-
-	protected DatabaseOperator dbOp;
+	
+	public void setQueryLimit(int limit) {
+		QueryLimit = " LIMIT " + limit;
+	}
 	
 	
 	public void closeConnection() {
