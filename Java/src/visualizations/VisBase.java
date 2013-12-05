@@ -20,8 +20,9 @@ import edu.cs4460.msd.visual.controls.FilterVisBase;
  *
  */
 public class VisBase extends AbstractVizBase {
-	public static final int WIDTH = 1000, HEIGHT = 700;
-	public static final int DEFAULT_X = 25, DEFAULT_Y = 25, DEFAULT_WIDTH = 500, DEFAULT_HEIGHT = 400;
+	public static final int WIDTH = 1200, HEIGHT = 800;
+	public static final int DEFAULT_X = 25, DEFAULT_Y = 35, DEFAULT_WIDTH = 700, DEFAULT_HEIGHT = 500;
+	public static final int SPACING = 25;
 	private int backgroundColor;
 	private ControlP5 cp5;
 	private FontHelper fh;
@@ -58,9 +59,9 @@ public class VisBase extends AbstractVizBase {
 			cv.setP(this);
 		}
 
-		int filterX = 550, filterY = 10, filterWidth = 400, filterHeight = 500;
+		int filterX = DEFAULT_X + DEFAULT_WIDTH + SPACING, filterY = 10, filterWidth = 400, filterHeight = 500;
 		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_WIDTH, mapHeight = DEFAULT_HEIGHT;
-		int controlX = DEFAULT_X, controlY = 500, controlWidth = DEFAULT_WIDTH, controlHeight = 100;
+		int controlX = DEFAULT_X, controlY = DEFAULT_HEIGHT + SPACING, controlWidth = DEFAULT_WIDTH, controlHeight = 100;
 		backgroundColor = color(164);
 
 		// Change Font
@@ -84,7 +85,7 @@ public class VisBase extends AbstractVizBase {
 			.setId(mapTabId)
 			;
 
-
+		activeTabId = circleTabId;
 		fvb = new FilterVisBase(this, filterX, filterY, filterWidth, filterHeight);
 		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
 		cvb = new ControlVisBase(this, controlX, controlY, controlWidth, controlHeight);
@@ -117,6 +118,10 @@ public class VisBase extends AbstractVizBase {
 
 	public void filterContinents(boolean[] checked) {
 		// TODO
+	}
+	
+	public void filterSongs(int count) {
+		
 	}
 
 	public void controlEvent(ControlEvent theEvent) {
