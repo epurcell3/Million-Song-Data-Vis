@@ -18,6 +18,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PApplet;
+import visualizations.VisBase;
 import ch.randelshofer.gui.ProgressObserver;
 import ch.randelshofer.tree.NodeInfo;
 
@@ -40,7 +41,7 @@ public class CirclemapDraw {
     /**
      * Center of the tree.
      */
-    private double cx = 100,  cy = 100;
+    private double cx = VisBase.DEFAULT_X + VisBase.DEFAULT_WIDTH / 2,  cy = VisBase.DEFAULT_Y  + VisBase.DEFAULT_HEIGHT / 2;
     /**
      * Radius of the phyllotactic tree.
      */
@@ -100,7 +101,9 @@ public class CirclemapDraw {
         }
 
         
-        Rectangle clipBounds = new Rectangle(0, 0, par.width, par.height);
+        Rectangle clipBounds = new Rectangle(VisBase.DEFAULT_X, VisBase.DEFAULT_Y, VisBase.DEFAULT_WIDTH, VisBase.DEFAULT_HEIGHT);
+        par.color(30, 40, 255);
+        par.fill(235, 107, 43);
         drawTree0(par, root, depth, sx, sy, scaleFactor, clipBounds, p);
     }
 

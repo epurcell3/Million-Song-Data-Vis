@@ -1,41 +1,38 @@
 package visualizations;
 
-import processing.core.*;
-import backend.GenreBase;
-import backend.Genre;
-import backend.GenreNode;
-import backend.SongList;
-import database.DatabaseConnection;
-
-import java.util.List;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 
-import ch.randelshofer.tree.circlemap.*;
+import processing.core.PApplet;
+import processing.core.PConstants;
+import backend.GenreNode;
+import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.TreeView;
+import ch.randelshofer.tree.circlemap.CirclemapDraw;
+import ch.randelshofer.tree.circlemap.CirclemapNode;
+import ch.randelshofer.tree.circlemap.CirclemapTree;
 
 public class CircleVis implements TreeView
 {
 //    static int SONG_REQ = 50;
-    static int WIDTH = 750;
-    static int HEIGHT = 750;
-    int x;
-    int y;
-    PApplet p;
+    private int width = 500;
+    private int height = 400;
+    private int x;
+    private int y;
+    private PApplet p;
     
-    CirclemapDraw draw;
-    boolean isInvalid;
-    boolean drawHandles;
-    boolean isAdjusting;
-    boolean needsSimplify;
-    boolean needsProgressive = true;
-    CirclemapNode hoverNode;
-    boolean isToolTipVisible = false;
-    CirclemapTree model;
+    private CirclemapDraw cmDraw;
+    private boolean isInvalid;
+    private boolean drawHandles;
+    private boolean isAdjusting;
+    private boolean needsSimplify;
+    private boolean needsProgressive = true;
+    private CirclemapNode hoverNode;
+    private boolean isToolTipVisible = false;
+    private CirclemapTree model;
     
-    GenreNode rootNode;
+    private GenreNode rootNode;
 
     public CircleVis(CirclemapTree model)
     {
@@ -44,18 +41,9 @@ public class CircleVis implements TreeView
     	//this.p = p;
     	
     	this.model = model;
-    	this.draw = new CirclemapDraw(model.getRoot(), model.getInfo());
+    	this.cmDraw = new CirclemapDraw(model.getRoot(), model.getInfo());
     }
     
-    public void setX(int x)
-    {
-    	this.x = x;
-    }
-    
-    public void setY(int y)
-    {
-    	this.y = y;
-    }
     
     public void setP(PApplet p)
     {
@@ -68,24 +56,26 @@ public class CircleVis implements TreeView
 		p.fill(255, 255, 255);
 		p.noStroke();
 		p.rectMode(PConstants.CORNER);
-		p.rect(x, y, HEIGHT, WIDTH);
+		p.rect(x, y, height, width);
 		
 		//draw vis
-		CirclemapNode selectedNode = draw.getDrawRoot();
+		CirclemapNode selectedNode = cmDraw.getDrawRoot();
 		if (selectedNode != null)
 		{
 			if (selectedNode.children().isEmpty())
 			{
-				draw.drawSubtreeBounds(p, selectedNode, Color.blue);
+				cmDraw.drawSubtreeBounds(p, selectedNode, Color.blue);
 			}
 			else
 			{
-				draw.drawDescendantSubtreeBounds(p, selectedNode, Color.blue);
+//				draw.drawDescendantSubtreeBounds(p, selectedNode, Color.blue);
+				ProgressTracker pt = new ProgressTracker("","");
+				cmDraw.drawTree(p, pt);
 			}
 		}
 		if (hoverNode != null)
 		{
-			draw.drawNodeBounds(null, hoverNode, Color.red);
+			cmDraw.drawNodeBounds(null, hoverNode, Color.red);
 		}
 		if (drawHandles)
 		{
@@ -100,8 +90,8 @@ public class CircleVis implements TreeView
 
 	@Override
 	public void setMaxDepth(int newValue) {
-		if (newValue != draw.getMaxDepth()) {
-            draw.setMaxDepth(newValue);
+		if (newValue != cmDraw.getMaxDepth()) {
+            cmDraw.setMaxDepth(newValue);
             isInvalid = true;
             if (newValue == Integer.MAX_VALUE) {
                 needsProgressive = true;
@@ -112,7 +102,7 @@ public class CircleVis implements TreeView
 
 	@Override
 	public int getMaxDepth() {
-        return draw.getMaxDepth();
+        return cmDraw.getMaxDepth();
 	}
 
 	@Override
@@ -126,16 +116,16 @@ public class CircleVis implements TreeView
 	}
 	
 	public String getInfoText(int x, int y) {
-        CirclemapNode node = draw.getNodeAt(x, y);
-        return (node == null) ? null : draw.getInfo().getTooltip(node.getDataNodePath());
+        CirclemapNode node = cmDraw.getNodeAt(x, y);
+        return (node == null) ? null : cmDraw.getInfo().getTooltip(node.getDataNodePath());
 	}
 
 	@Override
 	public String getInfoText(MouseEvent evt) {
         int x = evt.getX();
         int y = evt.getY();
-        CirclemapNode node = draw.getNodeAt(x, y);
-        return (node == null) ? null : draw.getInfo().getTooltip(node.getDataNodePath());
+        CirclemapNode node = cmDraw.getNodeAt(x, y);
+        return (node == null) ? null : cmDraw.getInfo().getTooltip(node.getDataNodePath());
 	}
 
 	@Override
@@ -145,16 +135,64 @@ public class CircleVis implements TreeView
 	}
 	
 	private void setCenter(double cx, double cy) {
-        draw.setCX(cx);
-        draw.setCY(cy);
+        cmDraw.setCX(cx);
+        cmDraw.setCY(cy);
     }
 	
     private Point2D.Double getCenter() {
-        return new Point2D.Double(draw.getCX(),draw.getCY());
+        return new Point2D.Double(cmDraw.getCX(),cmDraw.getCY());
     }
     
     private void setOuterRadius(double r) {
-        draw.setRadius(r);
+        cmDraw.setRadius(r);
     }
 
+	/**
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/**
+	 * @param width the width to set
+	 */
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	/**
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * @param height the height to set
+	 */
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	
+	public void setX(int x)
+    {
+    	this.x = x;
+    }
+    
+    public void setY(int y)
+    {
+    	this.y = y;
+    }
+    
+    public void setDimensions(int x, int y, int width, int height) {
+    	this.setXY(x, y);
+    	this.setWidth(width);
+    	this.setHeight(height);
+    }
+    
+    public void setXY(int x, int y) {
+    	this.setX(x);
+    	this.setY(y);
+    }
 }

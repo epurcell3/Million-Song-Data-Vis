@@ -19,7 +19,7 @@ import database.DatabaseConnection;
  */
 public class VisBase extends AbstractVizBase {
 	public static final int WIDTH = 1000, HEIGHT = 700;
-	public static final int DEFAULT_X = 25, DEFAULT_Y = 25;
+	public static final int DEFAULT_X = 25, DEFAULT_Y = 25, DEFAULT_WIDTH = 500, DEFAULT_HEIGHT = 400;
 	private int backgroundColor;
 	private ControlP5 cp5;
 	private FontHelper fh;
@@ -52,14 +52,13 @@ public class VisBase extends AbstractVizBase {
 			ProgressTracker p = new ProgressTracker("","");
 			CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);
 			cv = model.getView();
-			cv.setX(25);
-			cv.setY(25);
+			cv.setDimensions(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 			cv.setP(this);
 		}
 
 		int filterX = 550, filterY = 10, filterWidth = 400, filterHeight = 500;
-		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = 500, mapHeight = 400;
-		int controlX = DEFAULT_X, controlY = 500, controlWidth = 500, controlHeight = 100;
+		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_WIDTH, mapHeight = DEFAULT_HEIGHT;
+		int controlX = DEFAULT_X, controlY = 500, controlWidth = DEFAULT_WIDTH, controlHeight = 100;
 		backgroundColor = color(164);
 
 		// Change Font
@@ -71,10 +70,12 @@ public class VisBase extends AbstractVizBase {
 			.setLabel(circleTabName)
 			.setId(circleTabId)
 			.setColorBackground(backgroundColor)
+			.setHeight(25)
 			;
 
 		cp5.addTab(mapTabName)
 			.setColorBackground(backgroundColor)
+			.setHeight(25)
 			;
 		cp5.getTab(mapTabName)
 			.activateEvent(true)
