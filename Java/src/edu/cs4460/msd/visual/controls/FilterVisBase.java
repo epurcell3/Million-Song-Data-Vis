@@ -1,7 +1,8 @@
-package visualizations;
+package edu.cs4460.msd.visual.controls;
 
 import java.util.Arrays;
 
+import visualizations.VisBase;
 import controlP5.Accordion;
 import controlP5.CheckBox;
 import controlP5.ControlEvent;

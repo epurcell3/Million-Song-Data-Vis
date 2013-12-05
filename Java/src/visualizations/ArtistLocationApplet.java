@@ -5,6 +5,7 @@ import backend.SongList;
 import codeanticode.glgraphics.GLConstants;
 import controlP5.ControlEvent;
 import edu.cs4460.msd.backend.database.DatabaseConnectionTotal;
+import edu.cs4460.msd.visual.controls.ContinentCheckboxes;
 
 public class ArtistLocationApplet extends PApplet {
 

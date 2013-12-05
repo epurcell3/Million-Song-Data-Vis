@@ -2,6 +2,7 @@ package visualizations;
 
 import processing.core.PApplet;
 import controlP5.ControlEvent;
+import edu.cs4460.msd.visual.controls.ContinentCheckboxes;
 
 public class CheckBoxTestBase extends PApplet {
 	private ContinentCheckboxes ccb;

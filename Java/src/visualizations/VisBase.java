@@ -11,6 +11,8 @@ import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
 import edu.cs4460.msd.backend.utilities.FontHelper;
 import edu.cs4460.msd.backend.visual_abstract.AbstractVizBase;
+import edu.cs4460.msd.visual.controls.ControlVisBase;
+import edu.cs4460.msd.visual.controls.FilterVisBase;
 
 /**
  * Base PApplet and controller for the visualization
