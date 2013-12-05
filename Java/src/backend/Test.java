@@ -2,7 +2,7 @@ package backend;
 
 import java.util.List;
 
-import database.DatabaseConnection;
+import edu.cs4460.msd.backend.database.DatabaseConnection;
 
 public class Test {
 	

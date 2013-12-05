@@ -1,4 +1,4 @@
-package database;
+package edu.cs4460.msd.backend.database;
 
 public abstract class DatabaseConnectionInterface {
 	protected String dbFilepath;

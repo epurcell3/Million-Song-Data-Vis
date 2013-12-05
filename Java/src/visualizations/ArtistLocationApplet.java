@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import backend.SongList;
 import codeanticode.glgraphics.GLConstants;
 import controlP5.ControlEvent;
-import database.DatabaseConnectionTotal;
+import edu.cs4460.msd.backend.database.DatabaseConnectionTotal;
 
 public class ArtistLocationApplet extends PApplet {
 

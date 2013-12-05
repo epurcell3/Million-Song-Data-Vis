@@ -12,7 +12,7 @@ import java.util.HashMap;
 import org.geonames.WebService;
 
 import backend.PathHandler;
-import database.DatabaseOperator;
+import edu.cs4460.msd.backend.database.DatabaseOperator;
 
 public class ContinentData {
 	private HashMap<String, CountryDataEntry> continentData;

@@ -10,7 +10,7 @@ import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.circlemap.CirclemapModel;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
-import database.DatabaseConnection;
+import edu.cs4460.msd.backend.database.DatabaseConnection;
 
 /**
  * Base PApplet and controller for the visualization
@@ -95,7 +95,7 @@ public class VisBase extends AbstractVizBase {
 		
 		if(activeTabId == mapTabId) {
 			glm.draw();
-		} else {
+		} else if(activeTabId == circleTabId){
 			cv.draw();
 		}
 		

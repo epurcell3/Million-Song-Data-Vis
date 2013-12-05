@@ -1,4 +1,4 @@
-package database;
+package edu.cs4460.msd.backend.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
