@@ -129,6 +129,8 @@ public class CirclemapDraw {
         }
     }
     public void drawNode(PApplet par, CirclemapNode node, int depth, double px, double py, double sf) {
+    	par.color(30, 40, 255);
+        par.fill(235, 107, 43);
         double r = node.getRadius() * sf;
         float ex = (float)(cx + sf * px - r);
         float ey = (float)(cy + sf * py - r);
@@ -158,6 +160,8 @@ public class CirclemapDraw {
 
 
     public void drawLabel(PApplet par, CirclemapNode node, int depth, double px, double py, double sf) {
+    	par.color(0,0,0);
+    	par.fill(0,0,0);
         if (node.children().size() == 0 || depth == maxDepth) {
             double r;
             if (depth == maxDepth) {
