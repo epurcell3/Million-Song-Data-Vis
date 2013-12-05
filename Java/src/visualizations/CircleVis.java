@@ -56,7 +56,7 @@ public class CircleVis implements TreeView
 		p.fill(255, 255, 255);
 		p.noStroke();
 		p.rectMode(PConstants.CORNER);
-		p.rect(x, y, height, width);
+		p.rect(x, y, width, height);
 		
 		//draw vis
 		CirclemapNode selectedNode = cmDraw.getDrawRoot();
