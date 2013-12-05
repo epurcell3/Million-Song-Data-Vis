@@ -18,9 +18,21 @@ public class Genre {
     List<Genre> children;
     int songCount;
     double averageDuration;
+    /**
+     * <Year, Count>
+     */
     HashMap<Integer, Integer> yearsMap;
+    /**
+     * <Continent name, Count>
+     */
     HashMap<String, Integer> continentMap;
+    /**
+     * <Country name, Count>
+     */
     HashMap<String, Integer> countryMap;
+    /**
+     * <Key combination, Count>
+     */
     HashMap<String, Integer> masterMap;
     
     public Genre(String keyword, Song initial, Artist a){
