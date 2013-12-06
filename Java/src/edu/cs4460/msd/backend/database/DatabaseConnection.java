@@ -31,19 +31,22 @@ public class DatabaseConnection extends DatabaseConnectionInterface{
 				// Get data from each row
 				String song_id = rs.getString("song_id");
 				String title = rs.getString("song_title");
+				String release = rs.getString("release");
 				String artist_id = rs.getString("artist_id");
 				String artist_mbid = "";
 				String artist_name = rs.getString("artist_name");
 				String term = rs.getString("artist_term");
+				double duration = rs.getDouble("duration");
 				double artist_fam = Double.NaN;
 				double artist_hott = Double.NaN;
 				double lat = rs.getDouble("artist_latitude");
 				double lon = rs.getDouble("artist_longitude");
+				int year = rs.getInt("year");
 				String country = rs.getString("artist_country");
 				String continent = rs.getString("artist_continent");
 				
-				
-				Song s = new Song(song_id, title, artist_id);
+				Song s = new Song(title, song_id, release, artist_id, year, duration);
+				//Song s = new Song(song_id, title, artist_id);
 				Artist a = new Artist(artist_id, artist_mbid, artist_name, artist_fam, artist_hott, lat, lon, country, continent);
 				a.addTerm(term);
 				
@@ -65,7 +68,7 @@ public class DatabaseConnection extends DatabaseConnectionInterface{
 	private String createArtistTermsSQLQuery() {
 		String q = "";
 		
-		q = q + "SELECT song_id, song_title, 'songs_h5'.artist_id, year, artist_name, artist_term, artist_country, artist_continent, artist_latitude, artist_longitude ";
+		q = q + "SELECT song_id, song_title, 'songs_h5'.artist_id, year, artist_name, artist_term, artist_country, artist_continent, artist_latitude, artist_longitude, duration, release ";
 		q = q + "FROM 'songs_h5' JOIN 'artists_h5' ON 'songs_h5'.artist_id = 'artists_h5'.artist_id ";
 		q = q + "JOIN 'artist_terms_h5' ON 'songs_h5'.artist_id = 'artist_terms_h5'.artist_id ";
 		q = q + "WHERE year <> 0 ";
