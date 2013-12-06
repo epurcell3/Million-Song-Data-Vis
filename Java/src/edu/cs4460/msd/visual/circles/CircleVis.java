@@ -1,5 +1,6 @@
 package edu.cs4460.msd.visual.circles;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
@@ -75,7 +76,7 @@ public class CircleVis implements TreeView
 		}
 		if (hoverNode != null)
 		{
-			//cmDraw.drawNodeBounds(null, hoverNode, Color.red);
+			cmDraw.drawNodeBounds(p, hoverNode, Color.red);
 		}
 		if (drawHandles)
 		{
@@ -91,6 +92,7 @@ public class CircleVis implements TreeView
 	public void mouseMoved(int mouseX, int mouseY) {
 		CirclemapNode node = cmDraw.getNodeAt(mouseX, mouseY);
 		// TODO Something clever with Tooltip
+		hoverNode = node;
 	}
 
 	@Override
