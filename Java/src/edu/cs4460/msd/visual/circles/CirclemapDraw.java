@@ -23,6 +23,8 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 	private double radius = 96;
     private double scaleFactor = 1;
     private int maxDepth = Integer.MAX_VALUE;
+    
+    Rectangle clipBounds;
 	
 	
 	public CirclemapDraw(CirclemapTree model)
@@ -87,6 +89,10 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
     public int getMaxDepth() {
         return maxDepth;
     }
+    
+    public void setClipBounds(Rectangle bounds) {
+    	this.clipBounds = bounds;
+    }
 
     /*
      * Draw functions
@@ -107,7 +113,6 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
         }
 
         //TODO clipBounds should be the CircleVis bounds
-        Rectangle clipBounds = par.getBounds();
         if (clipBounds == null) {
             clipBounds = new Rectangle(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
         }
