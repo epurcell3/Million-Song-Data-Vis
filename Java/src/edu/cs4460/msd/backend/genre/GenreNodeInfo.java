@@ -18,7 +18,7 @@ public class GenreNodeInfo extends DefaultNodeInfo {
 	private Weighter colorWeighter;
 	private int colorWeighterToggle;
 	
-	private GenreFilter filter;
+	protected GenreFilter filter;
 	
 	private TreeNode root;
 	
