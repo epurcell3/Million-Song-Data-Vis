@@ -110,13 +110,15 @@ public class VisBase extends AbstractVizBase {
 		if(activeTabId == mapTabId) {
 			glm.draw();
 		} else if(activeTabId == circleTabId){
-			cv.draw();
+			cv.draw(filter);
 		}
 		
 	}
 
 	public void mouseMoved() {
-
+		if(activeTabId == circleTabId) {
+			cv.mouseMoved(mouseX, mouseY);
+		}
 	}
 
 	public void filterYears(int lower, int upper) {
