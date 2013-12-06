@@ -7,14 +7,19 @@ import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
 import edu.cs4460.msd.backend.database.SongList;
 import edu.cs4460.msd.backend.genre.GenreBase;
+import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.genre.GenreNode;
 import edu.cs4460.msd.backend.genre.GenreNodeInfo;
+import edu.cs4460.msd.backend.maps_works.ContinentData;
 import edu.cs4460.msd.backend.utilities.FontHelper;
 import edu.cs4460.msd.backend.visual_abstract.AbstractVizBase;
 import edu.cs4460.msd.visual.circles.CircleVis;
 import edu.cs4460.msd.visual.controls.ControlVisBase;
 import edu.cs4460.msd.visual.controls.FilterVisBase;
 import edu.cs4460.msd.visual.maps.GenreLocationMap;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Base PApplet and controller for the visualization
@@ -36,6 +41,14 @@ public class VisBase extends AbstractVizBase {
 	private FilterVisBase fvb;
 	private ControlVisBase cvb;
 	private CircleVis cv;
+    private GenreFilter filter;
+//    private boolean yearsFiltered;
+//    private boolean countriesFiltered;
+//    private boolean continentsFiltered;
+//    private int maxYear;
+//    private int minYear;
+//    private List<String> countries;
+//    private List<String> continents;
 
 	/**
 	 * 
@@ -83,6 +96,12 @@ public class VisBase extends AbstractVizBase {
 		fvb = new FilterVisBase(this, filterX, filterY, filterWidth, filterHeight);
 		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
 		cvb = new ControlVisBase(this, controlX, controlY, controlWidth, controlHeight);
+        filter = new GenreFilter();
+//        yearsFiltered = false;
+//        countriesFiltered = false;
+//        continentsFiltered = false;
+//        continents = new ArrayList<String>();
+//        countries = new ArrayList<String>();
 	}
 
 	public void draw() {
@@ -103,14 +122,50 @@ public class VisBase extends AbstractVizBase {
 	}
 
 	public void filterYears(int lower, int upper) {
+        if(lower == 1926 && upper == 2010){
+            filter.setYearsFiltered(false);
+        }
+        else {
+            filter.setYearsFiltered(true);
+            filter.setMinYear(lower);
+            filter.setMaxYear(upper);
+        }
 		// TODO
 	}
 
 	public void filterCountries(boolean[] checked) {
+        ContinentData cd = new ContinentData();
+        String[] allCountries = cd.findCountriesISOInDatabase();
+        filter.getCountries().clear();
+        for(int i = 0; i < checked.length; i++){
+            if(checked[i]){
+                filter.getCountries().add(allCountries[i]);
+            }
+        }
+        if(filter.getCountries().size() > 0){
+            filter.setCountriesFiltered(true);
+        }
+        else {
+            filter.setCountriesFiltered(false);
+        }
+
 		// TODO
 	}
 
 	public void filterContinents(boolean[] checked) {
+        String[] allCONTINENTS = {"North America", "South America", "Europe", "Asia", "Oceania", "Antarctica", "Africa"};
+        filter.getContinents().clear();
+        for(int i = 0; i < checked.length; i++){
+            if(checked[i]){
+                filter.getContinents().add(allCONTINENTS[i]);
+            }
+        }
+        if (filter.getContinents().size() >0){
+            filter.setContinentsFiltered(true);
+        }
+        else{
+            filter.setContinentsFiltered(false);
+        }
 		// TODO
 	}
 	

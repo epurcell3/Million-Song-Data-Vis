@@ -281,7 +281,80 @@ public class Genre {
         return maxContinent;
 
     }
+    public int getFilteredCount(GenreFilter filter){
+        int total = 0;
+        if(!filter.isYearsFiltered() && !filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            return songCount;
 
+        }
+        if(filter.isYearsFiltered() && !filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                Integer temp = yearsMap.get(Integer.valueOf(i));
+                if (temp != null){
+                    total += temp;
+                }
+            }
+        }
+        else if(!filter.isYearsFiltered() && filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+             for(String s : filter.getContinents()){
+                 Integer temp = continentMap.get(s);
+                 if (temp != null){
+                     total += temp;
+                 }
+             }
+        }
+        else if(!filter.isYearsFiltered() && !filter.isContinentsFiltered() && filter.isCountriesFiltered()){
+            for(String s : filter.getCountries()){
+                Integer temp = countryMap.get(s);
+                if (temp != null){
+                    total += temp;
+                }
+            }
+        }
+        else if(filter.isYearsFiltered() && filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                for(String s : filter.getContinents()){
+                    Integer temp = masterMap.get(String.valueOf(i) + s + "All");
+                    if (temp != null){
+                        total += temp;
+                    }
+                }
+            }
+        }
+        else if(filter.isYearsFiltered() && !filter.isContinentsFiltered() && filter.isCountriesFiltered()){
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                for(String s : filter.getCountries()){
+                    Integer temp = masterMap.get(String.valueOf(i) + "All" + s);
+                    if (temp != null){
+                        total += temp;
+                    }
+                }
+            }
+        }
+        else if(!filter.isYearsFiltered() && filter.isContinentsFiltered() && filter.isCountriesFiltered()){
+            for(String h : filter.getContinents()){
+                for(String s : filter.getCountries()){
+                    Integer temp = masterMap.get("All" + h + s);
+                    if (temp != null){
+                        total += temp;
+                    }
+                }
+            }
+        }
+        else{
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                for(String h : filter.getContinents()){
+                    for(String s : filter.getCountries()){
+                        Integer temp = masterMap.get(String.valueOf(i) + h + s);
+                        if (temp != null){
+                            total += temp;
+                        }
+                    }
+                }
+            }
+        }
+        return total;
+    }
     public HashMap<String, Integer> getMasterMap() {
         return masterMap;
     }
