@@ -152,8 +152,8 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 		
 		if (node.isLeaf())
 		{
-			par.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
-			par.stroke(cd.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+			par.noFill();
+			par.stroke(cd.getRed(), cd.getGreen(), cd.getBlue(), cd.getAlpha());
 			par.smooth();
 			par.ellipseMode(PConstants.RADIUS);
 			par.ellipse((float)x, (float)y, (float)r, (float)r);
@@ -169,8 +169,12 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 		}
 		else
 		{
-			par.noFill();
-			par.stroke(cd.getRed(), cd.getGreen(), cd.getBlue(), cd.getAlpha());
+			par.fill(255, 255, 255);
+			par.noStroke();
+			par.ellipseMode(PConstants.RADIUS);
+			par.ellipse((float)x, (float)y, (float)r, (float)r);
+			par.fill(c.getRed(), c.getGreen(), c.getBlue(), 50);
+			par.stroke(cd.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 			par.smooth();
 			par.ellipseMode(PConstants.RADIUS);
 			par.ellipse((float)x, (float)y, (float)r, (float)r);
