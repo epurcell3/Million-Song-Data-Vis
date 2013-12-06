@@ -2,6 +2,7 @@ package edu.cs4460.msd.visual.main;
 
 import java.util.ArrayList;
 
+import processing.core.PApplet;
 import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.circlemap.CirclemapModel;
@@ -289,6 +290,10 @@ public class VisBase extends AbstractVizBase {
 		}
 		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_HEIGHT, mapHeight = DEFAULT_HEIGHT;
 		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight, trees);
+	}
+	
+	public static void main(String[] args) {
+		PApplet.main(new String[] {"--present", "VisBase"});
 	}
 
 }
