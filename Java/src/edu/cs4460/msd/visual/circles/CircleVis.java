@@ -84,10 +84,13 @@ public class CircleVis implements TreeView
 		}
 		if (hoverNode != null)
 		{
-			cmDraw.drawNodeBounds(p, hoverNode, Color.red);
-			if (this.isToolTipVisible)
+			if(info.getWeight(hoverNode.getDataNodePath()) > 0)
 			{
-				tooltip.draw();
+				cmDraw.drawNodeBounds(p, hoverNode, Color.red);
+				if (this.isToolTipVisible && hoverNode != cmDraw.getRoot())
+				{
+					tooltip.draw();
+				}
 			}
 		}
 		if (drawHandles)
