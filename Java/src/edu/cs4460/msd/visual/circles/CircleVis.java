@@ -8,7 +8,6 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.TreeView;
-import ch.randelshofer.tree.circlemap.CirclemapDraw;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
 import edu.cs4460.msd.backend.genre.GenreFilter;
@@ -67,18 +66,15 @@ public class CircleVis implements TreeView
 		{
 			if (selectedNode.children().isEmpty())
 			{
-				cmDraw.drawSubtreeBounds(p, selectedNode, Color.blue);
 			}
 			else
 			{
-//				draw.drawDescendantSubtreeBounds(p, selectedNode, Color.blue);
-				ProgressTracker pt = new ProgressTracker("","");
-				cmDraw.drawTree(p, pt);
+				cmDraw.drawTree(p);
 			}
 		}
 		if (hoverNode != null)
 		{
-			cmDraw.drawNodeBounds(null, hoverNode, Color.red);
+			//cmDraw.drawNodeBounds(null, hoverNode, Color.red);
 		}
 		if (drawHandles)
 		{
