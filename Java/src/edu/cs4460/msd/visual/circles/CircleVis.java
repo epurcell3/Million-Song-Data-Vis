@@ -1,6 +1,7 @@
 package edu.cs4460.msd.visual.circles;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
@@ -48,6 +49,7 @@ public class CircleVis implements TreeView
     	this.model = model;
     	this.cmDraw = new CirclemapDraw(model.getRoot(), model.getInfo());
     	this.cmDraw.setRadius(width/2 - 10);
+    	this.cmDraw.setClipBounds(getBounds());
     	
     	this.info = model.getInfo();
     }
@@ -118,6 +120,11 @@ public class CircleVis implements TreeView
 		{
 			cmDraw.setDrawRoot(node);
 		}
+	}
+	
+	public Rectangle getBounds()
+	{
+		return new Rectangle(this.x, this.y, this.x + this.width, this.y + this.height);
 	}
 
 	@Override
