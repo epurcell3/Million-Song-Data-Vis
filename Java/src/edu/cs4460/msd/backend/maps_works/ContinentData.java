@@ -58,7 +58,7 @@ public class ContinentData {
 		HashMap<String, Location> out = new HashMap<String, Location>();
 		
 		Location africa = new Location(2.378, 16.063);
-		Location asia = new Location(43.67694, .3311);
+		Location asia = new Location(43.67694, 87.331);
 		Location europe = new Location(48.236210, 21.22574);
 		Location nAmerica = new Location(48.1667, -100.1667);
 		Location oceania = new Location(-7.2807, 130.2539);
