@@ -1,19 +1,15 @@
 package edu.cs4460.msd.backend.genre;
 
 import java.awt.Color;
-import java.awt.Image;
 
-import javax.swing.Action;
-import javax.swing.event.ChangeListener;
-
-import ch.randelshofer.tree.DefaultNodeInfo;
 import ch.randelshofer.tree.Colorizer;
-import ch.randelshofer.tree.NodeInfo;
+import ch.randelshofer.tree.DefaultNodeInfo;
 import ch.randelshofer.tree.TreeNode;
 import ch.randelshofer.tree.TreePath2;
 import ch.randelshofer.tree.Weighter;
 import ch.randelshofer.tree.demo.RGBColorizer;
-import edu.cs4460.msd.backend.music.SongCountWeighter;
+import edu.cs4460.msd.backend.utilities.DepthWeighter;
+import edu.cs4460.msd.backend.utilities.SongCountWeighter;
 
 public class GenreNodeInfo extends DefaultNodeInfo {
 	
@@ -27,7 +23,7 @@ public class GenreNodeInfo extends DefaultNodeInfo {
 	public GenreNodeInfo() {
 		colorizer = new RGBColorizer();
 		weighter = new SongCountWeighter();
-		colorWeighter = new SongCountWeighter(); //should change this
+		colorWeighter = new DepthWeighter();
 		colorWeighterToggle = 0;
 	}
 	
@@ -55,7 +51,7 @@ public class GenreNodeInfo extends DefaultNodeInfo {
     @Override
     public Color getColor(TreePath2<TreeNode> path) {
         //GenreNode gn = (GenreNode) path.getLastPathComponent();
-        return colorizer.get(weighter.getWeight(path));
+        return colorizer.get(colorWeighter.getWeight(path));
     }
 
     @Override
@@ -68,7 +64,6 @@ public class GenreNodeInfo extends DefaultNodeInfo {
     public String getTooltip(TreePath2<TreeNode> path) {
         StringBuilder buf = new StringBuilder();
 
-        TreePath2<TreeNode> parentPath = path;
         buf.insert(0, getName(path));
         buf.insert(0, "<html>");
         buf.append("<br>");
