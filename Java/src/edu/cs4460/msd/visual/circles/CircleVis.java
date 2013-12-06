@@ -1,17 +1,16 @@
 package edu.cs4460.msd.visual.circles;
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
-import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.TreeView;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
 import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.genre.GenreNode;
+import edu.cs4460.msd.backend.genre.GenreNodeInfo;
 
 public class CircleVis implements TreeView
 {
@@ -202,5 +201,10 @@ public class CircleVis implements TreeView
     public void setXY(int x, int y) {
     	this.setX(x);
     	this.setY(y);
+    }
+    
+    public void filterChanged(GenreFilter filter)
+    {
+    	((GenreNodeInfo)(model.getInfo())).setFilter(filter);
     }
 }

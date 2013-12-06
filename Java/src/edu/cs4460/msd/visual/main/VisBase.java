@@ -152,7 +152,7 @@ public class VisBase extends AbstractVizBase {
             filter.setMinYear(lower);
             filter.setMaxYear(upper);
         }
-		// TODO
+		cv.filterChanged(filter);
 	}
 
 	public void filterCountries(boolean[] checked) {
@@ -169,8 +169,7 @@ public class VisBase extends AbstractVizBase {
         else {
             filter.setCountriesFiltered(false);
         }
-
-		// TODO
+		cv.filterChanged(filter);
 	}
 
 	public void filterContinents(boolean[] checked) {
@@ -187,7 +186,7 @@ public class VisBase extends AbstractVizBase {
         else{
             filter.setContinentsFiltered(false);
         }
-		// TODO
+		cv.filterChanged(filter);
 	}
 	
 	public void filterSongs(int count) {
