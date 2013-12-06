@@ -13,8 +13,7 @@ package ch.randelshofer.tree.circlemap;
 import ch.randelshofer.gui.ProgressObserver;
 import ch.randelshofer.tree.TreeNode;
 import ch.randelshofer.tree.NodeInfo;
-
-import visualizations.CircleVis;
+import edu.cs4460.msd.visual.circles.CircleVis;
 
 /**
  * CirclemapModel manages a CirclemapTree and its CirclemapView.

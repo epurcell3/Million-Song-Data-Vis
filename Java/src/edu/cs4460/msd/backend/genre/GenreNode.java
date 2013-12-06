@@ -1,4 +1,4 @@
-package backend;
+package edu.cs4460.msd.backend.genre;
 
 import ch.randelshofer.tree.TreeNode;
 

@@ -1,9 +1,12 @@
-package backend;
+package edu.cs4460.msd.backend.genre;
 
 import java.lang.Integer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import edu.cs4460.msd.backend.music.Artist;
+import edu.cs4460.msd.backend.music.Song;
 
 /**
  * Created with IntelliJ IDEA.

@@ -3,9 +3,8 @@ package edu.cs4460.msd.backend.database;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import backend.Artist;
-import backend.Song;
-import backend.SongList;
+import edu.cs4460.msd.backend.music.Artist;
+import edu.cs4460.msd.backend.music.Song;
 
 /**
  * Makes a connection to the database

@@ -1,4 +1,4 @@
-package visualizations;
+package edu.cs4460.msd.visual.main;
 
 import processing.core.PApplet;
 import controlP5.ControlEvent;

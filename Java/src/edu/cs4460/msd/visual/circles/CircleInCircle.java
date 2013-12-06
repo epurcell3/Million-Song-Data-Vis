@@ -1,13 +1,15 @@
-package visualizations;
+package edu.cs4460.msd.visual.circles;
 
 import java.util.ArrayList;
 //import java.util.Random;
 
 import java.lang.Math;
 
+import edu.cs4460.msd.backend.genre.Genre;
+import edu.cs4460.msd.backend.visual_abstract.Drawable;
+import edu.cs4460.msd.visual.controls.ToolTip;
 import processing.core.PApplet;
 import processing.core.PConstants;
-import backend.Genre;
 
 public class CircleInCircle implements Drawable
 {

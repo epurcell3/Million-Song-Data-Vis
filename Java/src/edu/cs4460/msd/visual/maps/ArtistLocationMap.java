@@ -1,14 +1,15 @@
-package visualizations;
+package edu.cs4460.msd.visual.maps;
 
 import java.util.Collection;
 
-import backend.Artist;
-import backend.SongList;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import de.fhpotsdam.unfolding.utils.ScreenPosition;
+import edu.cs4460.msd.backend.database.SongList;
+import edu.cs4460.msd.backend.music.Artist;
 import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
+import edu.cs4460.msd.visual.main.ArtistLocationApplet;
 
 public class ArtistLocationMap extends AbstractMap {
 	

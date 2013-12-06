@@ -1,18 +1,20 @@
-package visualizations;
+package edu.cs4460.msd.visual.main;
 
-import backend.GenreBase;
-import backend.GenreNode;
-import backend.GenreNodeInfo;
-import backend.SongList;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.circlemap.CirclemapModel;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
+import edu.cs4460.msd.backend.database.SongList;
+import edu.cs4460.msd.backend.genre.GenreBase;
+import edu.cs4460.msd.backend.genre.GenreNode;
+import edu.cs4460.msd.backend.genre.GenreNodeInfo;
 import edu.cs4460.msd.backend.utilities.FontHelper;
 import edu.cs4460.msd.backend.visual_abstract.AbstractVizBase;
+import edu.cs4460.msd.visual.circles.CircleVis;
 import edu.cs4460.msd.visual.controls.ControlVisBase;
 import edu.cs4460.msd.visual.controls.FilterVisBase;
+import edu.cs4460.msd.visual.maps.GenreLocationMap;
 
 /**
  * Base PApplet and controller for the visualization

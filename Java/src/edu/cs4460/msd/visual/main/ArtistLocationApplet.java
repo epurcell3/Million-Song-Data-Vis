@@ -1,11 +1,12 @@
-package visualizations;
+package edu.cs4460.msd.visual.main;
 
 import processing.core.PApplet;
-import backend.SongList;
 import codeanticode.glgraphics.GLConstants;
 import controlP5.ControlEvent;
 import edu.cs4460.msd.backend.database.DatabaseConnectionTotal;
+import edu.cs4460.msd.backend.database.SongList;
 import edu.cs4460.msd.visual.controls.ContinentCheckboxes;
+import edu.cs4460.msd.visual.maps.ArtistLocationMap;
 
 public class ArtistLocationApplet extends PApplet {
 

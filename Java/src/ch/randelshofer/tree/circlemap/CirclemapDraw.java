@@ -18,9 +18,9 @@ import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 
 import processing.core.PApplet;
-import visualizations.VisBase;
 import ch.randelshofer.gui.ProgressObserver;
 import ch.randelshofer.tree.NodeInfo;
+import edu.cs4460.msd.visual.main.VisBase;
 
 /**
  * CirclemapDraw draws a {@link CirclemapTree}.

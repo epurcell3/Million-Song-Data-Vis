@@ -1,4 +1,4 @@
-package visualizations;
+package edu.cs4460.msd.visual.circles;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
@@ -6,12 +6,12 @@ import java.awt.geom.Point2D;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
-import backend.GenreNode;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.TreeView;
 import ch.randelshofer.tree.circlemap.CirclemapDraw;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
+import edu.cs4460.msd.backend.genre.GenreNode;
 
 public class CircleVis implements TreeView
 {

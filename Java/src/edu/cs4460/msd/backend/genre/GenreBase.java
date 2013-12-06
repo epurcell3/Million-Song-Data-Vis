@@ -1,10 +1,14 @@
-package backend;
+package edu.cs4460.msd.backend.genre;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+
+import edu.cs4460.msd.backend.database.SongList;
+import edu.cs4460.msd.backend.music.Artist;
+import edu.cs4460.msd.backend.music.Song;
 
 
 /**

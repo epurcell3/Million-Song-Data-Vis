@@ -1,4 +1,4 @@
-package visualizations;
+package edu.cs4460.msd.visual.maps;
 
 import processing.core.PApplet;
 import de.fhpotsdam.unfolding.UnfoldingMap;

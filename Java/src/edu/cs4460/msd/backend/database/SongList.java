@@ -1,4 +1,4 @@
-package backend;
+package edu.cs4460.msd.backend.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
-import edu.cs4460.msd.backend.database.DatabaseOperator;
 import edu.cs4460.msd.backend.maps_works.ContinentData;
+import edu.cs4460.msd.backend.music.Artist;
+import edu.cs4460.msd.backend.music.Song;
 
 public class SongList {
 	/**

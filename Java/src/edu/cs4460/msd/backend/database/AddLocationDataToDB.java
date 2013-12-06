@@ -7,9 +7,8 @@ import java.sql.Statement;
 import java.util.Collection;
 
 import edu.cs4460.msd.backend.maps_works.ContinentData;
+import edu.cs4460.msd.backend.music.Artist;
 import edu.cs4460.msd.backend.utilities.PathHandler;
-import backend.Artist;
-import backend.SongList;
 
 public class AddLocationDataToDB {
 	public static String dbTotal = "MillionSongSubset.db";

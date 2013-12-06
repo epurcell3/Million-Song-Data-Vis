@@ -7,6 +7,7 @@ import java.util.List;
 import ch.randelshofer.tree.TreeNode;
 import ch.randelshofer.tree.TreePath2;
 import ch.randelshofer.tree.Weighter;
+import edu.cs4460.msd.backend.genre.GenreNode;
 
 public class SongCountWeighter implements Weighter {
 

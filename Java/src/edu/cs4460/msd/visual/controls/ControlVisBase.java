@@ -1,8 +1,8 @@
 package edu.cs4460.msd.visual.controls;
 
-import visualizations.VisBase;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
+import edu.cs4460.msd.visual.main.VisBase;
 
 public class ControlVisBase {
 	private VisBase vb;

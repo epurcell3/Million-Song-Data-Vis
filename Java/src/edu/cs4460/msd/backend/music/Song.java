@@ -1,4 +1,4 @@
-package backend;
+package edu.cs4460.msd.backend.music;
 
 /**
  * Object representing a song in the database

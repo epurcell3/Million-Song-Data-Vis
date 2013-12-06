@@ -2,7 +2,6 @@ package edu.cs4460.msd.visual.controls;
 
 import java.util.Arrays;
 
-import visualizations.VisBase;
 import controlP5.Accordion;
 import controlP5.Bang;
 import controlP5.CheckBox;
@@ -14,6 +13,7 @@ import controlP5.Slider;
 import edu.cs4460.msd.backend.database.DatabaseConnectionInterface;
 import edu.cs4460.msd.backend.maps_works.ContinentData;
 import edu.cs4460.msd.backend.utilities.FontHelper;
+import edu.cs4460.msd.visual.main.VisBase;
 
 public class FilterVisBase {
 	// ControlP5 elements
