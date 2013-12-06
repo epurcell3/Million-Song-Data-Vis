@@ -7,12 +7,14 @@ import java.awt.geom.Point2D;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
+import ch.randelshofer.tree.NodeInfo;
 import ch.randelshofer.tree.TreeView;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
 import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.genre.GenreNode;
 import edu.cs4460.msd.backend.genre.GenreNodeInfo;
+import edu.cs4460.msd.visual.controls.ToolTip;
 
 public class CircleVis implements TreeView
 {
@@ -30,28 +32,31 @@ public class CircleVis implements TreeView
     private boolean needsSimplify;
     private boolean needsProgressive = true;
     private CirclemapNode hoverNode;
-    private boolean isToolTipVisible = false;
+    private boolean isToolTipVisible = true;
     private CirclemapTree model;
+    private NodeInfo info;
+    
+    private ToolTip tooltip;
     
     private GenreNode rootNode;
 
     public CircleVis(CirclemapTree model)
     {
-    	//this.x = x;
-    	//this.y = y;
-    	//this.p = p;
     	this.isInvalid = false;
     	this.isAdjusting = false;
     	this.needsSimplify = false;
     	this.model = model;
     	this.cmDraw = new CirclemapDraw(model.getRoot(), model.getInfo());
     	this.cmDraw.setRadius(width/2 - 10);
+    	
+    	this.info = model.getInfo();
     }
     
     
     public void setP(PApplet p)
     {
     	this.p = p;
+    	this.tooltip = new ToolTip(p, 0, 0);
     }
 
 	public void draw(GenreFilter filter)
@@ -68,6 +73,7 @@ public class CircleVis implements TreeView
 		{
 			if (selectedNode.children().isEmpty())
 			{
+				cmDraw.drawTree(p);
 			}
 			else
 			{
@@ -77,6 +83,10 @@ public class CircleVis implements TreeView
 		if (hoverNode != null)
 		{
 			cmDraw.drawNodeBounds(p, hoverNode, Color.red);
+			if (this.isToolTipVisible)
+			{
+				tooltip.draw();
+			}
 		}
 		if (drawHandles)
 		{
@@ -91,8 +101,14 @@ public class CircleVis implements TreeView
 	
 	public void mouseMoved(int mouseX, int mouseY) {
 		CirclemapNode node = cmDraw.getNodeAt(mouseX, mouseY);
-		// TODO Something clever with Tooltip
 		hoverNode = node;
+		if (node != null)
+		{
+		tooltip.setText(info.getTooltip(node.getDataNodePath()));
+		tooltip.setXpos(mouseX - 5);
+		tooltip.setYpos(mouseY - 54);
+		}
+		
 	}
 
 	@Override
