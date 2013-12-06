@@ -145,7 +145,7 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 			double py, double sf) {
 		double r = node.getRadius() * sf;
 		double x = cx + px * sf;
-		double y = cy + px * sf;
+		double y = cy + py * sf;
 		
 		Color c = info.getColor(node.getDataNodePath());
 		Color cd = c.darker();
