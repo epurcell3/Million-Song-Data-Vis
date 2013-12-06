@@ -18,8 +18,6 @@ import edu.cs4460.msd.visual.controls.ControlVisBase;
 import edu.cs4460.msd.visual.controls.FilterVisBase;
 import edu.cs4460.msd.visual.maps.GenreLocationMap;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Base PApplet and controller for the visualization

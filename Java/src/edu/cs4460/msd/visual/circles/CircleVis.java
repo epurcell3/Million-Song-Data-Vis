@@ -39,7 +39,9 @@ public class CircleVis implements TreeView
     	//this.x = x;
     	//this.y = y;
     	//this.p = p;
-    	
+    	this.isInvalid = false;
+    	this.isAdjusting = false;
+    	this.needsSimplify = false;
     	this.model = model;
     	this.cmDraw = new CirclemapDraw(model.getRoot(), model.getInfo());
     }
@@ -134,16 +136,19 @@ public class CircleVis implements TreeView
 		draw();
 	}
 	
+	@SuppressWarnings("unused")
 	private void setCenter(double cx, double cy) {
         cmDraw.setCX(cx);
         cmDraw.setCY(cy);
     }
 	
-    private Point2D.Double getCenter() {
+    @SuppressWarnings("unused")
+	private Point2D.Double getCenter() {
         return new Point2D.Double(cmDraw.getCX(),cmDraw.getCY());
     }
     
-    private void setOuterRadius(double r) {
+    @SuppressWarnings("unused")
+	private void setOuterRadius(double r) {
         cmDraw.setRadius(r);
     }
 

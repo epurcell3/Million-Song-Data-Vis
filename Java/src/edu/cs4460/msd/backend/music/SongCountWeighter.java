@@ -1,4 +1,4 @@
-package edu.cs4460.msd.backend.circles;
+package edu.cs4460.msd.backend.music;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -53,6 +53,7 @@ public class SongCountWeighter implements Weighter {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public float getWeight(TreePath2 path) {
 		TreeNode node = (TreeNode) path.getLastPathComponent();
