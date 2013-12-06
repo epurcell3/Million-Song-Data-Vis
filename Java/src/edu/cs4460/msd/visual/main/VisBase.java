@@ -127,7 +127,7 @@ public class VisBase extends AbstractVizBase {
 		cvb.draw();
 		
 		if(activeTabId == mapTabId) {
-			glm.draw(filter);
+			glm.draw();
 		} else if(activeTabId == circleTabId){
 			cv.draw(filter);
 			noStroke();
@@ -138,7 +138,7 @@ public class VisBase extends AbstractVizBase {
 			rect(DEFAULT_X + DEFAULT_WIDTH, DEFAULT_Y, WIDTH, HEIGHT);
 			rect(0, DEFAULT_Y + DEFAULT_HEIGHT, WIDTH, HEIGHT);
 		} else if(activeTabId == mapArtistsId) {
-			alm.draw(filter);
+			alm.draw();
 		}
 		
 	}
@@ -166,7 +166,7 @@ public class VisBase extends AbstractVizBase {
             filter.setMinYear(lower);
             filter.setMaxYear(upper);
         }
-		cv.filterChanged(filter);
+        filterChanged();
 	}
 
 	public void filterCountries(boolean[] checked) {
@@ -183,7 +183,7 @@ public class VisBase extends AbstractVizBase {
         else {
             filter.setCountriesFiltered(false);
         }
-		cv.filterChanged(filter);
+        filterChanged();
 	}
 
 	public void filterContinents(boolean[] checked) {
@@ -200,11 +200,17 @@ public class VisBase extends AbstractVizBase {
         else{
             filter.setContinentsFiltered(false);
         }
-		cv.filterChanged(filter);
+        filterChanged();
 	}
 	
 	public void filterSongs(int count) {
 		updateCircleVis(count);
+	}
+	
+	private void filterChanged() {
+		cv.filterChanged(filter);
+		alm.updateFilter(filter);
+		glm.updateFilter(filter);
 	}
 
 	public void controlEvent(ControlEvent theEvent) {
