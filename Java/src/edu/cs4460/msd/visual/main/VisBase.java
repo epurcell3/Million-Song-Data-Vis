@@ -153,6 +153,8 @@ public class VisBase extends AbstractVizBase {
 			cv.mouseMoved(mouseX, mouseY);
 		} else if(activeTabId == mapArtistsId) {
 			alm.mouseMoved(mouseX, mouseY);
+		} else if (activeTabId == mapTabId) {
+			glm.mouseMoved(mouseX, mouseY);
 		}
 	}
 	
