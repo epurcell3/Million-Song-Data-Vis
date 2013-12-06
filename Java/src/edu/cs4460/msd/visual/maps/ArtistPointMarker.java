@@ -1,6 +1,7 @@
 package edu.cs4460.msd.visual.maps;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -15,37 +16,41 @@ public class ArtistPointMarker extends SimplePointMarker {
 	protected float size = 15;
 	private float fontSize = 12;
 	private PFont font;
-	
-	public ArtistPointMarker(Location location, float radius, String a_id, String artist_name) {
+	private Rectangle bounds;
+
+	public ArtistPointMarker(Location location, float radius, String a_id, String artist_name, Rectangle bounds) {
 		super(location);
 		this.setRadius(radius);
 		this.artist_id = a_id;
 		this.artist_name = artist_name;
+		this.bounds = bounds;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see de.fhpotsdam.unfolding.marker.SimplePointMarker#draw(processing.core.PGraphics, float, float)
 	 */
 	@Override
 	public void draw(PGraphics pg, float x, float y) {
-		super.draw(pg, x, y);
-		pg.pushStyle();
-		pg.pushMatrix();
-		// label
-				if (selected && artist_name != null) {
-					if (font != null) {
-						pg.textFont(font);
-					}
-					pg.fill(highlightColor);
-					pg.stroke(highlightStrokeColor);
-					pg.rect(x + strokeWeight / 2, y - fontSize + strokeWeight / 2 - space, pg.textWidth(artist_name) + space * 1.5f,
-							fontSize + space);
-					pg.fill(255, 255, 255);
-					pg.text(artist_name, Math.round(x + space * 0.75f + strokeWeight / 2),
-							Math.round(y + strokeWeight / 2 - space * 0.75f));
+		if(bounds.contains(x, y)) {
+			super.draw(pg, x, y);
+			pg.pushStyle();
+			pg.pushMatrix();
+			// label
+			if (selected && artist_name != null) {
+				if (font != null) {
+					pg.textFont(font);
 				}
-				pg.popMatrix();
-				pg.popStyle();
+				pg.fill(highlightColor);
+				pg.stroke(highlightStrokeColor);
+				pg.rect(x + strokeWeight / 2, y - fontSize + strokeWeight / 2 - space, pg.textWidth(artist_name) + space * 1.5f,
+						fontSize + space);
+				pg.fill(255, 255, 255);
+				pg.text(artist_name, Math.round(x + space * 0.75f + strokeWeight / 2),
+						Math.round(y + strokeWeight / 2 - space * 0.75f));
+			}
+			pg.popMatrix();
+			pg.popStyle();
+		}
 	}
 
 	public void setColor(PApplet p, int maxArtistRadius) {
@@ -53,7 +58,7 @@ public class ArtistPointMarker extends SimplePointMarker {
 		int c = p.color(cP.getRed(), cP.getGreen(), cP.getBlue(), cP.getAlpha() / 2);
 		this.setColor(c);
 	}
-	
+
 	private Color getColorForRadius(double radius, int maxArtistRadius) {
 		Color out = null;
 		double factor = maxArtistRadius / radius;
