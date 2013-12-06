@@ -17,11 +17,13 @@ import edu.cs4460.msd.backend.utilities.PathHandler;
 
 public class ContinentData {
 	private HashMap<String, CountryDataEntry> continentData;
-	private static final String[] CONTINENTS = {"Africa", "Antarctica", "Asia", "Europe", "North America", "Oceania", "South America"};
+	private static final String[] CONTINENTS = {"Africa",  "Asia", "Europe", "North America", "Oceania", "South America"};
+	private HashMap<String, Location> continentCenters;
 
 	public ContinentData() {
 
 		continentData = loadContinentDataFromCSV();
+		continentCenters = createContinentCenters();
 	}
 
 	/**
@@ -45,7 +47,30 @@ public class ContinentData {
 	 * @return Location of center of continent or null otherwise
 	 */
 	public Location getContinentCenter(String continent) {
-		return null; // TODO
+		Location out = null;
+		if(continentCenters.containsKey(continent)) {
+			out = continentCenters.get(continent);
+		}
+		return out;
+	}
+	
+	private HashMap<String, Location> createContinentCenters() {
+		HashMap<String, Location> out = new HashMap<String, Location>();
+		
+		Location africa = new Location(2.378, 16.063);
+		Location asia = new Location(43.67694, .3311);
+		Location europe = new Location(48.236210, 21.22574);
+		Location nAmerica = new Location(48.1667, -100.1667);
+		Location oceania = new Location(-7.2807, 130.2539);
+		Location sAmerica = new Location(-15.595833, -56.096944);
+		
+		out.put(CONTINENTS[0], africa);
+		out.put(CONTINENTS[1], asia);
+		out.put(CONTINENTS[2], europe);
+		out.put(CONTINENTS[3], nAmerica);
+		out.put(CONTINENTS[4], oceania);
+		out.put(CONTINENTS[5], sAmerica);
+		return out;
 	}
 	
 	public static boolean checkIfContinent(String cMaybe) {
