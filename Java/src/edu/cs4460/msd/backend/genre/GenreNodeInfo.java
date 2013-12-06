@@ -13,7 +13,7 @@ import ch.randelshofer.tree.TreeNode;
 import ch.randelshofer.tree.TreePath2;
 import ch.randelshofer.tree.Weighter;
 import ch.randelshofer.tree.demo.RGBColorizer;
-import edu.cs4460.msd.backend.circles.SongCountWeighter;
+import edu.cs4460.msd.backend.music.SongCountWeighter;
 
 public class GenreNodeInfo extends DefaultNodeInfo {
 	
