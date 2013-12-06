@@ -236,6 +236,10 @@ public class VisBase extends AbstractVizBase {
 	public void controlEvent(ControlEvent theEvent) {
 		if(theEvent.isTab()) {
 			activeTabId = theEvent.getTab().getId();
+			if (activeTabId == mapTabId)
+			{
+				fvb.checkAllContinents();
+			}
 		} else {
 			fvb.controlEvent(theEvent);
 			cvb.controlEvent(theEvent);

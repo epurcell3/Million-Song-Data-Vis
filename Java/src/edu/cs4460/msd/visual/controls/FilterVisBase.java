@@ -116,6 +116,11 @@ public class FilterVisBase {
 		
 	}
 	
+	public void checkAllContinents()
+	{
+		continentCheckBox.activateAll();
+	}
+	
 	public void controlEvent(ControlEvent theEvent) {
 		if(theEvent.isFrom(yearRange)) {
 			int rangeMin = (int) (theEvent.getController().getArrayValue(0));
