@@ -183,13 +183,39 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 
 	@Override
 	public CirclemapNode getNodeAt(int px, int py) {
-		return null;
+		return getNodeAt((px - cx) / scaleFactor, (py - cy) / scaleFactor);
 	}
 
 	@Override
 	public CirclemapNode getNodeAt(double px, double py) {
-		// TODO Auto-generated method stub
-		return null;
+		CirclemapNode parent = drawRoot;
+        int depth = 1;
+        while (parent != null) {
+            px += parent.getCX();
+            py += parent.getCY();
+            parent = parent.getParent();
+            depth--;
+        }
+
+        if (root.contains(px, py)) {
+            CirclemapNode found = root;
+            parent = found;
+            do {
+                parent = found;
+                px -= parent.cx;
+                py -= parent.cy;
+                for (CirclemapNode node : parent.children()) {
+                    if (node.contains(px, py)) {
+                        found = node;
+                        depth++;
+                        break;
+                    }
+                }
+            } while (found != parent && depth < maxDepth);
+            return found;
+        } else {
+            return null;
+        }
 	}
 
 }
