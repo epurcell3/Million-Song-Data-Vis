@@ -214,7 +214,9 @@ public class VisBase extends AbstractVizBase {
 			for (int i = 0; i < 6; i++)
 			{
 				if (checked[i])
-					glm.flipDrawContinent(i);
+					glm.setDrawContinent(i, true);
+				else
+					glm.setDrawContinent(i, false);
 			}
 		}
 	}

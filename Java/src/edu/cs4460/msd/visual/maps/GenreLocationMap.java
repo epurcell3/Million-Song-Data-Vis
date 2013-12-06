@@ -72,9 +72,14 @@ public class GenreLocationMap extends AbstractMap {
 		
 	}
 	
-	public void flipDrawContinent(int index)
+	public void mouseMoved(int mx, int my)
 	{
-		drawContinent[index] = !drawContinent[index];
+		
+	}
+	
+	public void setDrawContinent(int index, boolean bool)
+	{
+		drawContinent[index] = bool;
 	}
 	
 	private Location getMapCenter() {
