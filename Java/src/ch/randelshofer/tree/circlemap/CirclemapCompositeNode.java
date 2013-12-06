@@ -74,7 +74,7 @@ public class CirclemapCompositeNode extends CirclemapNode {
             radius = Math.max(10, getWeightRadius(info));
             return;
         } else if (children.size() == 1) {
-            radius = //children.get(0).radius + 1;
+            //radius = //children.get(0).radius + 1;
             radius = Math.max(children.get(0).radius + 1, getWeightRadius(info));
             return;
         }
