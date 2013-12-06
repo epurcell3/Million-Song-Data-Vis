@@ -36,13 +36,16 @@ public class ArtistLocationMap extends AbstractMap {
 		int artistMax = slh.getMostSongsForArtist();
 		scaleFactor = maxArtistRadius / artistMax;
 		
-//		PathHandler ph = new PathHandler();
-//		String mbTilesConnectionString = "jdbc:sqlite:" + ph.getPathToResource("blankLight-1-3.mbtiles");
-//		map = new UnfoldingMap(parent, "detail", x, y, width, height, true, false, new MBTilesMapProvider(mbTilesConnectionString));
 		map = new UnfoldingMap(parent, "detail", x, y, width, height);
-		//MapUtils.createDefaultEventDispatcher(parent, map);
+		addArtistsAsMarkers();
 		
 		MapUtils.createDefaultEventDispatcher(parent, map);
+	}
+	
+	private void addArtistsAsMarkers() {
+		for(Artist a: artists) {
+			
+		}
 	}
 	
 	public void updateFilter(GenreFilter filter) {

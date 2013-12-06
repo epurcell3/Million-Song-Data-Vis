@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import org.geonames.WebService;
 
+import de.fhpotsdam.unfolding.geo.Location;
 import edu.cs4460.msd.backend.database.DatabaseOperator;
 import edu.cs4460.msd.backend.utilities.PathHandler;
 
@@ -35,6 +36,16 @@ public class ContinentData {
 		out = getContinentForCountry(countryIso);
 
 		return out;
+	}
+	
+	/**
+	 * Gets the geographical center of a continent given the continent name.  String
+	 * input must match one of the Strings in CONTINENTS
+	 * @param continent Name of a continent
+	 * @return Location of center of continent or null otherwise
+	 */
+	public Location getContinentCenter(String continent) {
+		return null; // TODO
 	}
 	
 	public static boolean checkIfContinent(String cMaybe) {
