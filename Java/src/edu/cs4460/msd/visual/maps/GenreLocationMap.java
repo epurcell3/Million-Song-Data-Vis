@@ -34,22 +34,6 @@ public class GenreLocationMap extends AbstractMap {
 		this.width = width;
 		this.height = height;
 		
-		this.models = models;
-		this.cmDraws = new CirclemapDraw[6];
-		this.infos = new NodeInfo[6];
-		
-		for (int i = 0; i < 6; i++)
-		{
-			this.cmDraws[i] = new CirclemapDraw(this.models[i]);
-			this.cmDraws[i].setRadius(50);
-			ContinentData cd = new ContinentData();
-			Location loc = cd.getContinentCenter(ContinentData.getContinents()[i]);
-			ScreenPosition pos = map.getScreenPosition(loc);
-			this.cmDraws[i].setCX(pos.x);
-			this.cmDraws[i].setCY(pos.y);
-			this.infos[i] = this.models[i].getInfo();
-		}
-		
 		PathHandler ph = new PathHandler();
 		String mbTilesConnectionString = "jdbc:sqlite:" + ph.getPathToResource("blankLight-1-3.mbtiles");
 		map = new UnfoldingMap(parent, "detail", x, y, width, height, true, false, new MBTilesMapProvider(mbTilesConnectionString));
@@ -57,6 +41,22 @@ public class GenreLocationMap extends AbstractMap {
 		map.setZoomRange(1, 1);
 		
 		MapUtils.createDefaultEventDispatcher(parent, map);
+		
+		this.models = models;
+		this.cmDraws = new CirclemapDraw[6];
+		this.infos = new NodeInfo[6];
+		
+		for (int i = 0; i < 6; i++)
+		{
+			this.cmDraws[i] = new CirclemapDraw(this.models[i]);
+			this.cmDraws[i].setRadius(40);
+			ContinentData cd = new ContinentData();
+			Location loc = cd.getContinentCenter(ContinentData.getContinents()[i]);
+			ScreenPosition pos = map.getScreenPosition(loc);
+			this.cmDraws[i].setCX(pos.x);
+			this.cmDraws[i].setCY(pos.y);
+			this.infos[i] = this.models[i].getInfo();
+		}
 	}
 	
 	public void draw() {
