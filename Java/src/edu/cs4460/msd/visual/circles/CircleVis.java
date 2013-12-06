@@ -11,6 +11,7 @@ import ch.randelshofer.tree.TreeView;
 import ch.randelshofer.tree.circlemap.CirclemapDraw;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
+import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.genre.GenreNode;
 
 public class CircleVis implements TreeView
@@ -52,7 +53,7 @@ public class CircleVis implements TreeView
     	this.p = p;
     }
 
-	public void draw()
+	public void draw(GenreFilter filter)
 	{
 		//fill in it's background
 		p.fill(255, 255, 255);
@@ -89,6 +90,11 @@ public class CircleVis implements TreeView
 //			
 		}
 	}
+	
+	public void mouseMoved(int mouseX, int mouseY) {
+		CirclemapNode node = cmDraw.getNodeAt(mouseX, mouseY);
+		// TODO Something clever with Tooltip
+	}
 
 	@Override
 	public void setMaxDepth(int newValue) {
@@ -98,7 +104,7 @@ public class CircleVis implements TreeView
             if (newValue == Integer.MAX_VALUE) {
                 needsProgressive = true;
             }
-            draw();
+            //draw();
         }
 	}
 
@@ -133,7 +139,7 @@ public class CircleVis implements TreeView
 	@Override
 	public void repaintView() {
 		isInvalid = true;
-		draw();
+		//draw();
 	}
 	
 	@SuppressWarnings("unused")

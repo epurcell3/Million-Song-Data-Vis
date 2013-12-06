@@ -16,6 +16,7 @@ public class GenreNode implements TreeNode {
     HashMap<Integer, Integer> yearsMap;
     HashMap<String, Integer> continentMap;
     HashMap<String, Integer> countryMap;
+    HashMap<String, Integer> masterMap;
 
     public GenreNode(Genre genre){
         this.keyword = genre.getKeyword();
@@ -24,6 +25,7 @@ public class GenreNode implements TreeNode {
         this.yearsMap = genre.getYearsMap();
         this.continentMap = genre.getContinentMap();
         this.countryMap = genre.getCountryMap();
+        this.masterMap = genre.getMasterMap();
         children = new ArrayList<TreeNode>();
         for(Genre cGenre: genre.getChildren()){
             if(cGenre.getSongCount() >= 20)
@@ -77,6 +79,80 @@ public class GenreNode implements TreeNode {
 
     public void setCountryMap(HashMap<String, Integer> countryMap) {
         this.countryMap = countryMap;
+    }
+    public int getFilteredCount(GenreFilter filter){
+        int total = 0;
+        if(!filter.isYearsFiltered() && !filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            return songCount;
+
+        }
+        if(filter.isYearsFiltered() && !filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                Integer temp = yearsMap.get(Integer.valueOf(i));
+                if (temp != null){
+                    total += temp;
+                }
+            }
+        }
+        else if(!filter.isYearsFiltered() && filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            for(String s : filter.getContinents()){
+                Integer temp = continentMap.get(s);
+                if (temp != null){
+                    total += temp;
+                }
+            }
+        }
+        else if(!filter.isYearsFiltered() && !filter.isContinentsFiltered() && filter.isCountriesFiltered()){
+            for(String s : filter.getCountries()){
+                Integer temp = countryMap.get(s);
+                if (temp != null){
+                    total += temp;
+                }
+            }
+        }
+        else if(filter.isYearsFiltered() && filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                for(String s : filter.getContinents()){
+                    Integer temp = masterMap.get(String.valueOf(i) + s + "All");
+                    if (temp != null){
+                        total += temp;
+                    }
+                }
+            }
+        }
+        else if(filter.isYearsFiltered() && !filter.isContinentsFiltered() && filter.isCountriesFiltered()){
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                for(String s : filter.getCountries()){
+                    Integer temp = masterMap.get(String.valueOf(i) + "All" + s);
+                    if (temp != null){
+                        total += temp;
+                    }
+                }
+            }
+        }
+        else if(!filter.isYearsFiltered() && filter.isContinentsFiltered() && filter.isCountriesFiltered()){
+            for(String h : filter.getContinents()){
+                for(String s : filter.getCountries()){
+                    Integer temp = masterMap.get("All" + h + s);
+                    if (temp != null){
+                        total += temp;
+                    }
+                }
+            }
+        }
+        else{
+            for(int i = filter.getMinYear(); i<= filter.getMaxYear(); i++){
+                for(String h : filter.getContinents()){
+                    for(String s : filter.getCountries()){
+                        Integer temp = masterMap.get(String.valueOf(i) + h + s);
+                        if (temp != null){
+                            total += temp;
+                        }
+                    }
+                }
+            }
+        }
+        return total;
     }
 
     @Override
