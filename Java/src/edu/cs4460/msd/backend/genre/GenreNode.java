@@ -166,11 +166,13 @@ public class GenreNode implements TreeNode {
 
     @Override
     public List<TreeNode> children() {
-        return children;  //To change body of implemented methods use File | Settings | File Templates.
+        return children;
     }
 
     @Override
     public boolean getAllowsChildren() {
-        return true;  //To change body of implemented methods use File | Settings | File Templates.
+        if (children.size() > 0)
+        	return true;
+        return false;
     }
 }
