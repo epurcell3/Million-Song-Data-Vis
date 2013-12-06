@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
+import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.TreeView;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
@@ -206,5 +207,7 @@ public class CircleVis implements TreeView
     public void filterChanged(GenreFilter filter)
     {
     	((GenreNodeInfo)(model.getInfo())).setFilter(filter);
+    	ProgressTracker pt = new ProgressTracker("", "");
+    	model.getRoot().layout(model.getInfo(), pt);
     }
 }
