@@ -52,7 +52,9 @@ public class ArtistLocationMap extends AbstractMap {
 				Location loc = new Location(a.getArtist_latitude(), a.getArtist_longitude());
 				ScreenPosition pos = map.getScreenPosition(loc);
 				int radius = (int)(scaleFactor * slh.getSongsCountForArtist(a.getArtist_id()));
-				parent.ellipse(pos.x, pos.y, radius, radius);
+				if((x <= pos.x - radius && pos.x + radius <= x + width) && (y <= pos.y - radius && pos.y + radius <= y + height)) {	
+					parent.ellipse(pos.x, pos.y, radius, radius);
+				}
 			}
 		}
 	}
@@ -62,12 +64,12 @@ public class ArtistLocationMap extends AbstractMap {
 //		x = location.x;
 //		y = location.y;
 		
-		String line = "";
+		//String line = "";
 		for(Artist a: artists) {
 			ScreenPosition pos = map.getScreenPosition(new Location(a.getArtist_latitude(), a.getArtist_longitude()));
 			
 			if(contains(x,y, pos.x, pos.y, EDGE)) {
-				line += a.getArtist_continent() + "  " + a.getArtist_name() + "\n";
+				//line += a.getArtist_continent() + "  " + a.getArtist_name() + "\n";
 			} // close if
 		} // close for
 		
