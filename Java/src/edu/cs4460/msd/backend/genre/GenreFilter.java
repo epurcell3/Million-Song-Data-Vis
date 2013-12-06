@@ -87,8 +87,9 @@ public class GenreFilter{
     }
     
     public boolean artistConforms(Artist a) {
-    	boolean out = false;
+    	boolean out = true;
     	if(continentsFiltered) {
+    		out = false;
     		for(String c: continents) {
     			if(c.equals(a.getArtist_continent())) {
     				return true;
@@ -96,6 +97,7 @@ public class GenreFilter{
     		}
     	}
     	if(countriesFiltered) {
+    		out = false;
     		for(String c: countries) {
     			if(c.equals(a.getArtist_country())) {
     				return true;
