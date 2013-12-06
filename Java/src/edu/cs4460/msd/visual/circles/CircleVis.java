@@ -104,11 +104,20 @@ public class CircleVis implements TreeView
 		hoverNode = node;
 		if (node != null)
 		{
-		tooltip.setText(info.getTooltip(node.getDataNodePath()));
-		tooltip.setXpos(mouseX - 5);
-		tooltip.setYpos(mouseY - 54);
+			tooltip.setText(info.getTooltip(node.getDataNodePath()));
+			tooltip.setXpos(mouseX - 5);
+			tooltip.setYpos(mouseY - 64);
 		}
 		
+	}
+	
+	public void mouseClicked(int mx, int my)
+	{
+		CirclemapNode node = cmDraw.getNodeAt(mx, my);
+		if (node != null)
+		{
+			cmDraw.setDrawRoot(node);
+		}
 	}
 
 	@Override
