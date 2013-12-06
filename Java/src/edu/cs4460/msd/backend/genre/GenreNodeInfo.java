@@ -20,8 +20,17 @@ public class GenreNodeInfo extends DefaultNodeInfo {
 	
 	private TreeNode root;
 	
+	private Color[] colors = {
+			new Color(27, 158, 119),
+			new Color(217, 95, 2),
+			new Color(117, 112, 179),
+			new Color(231, 41, 138),
+			new Color(102, 166, 30),
+			new Color(230, 171, 2)
+		};
+	
 	public GenreNodeInfo() {
-		colorizer = new RGBColorizer();
+		colorizer = new RGBColorizer(colors);
 		weighter = new SongCountWeighter();
 		colorWeighter = new DepthWeighter();
 		colorWeighterToggle = 0;
@@ -30,6 +39,8 @@ public class GenreNodeInfo extends DefaultNodeInfo {
 	@Override
 	public void init(TreeNode node) {
 		this.root = node;
+		weighter.init(node);
+		colorWeighter.init(node);
 	}
 	
 	@Override
