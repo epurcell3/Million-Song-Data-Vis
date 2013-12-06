@@ -216,7 +216,7 @@ public class FilterVisBase {
 	
 	private void setCheckboxList(String[] cs) {
 		this.countriesInCheckboxList = cs;
-		Arrays.sort(cs);
+		//Arrays.sort(cs);
 		//System.out.println(Arrays.toString(cs));
 		for(int i = 0; i < cs.length; i++) {
 			countryCheckBox.addItem(cs[i], i);
