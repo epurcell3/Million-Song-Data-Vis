@@ -3,6 +3,7 @@ package edu.cs4460.msd.visual.maps;
 import java.awt.Color;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PGraphics;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.marker.SimplePointMarker;
@@ -13,6 +14,7 @@ public class ArtistPointMarker extends SimplePointMarker {
 	protected int space = 6;
 	protected float size = 15;
 	private float fontSize = 12;
+	private PFont font;
 	
 	public ArtistPointMarker(Location location, float radius, String a_id, String artist_name) {
 		super(location);
@@ -27,6 +29,8 @@ public class ArtistPointMarker extends SimplePointMarker {
 	@Override
 	public void draw(PGraphics pg, float x, float y) {
 		super.draw(pg, x, y);
+		pg.pushStyle();
+		pg.pushMatrix();
 		// label
 				if (selected && artist_name != null) {
 					if (font != null) {
