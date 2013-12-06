@@ -68,7 +68,10 @@ public class GenreBase {
                 zeroRank.add(fullGenreList.get(key));
             }
         }
-        rootGenre.setChildren(zeroRank);
+        for(Genre genre : zeroRank){
+            rootGenre.addChild(genre);
+        }
+        //rootGenre.setChildren(zeroRank);
         nodeTree = new GenreNode(rootGenre, 0);
     }
     public void generateParentsTree(String current){
