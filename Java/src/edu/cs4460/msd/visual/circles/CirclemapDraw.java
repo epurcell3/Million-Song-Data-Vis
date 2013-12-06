@@ -153,7 +153,8 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 		
 		Color c = info.getColor(node.getDataNodePath());
 		Color cd = c.darker();
-		
+		if (node != root && info.getWeight(node.getDataNodePath()) == 0)
+			return;
 		if (node.isLeaf())
 		{
 			par.noFill();
@@ -227,6 +228,7 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 	public CirclemapNode getNodeAt(double px, double py) {
 		CirclemapNode parent = drawRoot;
         int depth = 1;
+        //Sets depth for maxDepth check and goes to root.
         while (parent != null) {
             px += parent.getCX();
             py += parent.getCY();
@@ -242,7 +244,7 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
                 px -= parent.cx;
                 py -= parent.cy;
                 for (CirclemapNode node : parent.children()) {
-                    if (node.contains(px, py)) {
+                    if (node.contains(px, py) && info.getWeight(node.getDataNodePath()) != 0) {
                         found = node;
                         depth++;
                         break;
