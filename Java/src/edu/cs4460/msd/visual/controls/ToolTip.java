@@ -38,6 +38,7 @@ public class ToolTip implements Drawable {
         textSize = 12;
         resetText();
     }
+    
     public void addStringLine(String words){
         text.add(words);
     }
@@ -80,7 +81,7 @@ public class ToolTip implements Drawable {
     public void draw(){
         if(text.size() == 0)
             return;
-        int increment = height/ text.size();
+        int increment = this.textSize + 2;
         parent.fill(255,255,255);
         parent.stroke(0,0,0);
         parent.rect(xpos,ypos,width,height);
@@ -88,7 +89,7 @@ public class ToolTip implements Drawable {
         parent.textSize(textSize);
         parent.fill(0, 0, 0);
         for(int i = 0; i < text.size(); i++){
-            parent.text(text.get(i), xpos, ypos + ((i+1) * increment));
+            parent.text(text.get(i), xpos + 5, ypos + 5 + ((i + 1) * increment));
         }
     }
 
@@ -98,6 +99,14 @@ public class ToolTip implements Drawable {
 
     public void setText(List<String> text) {
         this.text = text;
+    }
+    
+    public void setText(String text)
+    {
+    	resetText();
+    	this.text.add(text);
+    	this.width = (int)parent.textWidth(text) + 10;
+    	this.height = this.textSize * 4 + 12;
     }
 
     public int getXpos() {
