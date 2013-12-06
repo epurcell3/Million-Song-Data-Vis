@@ -1,5 +1,7 @@
 package edu.cs4460.msd.visual.main;
 
+import java.util.ArrayList;
+
 import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.circlemap.CirclemapModel;
@@ -7,6 +9,7 @@ import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
 import edu.cs4460.msd.backend.database.SongList;
+import edu.cs4460.msd.backend.genre.BaseFilteredGenreNodeInfo;
 import edu.cs4460.msd.backend.genre.GenreBase;
 import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.genre.GenreNode;
@@ -30,30 +33,31 @@ public class VisBase extends AbstractVizBase {
 	public static final int WIDTH = 1200, HEIGHT = 800;
 	public static final int DEFAULT_X = 25, DEFAULT_Y = 35, DEFAULT_WIDTH = 700, DEFAULT_HEIGHT = 500;
 	public static final int SPACING = 25;
+	
 	private int backgroundColor;
+	
 	private ControlP5 cp5;
 	private FontHelper fh;
+	
 	private DatabaseConnection dc;
+    private SongList sl;
+    private GenreBase gb;
+    
 	private ContinentData cd;
 	private String mapTabName = "Map";
 	private String circleTabName = "Circles Only";
 	private String mapArtistsName = "Artist Map";
+	
 	private int activeTabId;
 	private int mapTabId = 1245, circleTabId = 32155, mapArtistsId = 43254;
+	
 	private GenreLocationMap glm;
 	private ArtistLocationMap alm;
 	private FilterVisBase fvb;
 	private ControlVisBase cvb;
 	private CircleVis cv;
+	
     private GenreFilter filter;
-    private SongList sl;
-//    private boolean yearsFiltered;
-//    private boolean countriesFiltered;
-//    private boolean continentsFiltered;
-//    private int maxYear;
-//    private int minYear;
-//    private List<String> countries;
-//    private List<String> continents;
 
 	/**
 	 * 
@@ -69,12 +73,13 @@ public class VisBase extends AbstractVizBase {
 
 		boolean connectToDB = true;
 		if(connectToDB) {
-			updateCircleVis();
-			
+			buildGenreBase();
+			buildCVTree();
+			buildGMTree();
 		}
 
-		int filterX = DEFAULT_X + DEFAULT_WIDTH + SPACING, filterY = 10, filterWidth = 400, filterHeight = 500;
 		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_HEIGHT, mapHeight = DEFAULT_HEIGHT;
+		int filterX = DEFAULT_X + DEFAULT_WIDTH + SPACING, filterY = 10, filterWidth = 400, filterHeight = 500;
 		int controlX = DEFAULT_X, controlY = DEFAULT_HEIGHT + SPACING, controlWidth = DEFAULT_WIDTH, controlHeight = 100;
 		backgroundColor = color(164);
 
@@ -110,7 +115,6 @@ public class VisBase extends AbstractVizBase {
 
 		activeTabId = circleTabId;
 		fvb = new FilterVisBase(this, filterX, filterY, filterWidth, filterHeight);
-		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
 		alm = new ArtistLocationMap(this, sl, mapX, mapY, mapWidth, mapHeight);
 		cvb = new ControlVisBase(this, controlX, controlY, controlWidth, controlHeight);
         filter = new GenreFilter();
@@ -204,7 +208,7 @@ public class VisBase extends AbstractVizBase {
 	}
 	
 	public void filterSongs(int count) {
-		updateCircleVis(count);
+		buildGenreBase(count);
 	}
 	
 	private void filterChanged() {
@@ -222,11 +226,11 @@ public class VisBase extends AbstractVizBase {
 		}
 	}
 	
-	private void updateCircleVis() {
-		updateCircleVis(-1);
+	private void buildGenreBase() {
+		buildGenreBase(-1);
 	}
 	
-	private void updateCircleVis(int limit) {
+	private void buildGenreBase(int limit) {
 		if(limit < 1) {
 			dc.setQueryLimit("");
 		} else {
@@ -235,13 +239,34 @@ public class VisBase extends AbstractVizBase {
 		sl = dc.getArtistTerms();
 		
 
-		GenreBase gb = new GenreBase(sl, 10);
+		gb = new GenreBase(sl, 10);
+	}
+	
+	private void buildCVTree() {
 		GenreNode root = gb.getNodeTree();
 		ProgressTracker p = new ProgressTracker("","");
 		CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);
 		cv = model.getView();
 		cv.setDimensions(DEFAULT_X, DEFAULT_Y, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		cv.setP(this);
+	}
+	
+	private void buildGMTree() {
+		GenreNode root = gb.getNodeTree();
+		ProgressTracker p = new ProgressTracker("", "");
+		CirclemapModel[] models = new CirclemapModel[6];
+		String[] continents = {"North America", "South America", "Europe", "Asia", "Africa", "Oceania"};
+		for (int i = 0; i < 6; i++) 
+		{
+			GenreFilter baseFilter = new GenreFilter();
+			baseFilter.setContinentsFiltered(true);
+			ArrayList<String> continent = new ArrayList<String>();
+			continent.add(continents[i]);
+			baseFilter.setContinents(continent);
+			models[i] = new CirclemapModel(root, new BaseFilteredGenreNodeInfo(baseFilter), p);
+		}
+		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_HEIGHT, mapHeight = DEFAULT_HEIGHT;
+		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
 	}
 
 }
