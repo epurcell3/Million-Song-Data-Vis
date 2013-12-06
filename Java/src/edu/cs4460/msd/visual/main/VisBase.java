@@ -194,7 +194,7 @@ public class VisBase extends AbstractVizBase {
 		}
 		SongList sl = dc.getArtistTerms();
 
-		GenreBase gb = new GenreBase(sl);
+		GenreBase gb = new GenreBase(sl, 6);
 		GenreNode root = gb.getNodeTree();
 		ProgressTracker p = new ProgressTracker("","");
 		CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);

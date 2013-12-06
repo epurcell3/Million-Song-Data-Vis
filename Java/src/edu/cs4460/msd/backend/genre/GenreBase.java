@@ -25,7 +25,7 @@ public class GenreBase {
     Genre rootGenre;
     GenreNode nodeTree;
     
-    public GenreBase(SongList sl){
+    public GenreBase(SongList sl, int maxChildren){
         rootGenre = new Genre("RootNode",null,null);
       //  fullList = new ArrayList<Genre>();
         fullGenreList = new HashMap<String,Genre>();

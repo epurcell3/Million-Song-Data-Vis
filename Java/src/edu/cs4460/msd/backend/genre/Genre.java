@@ -21,6 +21,8 @@ public class Genre {
     List<Genre> children;
     int songCount;
     double averageDuration;
+    int maxChildren;
+    Genre smallestChild;
     /**
      * <Year, Count>
      */
@@ -38,7 +40,7 @@ public class Genre {
      */
     HashMap<String, Integer> masterMap;
     
-    public Genre(String keyword, Song initial, Artist a){
+    public Genre(String keyword, Song initial, Artist a, int maxChildren){
         if(keyword.equals("RootNode")){
             this.children = new ArrayList<Genre>();
             yearsMap = new HashMap<Integer,Integer>();
@@ -46,6 +48,7 @@ public class Genre {
             countryMap = new HashMap<String, Integer>();
             masterMap = new HashMap<String, Integer>();
             minimalList = new ArrayList<String>();
+            this.maxChildren = maxChildren;
             return;
         }
         List<String> terms = a.getTerms();
@@ -53,6 +56,7 @@ public class Genre {
         continentMap  = new HashMap<String, Integer>();
         countryMap = new HashMap<String, Integer>();
         masterMap = new HashMap<String, Integer>();
+        this.maxChildren = maxChildren;
         this.keyword = keyword;
         this.minimalList = terms;
         minimalList.remove(keyword);
@@ -79,6 +83,18 @@ public class Genre {
         masterMap.put(yearStr + a.getArtist_continent() + a.getArtist_country(), Integer.valueOf(1));
         averageDuration= initial.getDuration();
         this.songCount = 1;
+    }
+    private void calcSmallestChild(){
+        int min = 1000000;
+        Genre filler = null;
+        for(int i = 0; i < children.size(); i++){
+            if(children.get(i).songCount < min){
+                filler = children.get(i);
+                min = filler.songCount;
+            }
+
+        }
+        smallestChild = filler;
     }
     public void addSong(Song song, Artist a){
         List<String> terms = a.getTerms();
@@ -187,7 +203,20 @@ public class Genre {
         return minimalList.size();
     }
     public void addChild(Genre genre){
-        children.add(genre);
+        if(children.size() < maxChildren){
+            children.add(genre);
+            if(children.size() == maxChildren){
+                calcSmallestChild();
+            }
+        }
+        else {
+            if(genre.songCount > smallestChild.songCount){
+                children.remove(smallestChild);
+                children.add(genre);
+                calcSmallestChild();
+            }
+
+        }
     }
     
     public String toString() {
@@ -296,12 +325,12 @@ public class Genre {
             }
         }
         else if(!filter.isYearsFiltered() && filter.isContinentsFiltered() && !filter.isCountriesFiltered()){
-             for(String s : filter.getContinents()){
-                 Integer temp = continentMap.get(s);
-                 if (temp != null){
-                     total += temp;
-                 }
-             }
+            for(String s : filter.getContinents()){
+                Integer temp = continentMap.get(s);
+                if (temp != null){
+                    total += temp;
+                }
+            }
         }
         else if(!filter.isYearsFiltered() && !filter.isContinentsFiltered() && filter.isCountriesFiltered()){
             for(String s : filter.getCountries()){
