@@ -18,6 +18,8 @@ public class GenreNodeInfo extends DefaultNodeInfo {
 	private Weighter colorWeighter;
 	private int colorWeighterToggle;
 	
+	private GenreFilter filter;
+	
 	private TreeNode root;
 	
 	private Color[] colors = {
@@ -34,8 +36,13 @@ public class GenreNodeInfo extends DefaultNodeInfo {
 		weighter = new SongCountWeighter();
 		colorWeighter = new DepthWeighter();
 		colorWeighterToggle = 0;
+		filter = new GenreFilter();
 	}
 	
+	public void setFilter(GenreFilter filter) {
+		this.filter = filter;
+	}
+
 	@Override
 	public void init(TreeNode node) {
 		this.root = node;
@@ -56,7 +63,7 @@ public class GenreNodeInfo extends DefaultNodeInfo {
     @Override
     public long getWeight(TreePath2<TreeNode> path) {
         GenreNode gn = (GenreNode) path.getLastPathComponent();
-        return gn.getSongCount();
+        return gn.getFilteredCount(filter);
     }
 
     @Override
