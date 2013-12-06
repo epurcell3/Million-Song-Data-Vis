@@ -9,12 +9,12 @@ public interface ProcessingCirclemapDraw {
 	
 	/**
      * Draws the tree onto
-     * the supplied graphics object.
+     * the supplied PApplet object.
      */
     public abstract void drawTree(PApplet par);
     
     /**
-     * Draws the subtree onto the supplied graphics object
+     * Draws the subtree onto the supplied PApplet object
      * @param par Graphics Object
      * @param node Current node
      * @param depth
@@ -26,7 +26,7 @@ public interface ProcessingCirclemapDraw {
     public abstract void drawTree0(PApplet par, CirclemapNode node, int depth, double px, double py, double sf, Rectangle clipBounds);
     
     /**
-     * Draws the node onto the supplied graphics object
+     * Draws the node onto the supplied PApplet object
      * @param par
      * @param node
      * @param depth
@@ -35,6 +35,17 @@ public interface ProcessingCirclemapDraw {
      * @param sf
      */
     public abstract void drawNode(PApplet par, CirclemapNode node, int depth, double px, double py, double sf);
+    
+    /**
+     * Draws the node's label onto the supplied PApplet object
+     * @param par
+     * @param node
+     * @param depth
+     * @param px
+     * @param py
+     * @param sf
+     */
+    public void drawLabel(PApplet par, CirclemapNode node, int depth, double px, double py, double sf);
     
     /**
      * Returns the node at the specified view coordinates.

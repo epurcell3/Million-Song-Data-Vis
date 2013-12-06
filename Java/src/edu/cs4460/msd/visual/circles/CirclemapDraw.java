@@ -218,4 +218,11 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
         }
 	}
 
+	@Override
+	public void drawLabel(PApplet par, CirclemapNode node, int depth,
+			double px, double py, double sf) {
+		
+		
+	}
+
 }
