@@ -112,7 +112,6 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
             depth--;
         }
 
-        //TODO clipBounds should be the CircleVis bounds
         if (clipBounds == null) {
             clipBounds = new Rectangle(0, 0, Integer.MAX_VALUE, Integer.MAX_VALUE);
         }
