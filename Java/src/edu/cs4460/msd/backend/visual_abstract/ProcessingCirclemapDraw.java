@@ -5,19 +5,7 @@ import java.awt.Rectangle;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import processing.core.PApplet;
 
-public abstract class AbstractCirclemapDraw {
-	/**
-	 * Center of the Circle vis
-	 */
-	protected double cx, cy;
-	/**
-	 * Radius of the circle vis
-	 */
-	protected double radius;
-	/**
-	 * Scale factor of the circle vis
-	 */
-	protected double scaleFactor;
+public interface ProcessingCirclemapDraw {
 	
 	/**
      * Draws the tree onto
