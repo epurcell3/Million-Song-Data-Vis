@@ -32,6 +32,8 @@ public class VisBase extends AbstractVizBase {
 	private int backgroundColor;
 	private ControlP5 cp5;
 	private FontHelper fh;
+	private DatabaseConnection dc;
+	private ContinentData cd;
 	private String mapTabName = "Map";
 	private String circleTabName = "Circles Only";
 	private String mapArtistsName = "Artist Map";
@@ -61,6 +63,8 @@ public class VisBase extends AbstractVizBase {
 		size(WIDTH, HEIGHT);
 		cp5 = new ControlP5(this);
 		fh = new FontHelper(this);
+		dc = new DatabaseConnection();
+		cd = new ContinentData();
 
 		boolean connectToDB = true;
 		if(connectToDB) {
@@ -152,7 +156,6 @@ public class VisBase extends AbstractVizBase {
 	}
 
 	public void filterCountries(boolean[] checked) {
-        ContinentData cd = new ContinentData();
         String[] allCountries = cd.findCountriesISOInDatabase();
         filter.getCountries().clear();
         for(int i = 0; i < checked.length; i++){
@@ -205,8 +208,6 @@ public class VisBase extends AbstractVizBase {
 	}
 	
 	private void updateCircleVis(int limit) {
-		DatabaseConnection dc = new DatabaseConnection();
-		
 		if(limit < 1) {
 			dc.setQueryLimit("");
 		} else {
@@ -215,7 +216,7 @@ public class VisBase extends AbstractVizBase {
 		sl = dc.getArtistTerms();
 		
 
-		GenreBase gb = new GenreBase(sl, 6);
+		GenreBase gb = new GenreBase(sl, 10);
 		GenreNode root = gb.getNodeTree();
 		ProgressTracker p = new ProgressTracker("","");
 		CirclemapModel model = new CirclemapModel(root, new GenreNodeInfo(), p);
