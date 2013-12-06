@@ -83,18 +83,17 @@ public class GenreNodeInfo extends DefaultNodeInfo {
         StringBuilder buf = new StringBuilder();
 
         buf.insert(0, getName(path));
-        buf.insert(0, "<html>");
-        buf.append("<br>");
+        buf.append("\n");
 
         GenreNode node = (GenreNode) path.getLastPathComponent();
         if (node.getAllowsChildren()) {
-            buf.append("<br>children: ");
+            buf.append("Children: ");
             buf.append(/*intFormat.format*/(node.children().size()));
 //            buf.append("<br>descendants: ");
 //            buf.append(/*intFormat.format*/(node.getDescendantCount()));
         }
 
-        buf.append("<br>Song Count: ");
+        buf.append("\nSong Count: ");
         buf.append(getWeight(path));
 
         return buf.toString();
