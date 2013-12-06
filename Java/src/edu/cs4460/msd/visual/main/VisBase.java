@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.circlemap.CirclemapModel;
+import ch.randelshofer.tree.circlemap.CirclemapTree;
 import controlP5.ControlEvent;
 import controlP5.ControlP5;
 import edu.cs4460.msd.backend.database.DatabaseConnection;
@@ -255,6 +256,7 @@ public class VisBase extends AbstractVizBase {
 		GenreNode root = gb.getNodeTree();
 		ProgressTracker p = new ProgressTracker("", "");
 		CirclemapModel[] models = new CirclemapModel[6];
+		CirclemapTree[] trees = new CirclemapTree[6];
 		String[] continents = {"North America", "South America", "Europe", "Asia", "Africa", "Oceania"};
 		for (int i = 0; i < 6; i++) 
 		{
@@ -264,9 +266,10 @@ public class VisBase extends AbstractVizBase {
 			continent.add(continents[i]);
 			baseFilter.setContinents(continent);
 			models[i] = new CirclemapModel(root, new BaseFilteredGenreNodeInfo(baseFilter), p);
+			trees[i] = models[i].getTree();
 		}
 		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_HEIGHT, mapHeight = DEFAULT_HEIGHT;
-		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
+		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight, trees);
 	}
 
 }

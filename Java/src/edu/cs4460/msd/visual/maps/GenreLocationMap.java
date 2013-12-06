@@ -2,8 +2,8 @@ package edu.cs4460.msd.visual.maps;
 
 import processing.core.PApplet;
 import ch.randelshofer.tree.NodeInfo;
-import ch.randelshofer.tree.circlemap.CirclemapModel;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
+import ch.randelshofer.tree.circlemap.CirclemapTree;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
@@ -17,19 +17,27 @@ public class GenreLocationMap extends AbstractMap {
 	private PApplet parent;
 	private int x, y, width, height;
 	
-	private CirclemapModel[] models;
+	private CirclemapTree[] models;
 	private CirclemapDraw[] cmDraws;
 	private NodeInfo[] infos;
 	
 	private CirclemapNode hoverNode;
 	
-	public GenreLocationMap(PApplet p, int x, int y, int width, int height) {
+	public GenreLocationMap(PApplet p, int x, int y, int width, int height, CirclemapTree[] models) {
 		this.parent = p;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 		
+		this.models = models;
+		this.cmDraws = new CirclemapDraw[6];
+		this.infos = new NodeInfo[6];
+		for (int i = 0; i < 6; i++)
+		{
+			this.cmDraws[i] = new CirclemapDraw(this.models[i]);
+			this.infos[i] = this.models[i].getInfo();
+		}
 
 		PathHandler ph = new PathHandler();
 		String mbTilesConnectionString = "jdbc:sqlite:" + ph.getPathToResource("blankLight-1-3.mbtiles");
