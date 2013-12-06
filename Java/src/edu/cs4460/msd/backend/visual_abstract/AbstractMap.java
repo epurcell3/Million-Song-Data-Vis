@@ -1,12 +1,13 @@
 package edu.cs4460.msd.backend.visual_abstract;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
+import edu.cs4460.msd.backend.genre.GenreFilter;
 
 public abstract class AbstractMap {
 	
 	protected UnfoldingMap map;
 	
-	public abstract void draw();
+	public abstract void draw(GenreFilter filter);
 	
 	protected boolean contains(float x1, float y1, double cx, double cy, double radius) {
 		boolean out = false;

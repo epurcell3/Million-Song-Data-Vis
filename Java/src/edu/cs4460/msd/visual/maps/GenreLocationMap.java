@@ -5,6 +5,7 @@ import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.MapUtils;
+import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.utilities.PathHandler;
 import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
 
@@ -29,7 +30,7 @@ public class GenreLocationMap extends AbstractMap {
 		MapUtils.createDefaultEventDispatcher(parent, map);
 	}
 	
-	public void draw() {
+	public void draw(GenreFilter filter) {
 		map.draw();
 		
 		

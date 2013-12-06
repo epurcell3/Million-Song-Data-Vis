@@ -3,6 +3,9 @@ package edu.cs4460.msd.backend.genre;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.cs4460.msd.backend.music.Artist;
+import edu.cs4460.msd.backend.music.Song;
+
 /**
  * Created with IntelliJ IDEA.
  * User: Ryan
@@ -81,5 +84,36 @@ public class GenreFilter{
 
     public void setContinents(List<String> continents) {
         this.continents = continents;
+    }
+    
+    public boolean artistConforms(Artist a) {
+    	boolean out = false;
+    	if(continentsFiltered) {
+    		for(String c: continents) {
+    			if(c.equals(a.getArtist_continent())) {
+    				return true;
+    			}
+    		}
+    	}
+    	if(countriesFiltered) {
+    		for(String c: countries) {
+    			if(c.equals(a.getArtist_country())) {
+    				return true;
+    			}
+    		}
+    	}
+    	
+    	return out;
+    }
+    
+    public boolean songConforms(Song s) {
+    	boolean out = true;
+    	
+    	if(yearsFiltered) {
+    		if(s.getYear() < minYear || maxYear < s.getYear()) {
+    			out = false;
+    		}
+    	}
+    	return out;
     }
 }

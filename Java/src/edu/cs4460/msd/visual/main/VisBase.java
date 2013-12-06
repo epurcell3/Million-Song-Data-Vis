@@ -16,6 +16,7 @@ import edu.cs4460.msd.backend.visual_abstract.AbstractVizBase;
 import edu.cs4460.msd.visual.circles.CircleVis;
 import edu.cs4460.msd.visual.controls.ControlVisBase;
 import edu.cs4460.msd.visual.controls.FilterVisBase;
+import edu.cs4460.msd.visual.maps.ArtistLocationMap;
 import edu.cs4460.msd.visual.maps.GenreLocationMap;
 
 
@@ -33,13 +34,16 @@ public class VisBase extends AbstractVizBase {
 	private FontHelper fh;
 	private String mapTabName = "Map";
 	private String circleTabName = "Circles Only";
+	private String mapArtistsName = "Artist Map";
 	private int activeTabId;
-	private int mapTabId = 1245, circleTabId = 32155;
+	private int mapTabId = 1245, circleTabId = 32155, mapArtistsId = 43254;
 	private GenreLocationMap glm;
+	private ArtistLocationMap alm;
 	private FilterVisBase fvb;
 	private ControlVisBase cvb;
 	private CircleVis cv;
     private GenreFilter filter;
+    private SongList sl;
 //    private boolean yearsFiltered;
 //    private boolean countriesFiltered;
 //    private boolean continentsFiltered;
@@ -65,7 +69,7 @@ public class VisBase extends AbstractVizBase {
 		}
 
 		int filterX = DEFAULT_X + DEFAULT_WIDTH + SPACING, filterY = 10, filterWidth = 400, filterHeight = 500;
-		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_WIDTH, mapHeight = DEFAULT_HEIGHT;
+		int mapX = DEFAULT_X, mapY = DEFAULT_Y, mapWidth = DEFAULT_HEIGHT, mapHeight = DEFAULT_HEIGHT;
 		int controlX = DEFAULT_X, controlY = DEFAULT_HEIGHT + SPACING, controlWidth = DEFAULT_WIDTH, controlHeight = 100;
 		backgroundColor = color(164);
 
@@ -89,10 +93,20 @@ public class VisBase extends AbstractVizBase {
 			.activateEvent(true)
 			.setId(mapTabId)
 			;
+		
+		cp5.addTab(mapArtistsName)
+			.setColorBackground(backgroundColor)
+			.setHeight(25)
+			;
+		cp5.getTab(mapArtistsName)
+			.activateEvent(true)
+			.setId(mapArtistsId)
+			;
 
 		activeTabId = circleTabId;
 		fvb = new FilterVisBase(this, filterX, filterY, filterWidth, filterHeight);
 		glm = new GenreLocationMap(this, mapX, mapY, mapWidth, mapHeight);
+		alm = new ArtistLocationMap(this, sl, mapX, mapY, mapWidth, mapHeight);
 		cvb = new ControlVisBase(this, controlX, controlY, controlWidth, controlHeight);
         filter = new GenreFilter();
 //        yearsFiltered = false;
@@ -108,9 +122,11 @@ public class VisBase extends AbstractVizBase {
 		cvb.draw();
 		
 		if(activeTabId == mapTabId) {
-			glm.draw();
+			glm.draw(filter);
 		} else if(activeTabId == circleTabId){
 			cv.draw(filter);
+		} else if(activeTabId == mapArtistsId) {
+			alm.draw(filter);
 		}
 		
 	}
@@ -118,6 +134,8 @@ public class VisBase extends AbstractVizBase {
 	public void mouseMoved() {
 		if(activeTabId == circleTabId) {
 			cv.mouseMoved(mouseX, mouseY);
+		} else if(activeTabId == mapArtistsId) {
+			alm.mouseMoved(mouseX, mouseY);
 		}
 	}
 
@@ -194,7 +212,8 @@ public class VisBase extends AbstractVizBase {
 		} else {
 			dc.setQueryLimit(limit);
 		}
-		SongList sl = dc.getArtistTerms();
+		sl = dc.getArtistTerms();
+		
 
 		GenreBase gb = new GenreBase(sl);
 		GenreNode root = gb.getNodeTree();
