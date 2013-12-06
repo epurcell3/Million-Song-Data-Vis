@@ -171,7 +171,7 @@ public class VisBase extends AbstractVizBase {
 	}
 
 	public void filterContinents(boolean[] checked) {
-        String[] allCONTINENTS = {"North America", "South America", "Europe", "Asia", "Oceania", "Antarctica", "Africa"};
+        String[] allCONTINENTS = ContinentData.getContinents();
         filter.getContinents().clear();
         for(int i = 0; i < checked.length; i++){
             if(checked[i]){

@@ -54,7 +54,7 @@ public class FilterVisBase {
 		cp5 = new ControlP5(vb);
 		fh = new FontHelper(vb);
 		cp5.setFont(fh.accordionHeadFont());
-		continents = new String[] {"North America", "South America", "Europe", "Africa", "Asia", "Oceania"};
+		continents = ContinentData.getContinents();
 		
 		// Color Setups
 		accordionBackgroundColor = vb.color(0,64);
