@@ -28,18 +28,12 @@ public class Song {
 		this.songNumber = (COUNT++);
 	}
 	
-	/**
-	 * @return the songNumber
-	 */
-	public int getSongNumber() {
-		return songNumber;
+	public Song(String title, String s_id, String rel, String a_id, int yr, double dur) {
+		this("", title, s_id, rel, a_id, yr, dur);
 	}
-
-	/**
-	 * @param songNumber the songNumber to set
-	 */
-	public void setSongNumber(int songNumber) {
-		this.songNumber = songNumber;
+	
+	public Song(String title, String s_id, String rel, String a_id, int yr) {
+		this("", title, s_id, rel, a_id, yr, 0);
 	}
 
 	public Song(String s_id, String title, String a_id) {
@@ -146,6 +140,20 @@ public class Song {
 	
 	public String toString() {
 		return track_title + "\t" + song_id;
+	}
+	
+	/**
+	 * @return the songNumber
+	 */
+	public int getSongNumber() {
+		return songNumber;
+	}
+
+	/**
+	 * @param songNumber the songNumber to set
+	 */
+	public void setSongNumber(int songNumber) {
+		this.songNumber = songNumber;
 	}
 
 }
