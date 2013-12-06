@@ -64,6 +64,8 @@ public class GenreLocationMap extends AbstractMap {
 			this.cmDraws[i].setCY(pos.y);
 			this.infos[i] = this.models[i].getInfo();
 		}
+		
+		this.tooltip = new ToolTip(parent, 0, 0);
 	}
 	
 	public void draw() {
@@ -83,7 +85,7 @@ public class GenreLocationMap extends AbstractMap {
 				cmDraws[hoverIndex].drawNodeBounds(parent, hoverNode, Color.red);
 				if (this.isToolTipVisible && hoverNode != cmDraws[hoverIndex].getRoot())
 				{
-					//tooltip.draw();
+					tooltip.draw();
 				}
 			}
 		}
@@ -99,6 +101,9 @@ public class GenreLocationMap extends AbstractMap {
 				if (hoverNode != null)
 				{
 					hoverIndex = i;
+					tooltip.setText(infos[i].getTooltip(hoverNode.getDataNodePath()));
+					tooltip.setXpos(mx - 5);
+					tooltip.setYpos(my - 64);
 					break;
 				}
 			}
