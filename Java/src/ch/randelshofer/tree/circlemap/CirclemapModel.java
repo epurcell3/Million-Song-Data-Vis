@@ -38,4 +38,8 @@ public class CirclemapModel {
     public NodeInfo getInfo() {
         return info;
     }
+    
+    public CirclemapTree getTree() {
+    	return tree;
+    }
 }
