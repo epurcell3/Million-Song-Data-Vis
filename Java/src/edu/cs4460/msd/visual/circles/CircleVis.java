@@ -8,9 +8,9 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.TreeView;
-import ch.randelshofer.tree.circlemap.CirclemapDraw;
 import ch.randelshofer.tree.circlemap.CirclemapNode;
 import ch.randelshofer.tree.circlemap.CirclemapTree;
+import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.genre.GenreNode;
 
 public class CircleVis implements TreeView
@@ -52,7 +52,7 @@ public class CircleVis implements TreeView
     	this.p = p;
     }
 
-	public void draw()
+	public void draw(GenreFilter filter)
 	{
 		//fill in it's background
 		p.fill(255, 255, 255);
@@ -66,18 +66,15 @@ public class CircleVis implements TreeView
 		{
 			if (selectedNode.children().isEmpty())
 			{
-				cmDraw.drawSubtreeBounds(p, selectedNode, Color.blue);
 			}
 			else
 			{
-//				draw.drawDescendantSubtreeBounds(p, selectedNode, Color.blue);
-				ProgressTracker pt = new ProgressTracker("","");
-				cmDraw.drawTree(p, pt);
+				cmDraw.drawTree(p);
 			}
 		}
 		if (hoverNode != null)
 		{
-			cmDraw.drawNodeBounds(null, hoverNode, Color.red);
+			//cmDraw.drawNodeBounds(null, hoverNode, Color.red);
 		}
 		if (drawHandles)
 		{
@@ -89,6 +86,11 @@ public class CircleVis implements TreeView
 //			
 		}
 	}
+	
+	public void mouseMoved(int mouseX, int mouseY) {
+		CirclemapNode node = cmDraw.getNodeAt(mouseX, mouseY);
+		// TODO Something clever with Tooltip
+	}
 
 	@Override
 	public void setMaxDepth(int newValue) {
@@ -98,7 +100,7 @@ public class CircleVis implements TreeView
             if (newValue == Integer.MAX_VALUE) {
                 needsProgressive = true;
             }
-            draw();
+            //draw();
         }
 	}
 
@@ -133,7 +135,7 @@ public class CircleVis implements TreeView
 	@Override
 	public void repaintView() {
 		isInvalid = true;
-		draw();
+		//draw();
 	}
 	
 	@SuppressWarnings("unused")

@@ -17,8 +17,10 @@ public class GenreNode implements TreeNode {
     HashMap<String, Integer> continentMap;
     HashMap<String, Integer> countryMap;
     HashMap<String, Integer> masterMap;
+    
+    private int depth;
 
-    public GenreNode(Genre genre){
+    public GenreNode(Genre genre, int depth){
         this.keyword = genre.getKeyword();
         this.songCount = genre.getSongCount();
         this.averageDuration = genre.getAverageDuration();
@@ -26,10 +28,11 @@ public class GenreNode implements TreeNode {
         this.continentMap = genre.getContinentMap();
         this.countryMap = genre.getCountryMap();
         this.masterMap = genre.getMasterMap();
+        this.depth = depth;
         children = new ArrayList<TreeNode>();
         for(Genre cGenre: genre.getChildren()){
             if(cGenre.getSongCount() >= 20)
-                children.add(new GenreNode(cGenre));
+                children.add(new GenreNode(cGenre, depth + 1));
         }
     }
 
@@ -80,6 +83,12 @@ public class GenreNode implements TreeNode {
     public void setCountryMap(HashMap<String, Integer> countryMap) {
         this.countryMap = countryMap;
     }
+    
+    public int getDepth()
+    {
+    	return depth;
+    }
+    
     public int getFilteredCount(GenreFilter filter){
         int total = 0;
         if(!filter.isYearsFiltered() && !filter.isContinentsFiltered() && !filter.isCountriesFiltered()){

@@ -16,7 +16,7 @@ import edu.cs4460.msd.backend.utilities.PathHandler;
 
 public class ContinentData {
 	private HashMap<String, CountryDataEntry> continentData;
-	private static final String[] CONTINENTS = {"North America", "South America", "Europe", "Asia", "Oceania", "Antarctica", "Africa"};
+	private static final String[] CONTINENTS = {"Africa", "Antarctica", "Asia", "Europe", "North America", "Oceania", "South America"};
 
 	public ContinentData() {
 
