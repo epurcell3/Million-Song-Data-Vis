@@ -6,7 +6,6 @@ import java.awt.Image;
 import javax.swing.Action;
 import javax.swing.event.ChangeListener;
 
-import backend.SongCountWeighter;
 import ch.randelshofer.tree.DefaultNodeInfo;
 import ch.randelshofer.tree.Colorizer;
 import ch.randelshofer.tree.NodeInfo;
@@ -14,6 +13,7 @@ import ch.randelshofer.tree.TreeNode;
 import ch.randelshofer.tree.TreePath2;
 import ch.randelshofer.tree.Weighter;
 import ch.randelshofer.tree.demo.RGBColorizer;
+import edu.cs4460.msd.backend.circles.SongCountWeighter;
 
 public class GenreNodeInfo extends DefaultNodeInfo {
 	

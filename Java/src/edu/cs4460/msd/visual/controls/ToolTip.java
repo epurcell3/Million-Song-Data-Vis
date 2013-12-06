@@ -3,9 +3,9 @@ package edu.cs4460.msd.visual.controls;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.cs4460.msd.backend.utilities.ToolTipResult;
 import edu.cs4460.msd.backend.visual_abstract.Drawable;
 import processing.core.PApplet;
-import backend.ToolTipResult;
 
 /**
  * Created with IntelliJ IDEA.
