@@ -18,8 +18,6 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 	private CirclemapNode drawRoot;
 	private NodeInfo info;
 	
-	private CirclemapNode hoverNode;
-	
 	private double cx = VisBase.DEFAULT_X + VisBase.DEFAULT_WIDTH / 2,  cy = VisBase.DEFAULT_Y  + VisBase.DEFAULT_HEIGHT / 2;
 	
 	private double radius = 96;
