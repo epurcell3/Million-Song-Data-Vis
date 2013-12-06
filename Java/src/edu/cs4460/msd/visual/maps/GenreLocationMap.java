@@ -1,6 +1,9 @@
 package edu.cs4460.msd.visual.maps;
 
 import processing.core.PApplet;
+import ch.randelshofer.tree.NodeInfo;
+import ch.randelshofer.tree.circlemap.CirclemapModel;
+import ch.randelshofer.tree.circlemap.CirclemapNode;
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
@@ -8,10 +11,17 @@ import de.fhpotsdam.unfolding.utils.MapUtils;
 import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.utilities.PathHandler;
 import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
+import edu.cs4460.msd.visual.circles.CirclemapDraw;
 
 public class GenreLocationMap extends AbstractMap {
 	private PApplet parent;
 	private int x, y, width, height;
+	
+	private CirclemapModel[] models;
+	private CirclemapDraw[] cmDraws;
+	private NodeInfo[] infos;
+	
+	private CirclemapNode hoverNode;
 	
 	public GenreLocationMap(PApplet p, int x, int y, int width, int height) {
 		this.parent = p;
