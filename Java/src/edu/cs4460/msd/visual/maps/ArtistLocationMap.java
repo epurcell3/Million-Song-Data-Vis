@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
+import de.fhpotsdam.unfolding.marker.SimplePointMarker;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import de.fhpotsdam.unfolding.utils.ScreenPosition;
 import edu.cs4460.msd.backend.database.SongList;
@@ -15,7 +16,7 @@ import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
 import edu.cs4460.msd.visual.main.VisBase;
 
 public class ArtistLocationMap extends AbstractMap {
-	
+
 	private VisBase parent;
 	private Collection<Artist> artists;
 	private SongListHelper slh;
@@ -23,7 +24,7 @@ public class ArtistLocationMap extends AbstractMap {
 	private int x, y, width, height;
 	private int maxArtistRadius = 30;
 	private double scaleFactor;
-	
+
 	public ArtistLocationMap(VisBase p, SongList sl, int x, int y, int width, int height) {
 		this.parent = p;
 		this.x = x;
@@ -31,31 +32,32 @@ public class ArtistLocationMap extends AbstractMap {
 		this.width = width;
 		this.height = height;
 		artists = sl.getArtists();
-		
+
 		slh = new SongListHelper(sl);
 		int artistMax = slh.getMostSongsForArtist();
 		scaleFactor = maxArtistRadius / artistMax;
-		
+
 		map = new UnfoldingMap(parent, "detail", x, y, width, height);
 		addArtistsAsMarkers();
-		
+
 		MapUtils.createDefaultEventDispatcher(parent, map);
 	}
-	
+
 	private void addArtistsAsMarkers() {
 		for(Artist a: artists) {
-			
+			Location loc = new Location(a.getArtist_latitude(), a.getArtist_longitude());
+			SimplePointMarker spm = new SimplePointMarker(loc);
 		}
 	}
-	
+
 	public void updateFilter(GenreFilter filter) {
-		
+
 	}
-	
+
 	public void draw() {
 		map.draw();
 		for(Artist a: artists) {
-			if(filter.artistConforms(a)) {
+			if(filter == null || filter.artistConforms(a)) {
 				Location loc = new Location(a.getArtist_latitude(), a.getArtist_longitude());
 				ScreenPosition pos = map.getScreenPosition(loc);
 				double radiusD = (scaleFactor * slh.getSongsCountForArtist(a.getArtist_id()));
@@ -69,9 +71,10 @@ public class ArtistLocationMap extends AbstractMap {
 					parent.ellipse(pos.x, pos.y, radius, radius);
 				}
 			}
+
 		}
 	}
-	
+
 	private Color getColorForRadius(double radius) {
 		Color out = null;
 		double factor = maxArtistRadius / radius;
@@ -86,26 +89,26 @@ public class ArtistLocationMap extends AbstractMap {
 		} else if(factor >= 0) {
 			out = new Color(0, 109, 44);
 		}
-		
+
 		return out;
 	}
-	
+
 	public void mouseMoved(float x, float y) {
-//		Location location = map.getLocation(x, y);
-//		x = location.x;
-//		y = location.y;
-		
+		//		Location location = map.getLocation(x, y);
+		//		x = location.x;
+		//		y = location.y;
+
 		//String line = "";
 		for(Artist a: artists) {
 			ScreenPosition pos = map.getScreenPosition(new Location(a.getArtist_latitude(), a.getArtist_longitude()));
-			
+
 			if(contains(x,y, pos.x, pos.y, EDGE)) {
 				//line += a.getArtist_continent() + "  " + a.getArtist_name() + "\n";
 			} // close if
 		} // close for
-		
-		
+
+
 	} // close mouseMoved
-	
-	
+
+
 }
