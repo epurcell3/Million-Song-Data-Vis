@@ -26,7 +26,7 @@ public class GenreBase {
     GenreNode nodeTree;
     
     public GenreBase(SongList sl, int maxChildren){
-        rootGenre = new Genre("RootNode",null,null);
+        rootGenre = new Genre("RootNode",null,null, maxChildren);
       //  fullList = new ArrayList<Genre>();
         fullGenreList = new HashMap<String,Genre>();
 
@@ -45,7 +45,7 @@ public class GenreBase {
                 //will use dictionary lookup to determine if it is already in the list first
             	String keyword = terms.get(i);
                 if(fullGenreList.get(keyword) == null){
-                    fullGenreList.put(keyword, new Genre(keyword, song, a));
+                    fullGenreList.put(keyword, new Genre(keyword, song, a, maxChildren));
                     //fullList.add(new Genre(keyword, song.getMyArtist().getArtist_terms()));
                 }
                 else{
@@ -68,7 +68,10 @@ public class GenreBase {
                 zeroRank.add(fullGenreList.get(key));
             }
         }
-        rootGenre.setChildren(zeroRank);
+        for(Genre genre : zeroRank){
+            rootGenre.addChild(genre);
+        }
+        //rootGenre.setChildren(zeroRank);
         nodeTree = new GenreNode(rootGenre, 0);
     }
     public void generateParentsTree(String current){
