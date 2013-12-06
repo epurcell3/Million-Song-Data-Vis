@@ -18,6 +18,8 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 	private CirclemapNode drawRoot;
 	private NodeInfo info;
 	
+	private CirclemapNode hoverNode;
+	
 	private double cx = VisBase.DEFAULT_X + VisBase.DEFAULT_WIDTH / 2,  cy = VisBase.DEFAULT_Y  + VisBase.DEFAULT_HEIGHT / 2;
 	
 	private double radius = 96;
@@ -179,6 +181,39 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 			par.ellipseMode(PConstants.RADIUS);
 			par.ellipse((float)x, (float)y, (float)r, (float)r);
 		}
+	}
+	
+	public void drawNodeBounds(PApplet par, CirclemapNode selectedNode, Color color)
+	{
+		double r = selectedNode.getRadius() * scaleFactor;
+		double scx = 0;
+		double scy = 0;
+		
+		CirclemapNode node = selectedNode;
+		while (node != null) {
+            scx += node.getCX();
+            scy += node.getCY();
+            node = node.getParent();
+        }
+        node = drawRoot;
+        while (node != null) {
+            scx -= node.getCX();
+            scy -= node.getCY();
+            node = node.getParent();
+        }
+        
+        double px = scx * scaleFactor + cx;
+        double py = scy * scaleFactor + cy;
+        
+        par.stroke(color.getRed(), color.getGreen(), color.getBlue());
+        par.strokeWeight(2);
+        par.noFill();
+        par.smooth();
+        par.ellipseMode(PConstants.RADIUS);
+        par.ellipse((float)px, (float)py, (float)r, (float)r);
+        
+        par.strokeWeight(1);
+        
 	}
 
 	@Override
