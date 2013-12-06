@@ -8,7 +8,9 @@ import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.MapUtils;
+import de.fhpotsdam.unfolding.utils.ScreenPosition;
 import edu.cs4460.msd.backend.genre.GenreFilter;
+import edu.cs4460.msd.backend.maps_works.ContinentData;
 import edu.cs4460.msd.backend.utilities.PathHandler;
 import edu.cs4460.msd.backend.visual_abstract.AbstractMap;
 import edu.cs4460.msd.visual.circles.CirclemapDraw;
@@ -35,11 +37,16 @@ public class GenreLocationMap extends AbstractMap {
 		this.models = models;
 		this.cmDraws = new CirclemapDraw[6];
 		this.infos = new NodeInfo[6];
+		
 		for (int i = 0; i < 6; i++)
 		{
 			this.cmDraws[i] = new CirclemapDraw(this.models[i]);
 			this.cmDraws[i].setRadius(50);
-			//TODO set centers
+			ContinentData cd = new ContinentData();
+			Location loc = cd.getContinentCenter(ContinentData.getContinents()[i]);
+			ScreenPosition pos = map.getScreenPosition(loc);
+			this.cmDraws[i].setCX(pos.x);
+			this.cmDraws[i].setCY(pos.y);
 			this.infos[i] = this.models[i].getInfo();
 		}
 		
