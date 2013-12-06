@@ -71,7 +71,7 @@ public class DatabaseConnection extends DatabaseConnectionInterface{
 		q = q + "SELECT song_id, song_title, 'songs_h5'.artist_id, year, artist_name, artist_term, artist_country, artist_continent, artist_latitude, artist_longitude, duration, release ";
 		q = q + "FROM 'songs_h5' JOIN 'artists_h5' ON 'songs_h5'.artist_id = 'artists_h5'.artist_id ";
 		q = q + "JOIN 'artist_terms_h5' ON 'songs_h5'.artist_id = 'artist_terms_h5'.artist_id ";
-		q = q + "WHERE year <> 0 ";
+		q = q + "WHERE year <> 0 AND artist_latitude NOT NULL";
 		q = q + QueryLimit + ";";
 		
 		return q;
