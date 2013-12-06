@@ -1,5 +1,6 @@
 package edu.cs4460.msd.visual.main;
 
+import processing.core.PConstants;
 import ch.randelshofer.gui.ProgressTracker;
 import ch.randelshofer.tree.circlemap.CirclemapModel;
 import controlP5.ControlEvent;
@@ -129,6 +130,13 @@ public class VisBase extends AbstractVizBase {
 			glm.draw(filter);
 		} else if(activeTabId == circleTabId){
 			cv.draw(filter);
+			noStroke();
+			fill(backgroundColor);
+			rectMode(PConstants.CORNER);
+			rect(0,0, WIDTH, DEFAULT_Y);
+			rect(0, DEFAULT_Y, DEFAULT_X, HEIGHT);
+			rect(DEFAULT_X + DEFAULT_WIDTH, DEFAULT_Y, WIDTH, HEIGHT);
+			rect(0, DEFAULT_Y + DEFAULT_HEIGHT, WIDTH, HEIGHT);
 		} else if(activeTabId == mapArtistsId) {
 			alm.draw(filter);
 		}
@@ -140,6 +148,12 @@ public class VisBase extends AbstractVizBase {
 			cv.mouseMoved(mouseX, mouseY);
 		} else if(activeTabId == mapArtistsId) {
 			alm.mouseMoved(mouseX, mouseY);
+		}
+	}
+	
+	public void mouseClicked() {
+		if(activeTabId == circleTabId) {
+			cv.mouseClicked(mouseX, mouseY);
 		}
 	}
 
