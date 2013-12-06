@@ -53,6 +53,7 @@ public class SongCountWeighter implements Weighter {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public float getWeight(TreePath2 path) {
 		TreeNode node = (TreeNode) path.getLastPathComponent();
