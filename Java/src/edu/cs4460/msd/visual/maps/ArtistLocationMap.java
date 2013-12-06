@@ -5,9 +5,9 @@ import java.util.Collection;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
 import de.fhpotsdam.unfolding.geo.Location;
-import de.fhpotsdam.unfolding.marker.SimplePointMarker;
+import de.fhpotsdam.unfolding.marker.Marker;
+import de.fhpotsdam.unfolding.marker.MarkerManager;
 import de.fhpotsdam.unfolding.utils.MapUtils;
-import de.fhpotsdam.unfolding.utils.ScreenPosition;
 import edu.cs4460.msd.backend.database.SongList;
 import edu.cs4460.msd.backend.genre.GenreFilter;
 import edu.cs4460.msd.backend.music.Artist;
@@ -20,6 +20,7 @@ public class ArtistLocationMap extends AbstractMap {
 	private VisBase parent;
 	private Collection<Artist> artists;
 	private SongListHelper slh;
+	private MarkerManager<ArtistPointMarker> mm;
 	private static final int EDGE = 10;
 	private int x, y, width, height;
 	private int maxArtistRadius = 30;
@@ -38,6 +39,8 @@ public class ArtistLocationMap extends AbstractMap {
 		scaleFactor = maxArtistRadius / artistMax;
 
 		map = new UnfoldingMap(parent, "detail", x, y, width, height);
+		mm = new MarkerManager<ArtistPointMarker>();
+		mm.setMap(map);
 		addArtistsAsMarkers();
 
 		MapUtils.createDefaultEventDispatcher(parent, map);
@@ -46,30 +49,34 @@ public class ArtistLocationMap extends AbstractMap {
 	private void addArtistsAsMarkers() {
 		for(Artist a: artists) {
 			Location loc = new Location(a.getArtist_latitude(), a.getArtist_longitude());
-			SimplePointMarker spm = new SimplePointMarker(loc);
+			float radius = (float) (scaleFactor * slh.getSongsCountForArtist(a.getArtist_id()));
+			ArtistPointMarker apm = new ArtistPointMarker(loc, radius, a.getArtist_id(), a.getArtist_name());
+			apm.setColor(parent, maxArtistRadius); // sets the marker color
+			mm.addMarker(apm);
 		}
 	}
 
 	public void updateFilter(GenreFilter filter) {
-
+		
 	}
 
 	public void draw() {
 		map.draw();
+		mm.draw();
 		for(Artist a: artists) {
 			if(filter == null || filter.artistConforms(a)) {
-				Location loc = new Location(a.getArtist_latitude(), a.getArtist_longitude());
-				ScreenPosition pos = map.getScreenPosition(loc);
-				double radiusD = (scaleFactor * slh.getSongsCountForArtist(a.getArtist_id()));
-				int radius = (int) radiusD;
-				Color c = getColorForRadius(radiusD);
-				//parent.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
-				parent.color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
-				Color cLight = c.brighter();
-				parent.fill(cLight.getRed(), cLight.getGreen(), cLight.getBlue(), cLight.getAlpha()/2);
-				if((x <= pos.x - radius && pos.x + radius <= x + width) && (y <= pos.y - radius && pos.y + radius <= y + height)) {	
-					parent.ellipse(pos.x, pos.y, radius, radius);
-				}
+//				Location loc = new Location(a.getArtist_latitude(), a.getArtist_longitude());
+//				ScreenPosition pos = map.getScreenPosition(loc);
+//				double radiusD = (scaleFactor * slh.getSongsCountForArtist(a.getArtist_id()));
+//				int radius = (int) radiusD;
+//				Color c = getColorForRadius(radiusD);
+//				//parent.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+//				parent.color(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+//				Color cLight = c.brighter();
+//				parent.fill(cLight.getRed(), cLight.getGreen(), cLight.getBlue(), cLight.getAlpha()/2);
+//				if((x <= pos.x - radius && pos.x + radius <= x + width) && (y <= pos.y - radius && pos.y + radius <= y + height)) {	
+//					parent.ellipse(pos.x, pos.y, radius, radius);
+//				}
 			}
 
 		}
@@ -93,19 +100,13 @@ public class ArtistLocationMap extends AbstractMap {
 		return out;
 	}
 
-	public void mouseMoved(float x, float y) {
-		//		Location location = map.getLocation(x, y);
-		//		x = location.x;
-		//		y = location.y;
-
-		//String line = "";
-		for(Artist a: artists) {
-			ScreenPosition pos = map.getScreenPosition(new Location(a.getArtist_latitude(), a.getArtist_longitude()));
-
-			if(contains(x,y, pos.x, pos.y, EDGE)) {
-				//line += a.getArtist_continent() + "  " + a.getArtist_name() + "\n";
-			} // close if
-		} // close for
+	public void mouseMoved(float mouseX, float mouseY) {
+		for (Marker marker : map.getMarkers()) {
+			marker.setSelected(false);
+		}
+		Marker marker = map.getFirstHitMarker(mouseX, mouseY);
+		if (marker != null)
+			marker.setSelected(true);
 
 
 	} // close mouseMoved
