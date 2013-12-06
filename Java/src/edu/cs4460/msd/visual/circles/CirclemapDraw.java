@@ -154,6 +154,7 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 		{
 			par.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 			par.stroke(cd.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+			par.smooth();
 			par.ellipseMode(PConstants.RADIUS);
 			par.ellipse((float)x, (float)y, (float)r, (float)r);
 		}
@@ -162,6 +163,7 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 			double r2 = node.getWeightRadius(info);
 			par.fill(c.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
 			par.stroke(cd.getRed(), c.getGreen(), c.getBlue(), c.getAlpha());
+			par.smooth();
 			par.ellipseMode(PConstants.RADIUS);
 			par.ellipse((float)x, (float)y, (float)r2, (float)r2);
 		}
@@ -169,6 +171,7 @@ public class CirclemapDraw implements ProcessingCirclemapDraw {
 		{
 			par.noFill();
 			par.stroke(cd.getRed(), cd.getGreen(), cd.getBlue(), cd.getAlpha());
+			par.smooth();
 			par.ellipseMode(PConstants.RADIUS);
 			par.ellipse((float)x, (float)y, (float)r, (float)r);
 		}
