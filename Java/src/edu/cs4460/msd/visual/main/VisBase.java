@@ -192,20 +192,31 @@ public class VisBase extends AbstractVizBase {
 	}
 
 	public void filterContinents(boolean[] checked) {
-        String[] allCONTINENTS = ContinentData.getContinents();
-        filter.getContinents().clear();
-        for(int i = 0; i < checked.length; i++){
-            if(checked[i]){
-                filter.getContinents().add(allCONTINENTS[i]);
-            }
-        }
-        if (filter.getContinents().size() >0){
-            filter.setContinentsFiltered(true);
-        }
-        else{
-            filter.setContinentsFiltered(false);
-        }
-        filterChanged();
+		if (activeTabId != mapTabId)
+		{
+	        String[] allCONTINENTS = ContinentData.getContinents();
+	        filter.getContinents().clear();
+	        for(int i = 0; i < checked.length; i++){
+	            if(checked[i]){
+	                filter.getContinents().add(allCONTINENTS[i]);
+	            }
+	        }
+	        if (filter.getContinents().size() >0){
+	            filter.setContinentsFiltered(true);
+	        }
+	        else{
+	            filter.setContinentsFiltered(false);
+	        }
+	        filterChanged();
+		}
+		else
+		{
+			for (int i = 0; i < 6; i++)
+			{
+				if (checked[i])
+					glm.flipDrawContinent(i);
+			}
+		}
 	}
 	
 	public void filterSongs(int count) {
@@ -257,7 +268,7 @@ public class VisBase extends AbstractVizBase {
 		ProgressTracker p = new ProgressTracker("", "");
 		CirclemapModel[] models = new CirclemapModel[6];
 		CirclemapTree[] trees = new CirclemapTree[6];
-		String[] continents = {"North America", "South America", "Europe", "Asia", "Africa", "Oceania"};
+		String[] continents = {"Africa", "Asia", "Europe", "North America", "Oceania", "South America"};
 		for (int i = 0; i < 6; i++) 
 		{
 			GenreFilter baseFilter = new GenreFilter();
