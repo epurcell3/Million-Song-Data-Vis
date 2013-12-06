@@ -30,7 +30,7 @@ public class GenreLocationMap extends AbstractMap {
 		MapUtils.createDefaultEventDispatcher(parent, map);
 	}
 	
-	public void draw(GenreFilter filter) {
+	public void draw() {
 		map.draw();
 		
 		
@@ -42,6 +42,12 @@ public class GenreLocationMap extends AbstractMap {
 	
 	public Location getMapLocation(int mouseX, int mouseY) {
 		return map.getLocation(mouseX, mouseY);
+	}
+
+	@Override
+	public void updateFilter(GenreFilter filter) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

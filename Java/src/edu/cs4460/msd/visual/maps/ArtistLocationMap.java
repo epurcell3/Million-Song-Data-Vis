@@ -45,7 +45,11 @@ public class ArtistLocationMap extends AbstractMap {
 		MapUtils.createDefaultEventDispatcher(parent, map);
 	}
 	
-	public void draw(GenreFilter filter) {
+	public void updateFilter(GenreFilter filter) {
+		
+	}
+	
+	public void draw() {
 		map.draw();
 		for(Artist a: artists) {
 			if(filter.artistConforms(a)) {
