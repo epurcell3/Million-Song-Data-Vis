@@ -21,6 +21,8 @@ public class GenreLocationMap extends AbstractMap {
 	private CirclemapDraw[] cmDraws;
 	private NodeInfo[] infos;
 	
+	private boolean[] drawContinent = {false, false, false, false, false, false};
+	
 	private CirclemapNode hoverNode;
 	
 	public GenreLocationMap(PApplet p, int x, int y, int width, int height, CirclemapTree[] models) {
@@ -36,9 +38,11 @@ public class GenreLocationMap extends AbstractMap {
 		for (int i = 0; i < 6; i++)
 		{
 			this.cmDraws[i] = new CirclemapDraw(this.models[i]);
+			this.cmDraws[i].setRadius(50);
+			//TODO set centers
 			this.infos[i] = this.models[i].getInfo();
 		}
-
+		
 		PathHandler ph = new PathHandler();
 		String mbTilesConnectionString = "jdbc:sqlite:" + ph.getPathToResource("blankLight-1-3.mbtiles");
 		map = new UnfoldingMap(parent, "detail", x, y, width, height, true, false, new MBTilesMapProvider(mbTilesConnectionString));
@@ -51,7 +55,19 @@ public class GenreLocationMap extends AbstractMap {
 	public void draw() {
 		map.draw();
 		
+		for(int i = 0; i < 6; i++)
+		{
+			if (drawContinent[i])
+			{
+				cmDraws[i].drawTree(parent);
+			}
+		}
 		
+	}
+	
+	public void flipDrawContinent(int index)
+	{
+		drawContinent[index] = !drawContinent[index];
 	}
 	
 	private Location getMapCenter() {
