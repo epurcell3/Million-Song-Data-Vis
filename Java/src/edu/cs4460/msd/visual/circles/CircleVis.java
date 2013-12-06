@@ -44,6 +44,7 @@ public class CircleVis implements TreeView
     	this.needsSimplify = false;
     	this.model = model;
     	this.cmDraw = new CirclemapDraw(model.getRoot(), model.getInfo());
+    	this.cmDraw.setRadius(width/2 - 10);
     }
     
     
